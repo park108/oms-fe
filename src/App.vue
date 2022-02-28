@@ -1,26 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+	<main>
+		<section class="section__full">
+			<Corporation />
+		</section>
+
+		<div class="section__box">
+			<section class="section__third">
+				<SalesOrg />
+			</section>
+			<section class="section__third">
+				<DistributionChannel />
+			</section>
+			<section class="section__third">
+				<Division />
+			</section>
+		</div>
+
+		<section class="section__full">
+			<SalesArea />
+		</section>
+
+		<div class="section__box">
+			<section class="section__second">
+				<SalesOffice />
+			</section>
+			<section class="section__second">
+				<SalesGroup />
+			</section>
+		</div>
+	</main>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
+<script src="./App.js"></script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+	@import url(./App.css);
 </style>

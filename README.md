@@ -1,9 +1,22 @@
 # oms-fe
 
-## Project setup
+## What is this project
+- Frontend project of Order Management System
+- Make using Vue.js
+
+## How to setup this project
+
+### Install Vue.js CLI
 ```
-npm install
+npm install -g @vue/cli
 ```
+
+### Create project via vue/cli
+```
+vue create oms-fe
+```
+
+## How to compile and lint
 
 ### Compiles and hot-reloads for development
 ```

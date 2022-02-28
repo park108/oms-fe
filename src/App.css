@@ -1,0 +1,40 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+section {
+	margin: 10px;
+	padding: 10px;
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+	border-radius: 10px;
+	box-shadow: 3px 3px 4px 2px #eeeeee;
+}
+
+.section__box {
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+.section__full {
+	box-sizing: border-box;
+	width: calc(100% - 20px);
+}
+
+.section__second {
+	box-sizing: border-box;
+	width: calc(50% - 20px);
+	float: left;
+}
+
+.section__third {
+	box-sizing: border-box;
+	width: calc(33% - 20px);
+	float: left;
+}
+
+hr {
+	margin: 5px 0;
+}
