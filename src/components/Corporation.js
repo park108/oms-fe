@@ -22,10 +22,12 @@ export default {
 				const data = await res.json();
 
 				this.corp = data[0];
+				this.$emit("setCorpId", this.corp.id);
 			}
 			catch (err) {
 				console.error(err);
 
+				// Dummy Data for Test
 				this.corp = {
 					companyName: "SK On Co., Ltd.",
 					companyCode: "S000",
@@ -36,7 +38,7 @@ export default {
 				}
 			}
 			finally {
-				console.log("finally...")
+				console.log("CORP.finally...")
 				this.isLoading = false;
 			}
 		},

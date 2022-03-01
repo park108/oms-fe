@@ -7,6 +7,11 @@ import SalesOffice from "./components/SalesOffice.vue";
 import SalesGroup from "./components/SalesGroup.vue";
 
 export default {
+	data() {
+		return {
+			corpId: String
+		}
+	},
 	components: {
 		Corporation,
 		SalesOrg,
@@ -15,5 +20,10 @@ export default {
 		SalesArea,
 		SalesOffice,
 		SalesGroup,
+	},
+	methods: {
+		setCorpId(value) {
+			this.corpId = value;
+		}
 	},
 };

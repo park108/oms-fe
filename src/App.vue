@@ -1,12 +1,12 @@
 <template>
 	<main>
 		<section class="section__full">
-			<Corporation />
+			<Corporation @setCorpId="setCorpId" />
 		</section>
 
 		<div class="section__box">
 			<section class="section__third">
-				<SalesOrg />
+				<SalesOrg :corpId="corpId" />
 			</section>
 			<section class="section__third">
 				<DistributionChannel />
