@@ -1,10 +1,12 @@
-import { getApi, regexExpForUuid } from "../common.js"
+import { getApi, isUuid } from "../common.js"
+
+const orgUri = "orgs";
 
 export default {
 	data() {
 		return {
 			isLoading: true,
-			orgs: []
+			list: []
 		}
 	},
 	props: {
@@ -15,16 +17,16 @@ export default {
 	watch: {
 		corpId: function() {
 
-			if(regexExpForUuid.test(this.corpId)) {
-				console.log("ORG.CORPID = " + this.corpId);
-				this.getSalesOrgs();
+			if(isUuid(this.corpId)) {
+				console.log(orgUri + ".CORPID = " + this.corpId);
+				this.getList();
 			}
 		}
 	},
 	methods: {
-		getSalesOrgs: async function() {
+		getList: async function() {
 
-			const url = getApi("organization") + "/corps/" + this.corpId + "/orgs/";
+			const url = getApi("organization") + "/corps/" + this.corpId + "/" + orgUri + "/";
 
 			try {
 				this.isLoading = true;
@@ -32,13 +34,13 @@ export default {
 				const res = await fetch(url);
 				const data = await res.json();
 
-				this.orgs = data;
+				this.list = data;
 			}
 			catch (err) {
 				console.error(err);	
 				
 				// Dummy Data for Test
-				this.orgs = [
+				this.list = [
 					{
 						salesOrg: "S000",
 						salesOrgDesc: "Battery District",
@@ -52,7 +54,7 @@ export default {
 				]
 			}
 			finally {
-				console.log("ORG.finally...")
+				console.log(orgUri + ".finally...");
 				this.isLoading = false;
 			}
 		}

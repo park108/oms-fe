@@ -2,7 +2,10 @@
     <div>
         <h1>Distribution Channels</h1>
         <hr />
-        <div v-for="channel in channels" :key="channel.distributionChannel">
+		<div v-if="isLoading">
+			Loading ...
+		</div>
+        <div v-else v-for="channel in list" :key="channel.distributionChannel">
             <span>{{ channel.distributionChannel }}</span>
             <span> : </span>
             <span>{{ channel.distributionChannelDesc }}</span>

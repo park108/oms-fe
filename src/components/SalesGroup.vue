@@ -2,7 +2,10 @@
     <div>
         <h1>Sales Groups</h1>
         <hr />
-        <div v-for="group in groups" :key="group.id">
+		<div v-if="isLoading">
+			Loading ...
+		</div>
+        <div v-else v-for="group in list" :key="group.id">
             <span>{{ group.salesGroup }}</span>
             <span> : </span>
             <span>{{ group.salesGroupDesc }}</span>

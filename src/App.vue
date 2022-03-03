@@ -9,23 +9,23 @@
 				<SalesOrg :corpId="corpId" />
 			</section>
 			<section class="section__third">
-				<DistributionChannel />
+				<DistributionChannel :corpId="corpId" />
 			</section>
 			<section class="section__third">
-				<Division />
+				<Division :corpId="corpId" />
 			</section>
 		</div>
 
 		<section class="section__full">
-			<SalesArea />
+			<SalesArea :corpId="corpId" />
 		</section>
 
 		<div class="section__box">
 			<section class="section__second">
-				<SalesOffice />
+				<SalesOffice :corpId="corpId" />
 			</section>
 			<section class="section__second">
-				<SalesGroup />
+				<SalesGroup :corpId="corpId" />
 			</section>
 		</div>
 	</main>

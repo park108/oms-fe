@@ -2,7 +2,10 @@
     <div>
         <h1>Sales Areas</h1>
         <hr />
-        <div v-for="area in areas" :key="area.id">
+		<div v-if="isLoading">
+			Loading ...
+		</div>
+        <div v-else v-for="area in list" :key="area.id">
             <span>{{ area.salesOrg.salesOrg }}</span>
             <span>/</span>
             <span>{{ area.distributionChannel.distributionChannel }}</span>

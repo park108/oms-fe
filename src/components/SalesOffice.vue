@@ -2,7 +2,10 @@
     <div>
         <h1>Sales Offices</h1>
         <hr />
-        <div v-for="office in offices" :key="office.id">
+		<div v-if="isLoading">
+			Loading ...
+		</div>
+        <div v-else v-for="office in list" :key="office.id">
             <span>{{ office.salesOffice }}</span>
             <span> : </span>
             <span>{{ office.salesOfficeDesc }}</span>
