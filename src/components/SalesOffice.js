@@ -10,7 +10,7 @@ export default {
 		}
 	},
 	props: {
-		corpId: String
+		corpId: ''
 	},
 	mounted() {
 	},
@@ -32,26 +32,18 @@ export default {
 				this.isLoading = true;
 
 				const res = await fetch(url);
-				const data = await res.json();
 
-				this.list = data;
+				if(404 === res.status) {
+					console.log(orgUri + " is not found");
+					this.list = dummyData;
+				}
+				else {
+					const data = await res.json();
+					this.list = data;
+				}
 			}
 			catch (err) {
 				console.error(err);	
-				
-				// Dummy Data for Test
-				this.list = [
-					{
-						salesOffice: "S100",
-						salesOfficeDesc: "SKO Battery Marketing",
-						id: "c13ae9ac-f2e2-44ca-981e-0dbb5ae1d2aa",
-					},
-					{
-						salesOffice: "S200",
-						salesOfficeDesc: "SKOH Marketing",
-						id: "1ce3d882-6d29-48a4-a133-48f9a17fc6c6",
-					},
-				]
 			}
 			finally {
 				console.log(orgUri + ".finally...");
@@ -60,3 +52,16 @@ export default {
 		}
 	},
 };
+
+const dummyData = [
+	{
+		salesOffice: "S100",
+		salesOfficeDesc: "SKO Battery Marketing",
+		id: "c13ae9ac-f2e2-44ca-981e-0dbb5ae1d2aa",
+	},
+	{
+		salesOffice: "S200",
+		salesOfficeDesc: "SKOH Marketing",
+		id: "1ce3d882-6d29-48a4-a133-48f9a17fc6c6",
+	},
+]

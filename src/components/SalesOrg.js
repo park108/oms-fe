@@ -10,7 +10,7 @@ export default {
 		}
 	},
 	props: {
-		corpId: String
+		corpId: ''
 	},
 	mounted() {
 	},
@@ -32,9 +32,14 @@ export default {
 				this.isLoading = true;
 
 				const res = await fetch(url);
-				const data = await res.json();
 
-				this.list = data;
+				if(404 === res.status) {
+					console.log(orgUri + " is not found");
+				}
+				else {
+					const data = await res.json();
+					this.list = data;
+				}
 			}
 			catch (err) {
 				console.error(err);	
