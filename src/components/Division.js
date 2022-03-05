@@ -1,6 +1,5 @@
-import { getApi, isUuid, log } from "../common.js"
-
-const orgUri = "divs";
+import { isUuid, log } from "../common.js"
+import { OrganizationDataHandler } from "./OrganizationDataHandler.js";
 
 export default {
 	data() {
@@ -12,46 +11,23 @@ export default {
 	props: {
 		corpId: ''
 	},
-	mounted() {
-	},
 	watch: {
 		corpId: function() {
-
-			if(isUuid(this.corpId)) {
-				log(orgUri + ".CORPID = " + this.corpId);
-				this.getList();
-			}
+			if(isUuid(this.corpId)) this.getList();
 		}
 	},
 	methods: {
 		getList: async function() {
-
-			const url = getApi("organization") + "/corps/" + this.corpId + "/" + orgUri + "/";
-
-			try {
-				this.isLoading = true;
-
-				const res = await fetch(url);
-
-				if(404 === res.status) {
-					log(orgUri + " is not found");
-					this.list = dummyData;
-				}
-				else {
-					const data = await res.json();
-					this.list = data;
-				}
+			this.list = await OrganizationDataHandler.getList(this.corpId, orgUri);
+			if(null === this.list) {
+				this.list = dummyData;
 			}
-			catch (err) {
-				console.error(err);	
-			}
-			finally {
-				log(orgUri + ".finally...");
-				this.isLoading = false;
-			}
+			this.isLoading = false;
 		}
 	},
 };
+
+const orgUri = "divs";
 				
 const dummyData = [
 	{
