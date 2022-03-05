@@ -1,4 +1,4 @@
-import { getApi } from "../common.js"
+import { getApi, log } from "../common.js"
 
 export default {
 	data() {
@@ -21,7 +21,7 @@ export default {
 				const res = await fetch(url);
 
 				if(404 === res.status) {
-					console.log(orgUri + " is not found");
+					log(orgUri + " is not found");
 					this.list = dummyData;
 				}
 				else {
@@ -34,7 +34,7 @@ export default {
 				console.error(err);
 			}
 			finally {
-				console.log("CORP.finally...")
+				log("CORP.finally...")
 				this.isLoading = false;
 			}
 		},

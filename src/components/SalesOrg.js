@@ -1,4 +1,4 @@
-import { getApi, isUuid } from "../common.js"
+import { getApi, isUuid, log } from "../common.js"
 
 const orgUri = "orgs";
 
@@ -18,7 +18,7 @@ export default {
 		corpId: function() {
 
 			if(isUuid(this.corpId)) {
-				console.log(orgUri + ".CORPID = " + this.corpId);
+				log(orgUri + ".CORPID = " + this.corpId);
 				this.getList();
 			}
 		}
@@ -34,7 +34,7 @@ export default {
 				const res = await fetch(url);
 
 				if(404 === res.status) {
-					console.log(orgUri + " is not found");
+					log(orgUri + " is not found");
 				}
 				else {
 					const data = await res.json();
@@ -43,25 +43,25 @@ export default {
 			}
 			catch (err) {
 				console.error(err);	
-				
-				// Dummy Data for Test
-				this.list = [
-					{
-						salesOrg: "S000",
-						salesOrgDesc: "Battery District",
-						id: "57738ddb-cdbb-4901-b8d4-49897142e8ab",
-					},
-					{
-						salesOrg: "S100",
-						salesOrgDesc: "Material District",
-						id: "15e70991-b766-4538-99da-cb7f4f4dd42c",
-					},
-				]
+				this.list = dummyData;
 			}
 			finally {
-				console.log(orgUri + ".finally...");
+				log(orgUri + ".finally...");
 				this.isLoading = false;
 			}
 		}
 	},
 };
+
+const dummyData = [
+	{
+		salesOrg: "S000",
+		salesOrgDesc: "Battery District",
+		id: "57738ddb-cdbb-4901-b8d4-49897142e8ab",
+	},
+	{
+		salesOrg: "S100",
+		salesOrgDesc: "Material District",
+		id: "15e70991-b766-4538-99da-cb7f4f4dd42c",
+	},
+]

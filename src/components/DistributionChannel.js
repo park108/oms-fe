@@ -1,4 +1,4 @@
-import { getApi, isUuid } from "../common.js"
+import { getApi, isUuid, log } from "../common.js"
 
 const orgUri = "channels";
 
@@ -18,7 +18,7 @@ export default {
 		corpId: function() {
 
 			if(isUuid(this.corpId)) {
-				console.log(orgUri + ".CORPID = " + this.corpId);
+				log(orgUri + ".CORPID = " + this.corpId);
 				this.getList();
 			}
 		}
@@ -34,7 +34,7 @@ export default {
 				const res = await fetch(url);
 
 				if(404 === res.status) {
-					console.log(orgUri + " is not found");
+					log(orgUri + " is not found");
 					this.list = dummyData;
 				}
 				else {
@@ -46,7 +46,7 @@ export default {
 				console.error(err);	
 			}
 			finally {
-				console.log(orgUri + ".finally...");
+				log(orgUri + ".finally...");
 				this.isLoading = false;
 			}
 		}
