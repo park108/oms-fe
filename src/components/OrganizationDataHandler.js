@@ -4,7 +4,7 @@ export class OrganizationDataHandler {
 
 	static async getList(corpId, uri) {
 
-		log("CALL DataHandler.getList(" + corpId + ", " + uri + ")");
+		log("CALL OrganizationDataHandler.getList(" + corpId + ", " + uri + ")");
 
 		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/";
 		let result;
