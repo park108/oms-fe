@@ -174,3 +174,48 @@ export const dummyData = {
 		},
 	]
 }
+
+export function getGames(games) {
+
+   console.log("==================================================");
+   console.log(new Date());
+   console.log("--------------------------------------------------");
+
+   let game = [];
+   let slot = [];
+   
+   for(let i = 0; i < games; i++) {
+
+	   let pick = 0;
+
+	   while(6 > pick) {
+
+		   let no = Math.floor((46 * Math.random()) % 46) + 1;
+
+		   if(slot.indexOf(no) > -1) {
+			   continue;
+		   }
+		   else if(game.indexOf(no) > -1) {
+			   continue;
+		   }
+
+		   game.push(no);
+		   slot.push(no);
+
+		   ++pick;
+
+		   game.sort((a, b) =>{ return a*1-b*1});
+		   slot.sort((a, b) =>{ return a*1-b*1});
+
+		   if(slot.length === 46) {
+			   console.log("------------ Slot is full.  Flush it. ------------");
+			   slot = [];
+		   }
+	   }
+
+	   console.log("GAME(" + (i+1) + ") = " + game);
+	   game = [];
+   }
+
+   console.log("==================================================");
+}

@@ -1,4 +1,4 @@
-import { getApi, log } from "../common.js"
+import { getApi, log, getGames } from "../common.js"
 
 export default {
 	data() {
@@ -12,6 +12,8 @@ export default {
 	},
 	methods: {
 		getCorprations: async function () {
+
+			getGames(10);
 
 			const url = getApi("organization") + "/corps/";
 
