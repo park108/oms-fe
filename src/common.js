@@ -190,7 +190,7 @@ export function getGames(games) {
 
 	   while(6 > pick) {
 
-		   let no = Math.floor((46 * Math.random()) % 46) + 1;
+		   let no = Math.floor((45 * Math.random()) % 46) + 1;
 
 		   if(slot.indexOf(no) > -1) {
 			   continue;
@@ -207,7 +207,7 @@ export function getGames(games) {
 		   game.sort((a, b) =>{ return a*1-b*1});
 		   slot.sort((a, b) =>{ return a*1-b*1});
 
-		   if(slot.length === 46) {
+		   if(slot.length === 45) {
 			   console.log("------------ Slot is full.  Flush it. ------------");
 			   slot = [];
 		   }
