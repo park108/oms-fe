@@ -5,8 +5,8 @@
 		<div v-if="isLoading">
 			Loading ...
 		</div>
-        <div v-else v-for="group in list" :key="group.id">
-            <span>{{ group.salesGroup }}</span>
+        <div class="div--org-listitem" v-else v-for="group in list" :key="group.id">
+            <span class="span--button" @click="moveDetail" :value="group.salesGroup">{{ group.salesGroup }}</span>
             <span> : </span>
             <span>{{ group.salesGroupDesc }}</span>
         </div>

@@ -5,8 +5,8 @@
 		<div v-if="isLoading">
 			Loading ...
 		</div>
-        <div v-else v-for="org in list" :key="org.salesOrg">
-            <span>{{ org.salesOrg }}</span>
+        <div class="div--org-listitem" v-else v-for="org in list" :key="org.salesOrg">
+            <span class="span--button" @click="moveDetail" :value="org.salesOrg">{{ org.salesOrg }}</span>
             <span> : </span>
             <span>{{ org.salesOrgDesc }}</span>
         </div>

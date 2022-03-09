@@ -5,7 +5,7 @@
 		<div v-if="isLoading">
 			Loading ...
 		</div>
-        <div v-else v-for="area in list" :key="area.id">
+        <div class="div--org-listitem" v-else v-for="area in list" :key="area.id">
             <span>{{ area.salesOrg.salesOrg }}</span>
             <span>/</span>
             <span>{{ area.distributionChannel.distributionChannel }}</span>

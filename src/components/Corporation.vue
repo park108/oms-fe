@@ -5,7 +5,7 @@
 		<div v-if="isLoading">
 			Loading ...
 		</div>
-		<div v-else>
+		<div class="div--org-listitem" v-else>
 			<span>{{ corp.companyName }}</span>
 			<span>, {{ corp.countryCode }}</span>
 			<span>, {{ corp.vatNumber }}</span>

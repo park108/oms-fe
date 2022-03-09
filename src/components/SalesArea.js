@@ -1,4 +1,4 @@
-import { isUuid, dummyData } from "../common.js"
+import { log, isUuid, dummyData } from "../common.js"
 import { OrganizationDataHandler } from "./OrganizationDataHandler.js";
 
 export default {
@@ -23,6 +23,10 @@ export default {
 				this.list = dummyData[orgUri];
 			}
 			this.isLoading = false;
+		},
+		moveDetail: function(e) {
+			const org = e.target;
+			log(org.getAttribute("value"));
 		}
 	},
 };

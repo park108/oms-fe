@@ -35,6 +35,18 @@ section {
 	float: left;
 }
 
+.div--org-listitem {
+	margin: 1em;
+}
+
 hr {
 	margin: 5px 0;
+}
+
+.span--button {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	color: #666666;
+	text-decoration: underline;
 }

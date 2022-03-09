@@ -5,8 +5,8 @@
 		<div v-if="isLoading">
 			Loading ...
 		</div>
-        <div v-else v-for="channel in list" :key="channel.distributionChannel">
-            <span>{{ channel.distributionChannel }}</span>
+        <div class="div--org-listitem" v-else v-for="channel in list" :key="channel.distributionChannel">
+            <span class="span--button" @click="moveDetail" :value="channel.distributionChannel">{{ channel.distributionChannel }}</span>
             <span> : </span>
             <span>{{ channel.distributionChannelDesc }}</span>
         </div>

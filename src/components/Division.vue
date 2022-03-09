@@ -5,8 +5,8 @@
 		<div v-if="isLoading">
 			Loading ...
 		</div>
-        <div v-else v-for="div in list" :key="div.division">
-            <span>{{ div.division }}</span>
+        <div class="div--org-listitem" v-else v-for="div in list" :key="div.division">
+            <span class="span--button" @click="moveDetail" :value="div.division">{{ div.division }}</span>
             <span> : </span>
             <span>{{ div.divisionDesc }}</span>
         </div>
