@@ -6,11 +6,9 @@
 			Loading ...
 		</div>
         <div class="div--org-listitem" v-else v-for="area in list" :key="area.id">
-            <span>{{ area.salesOrg.salesOrg }}</span>
-            <span>/</span>
-            <span>{{ area.distributionChannel.distributionChannel }}</span>
-            <span>/</span>
-            <span>{{ area.division.division }}</span>
+            <span class="span--button" @click="moveDetail" :value="area.salesOrg.salesOrg+'|'+area.distributionChannel.distributionChannel+'|'+area.division.division">
+				{{ area.salesOrg.salesOrg }}/{{ area.distributionChannel.distributionChannel }}/{{ area.division.division }}
+			</span>
             <span> : </span>
             <span>{{ area.salesOrg.salesOrgDesc }}, </span>
             <span
