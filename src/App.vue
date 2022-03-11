@@ -1,4 +1,9 @@
 <template>
+	<header>
+		<h1>
+			Order Management System Console
+		</h1>
+	</header>
 	<main>
 		<section class="section__full">
 			<Corporation @setCorpId="setCorpId" />
@@ -29,6 +34,9 @@
 			</section>
 		</div>
 	</main>
+	<footer>
+		© 2022 Jongkil Park.
+	</footer>
 </template>
 
 <script src="./App.js"></script>
