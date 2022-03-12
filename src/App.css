@@ -14,25 +14,25 @@ section {
 	box-shadow: 3px 3px 4px 2px #eeeeee;
 }
 
-.section__box {
+.section--box {
 	width: 100%;
 	position: relative;
 	overflow: hidden;
 	box-sizing: border-box;
 }
 
-.section__full {
+.section--full {
 	box-sizing: border-box;
 	width: calc(100% - 20px);
 }
 
-.section__second {
+.section--second {
 	box-sizing: border-box;
 	width: calc(50% - 20px);
 	float: left;
 }
 
-.section__third {
+.section--third {
 	box-sizing: border-box;
 	width: calc(33% - 20px);
 	float: left;

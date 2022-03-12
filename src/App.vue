@@ -5,31 +5,31 @@
 		</h1>
 	</header>
 	<main>
-		<section class="section__full">
+		<section class="section--full">
 			<Corporation @setCorpId="setCorpId" />
 		</section>
 
-		<div class="section__box">
-			<section class="section__third">
+		<div class="section--box">
+			<section class="section--third">
 				<SalesOrg :corpId="corpId" />
 			</section>
-			<section class="section__third">
+			<section class="section--third">
 				<DistributionChannel :corpId="corpId" />
 			</section>
-			<section class="section__third">
+			<section class="section--third">
 				<Division :corpId="corpId" />
 			</section>
 		</div>
 
-		<section class="section__full">
+		<section class="section--full">
 			<SalesArea :corpId="corpId" />
 		</section>
 
-		<div class="section__box">
-			<section class="section__second">
+		<div class="section--box">
+			<section class="section--second">
 				<SalesOffice :corpId="corpId" />
 			</section>
-			<section class="section__second">
+			<section class="section--second">
 				<SalesGroup :corpId="corpId" />
 			</section>
 		</div>
