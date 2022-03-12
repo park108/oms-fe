@@ -1,40 +1,40 @@
 <template>
-	<header>
-		<h1>
+	<header class="header">
+		<h1 class="h1">
 			Order Management System Console
 		</h1>
 	</header>
-	<main>
-		<section class="section--full">
+	<main class="main">
+		<section class="section section--split-none">
 			<Corporation @setCorpId="setCorpId" />
 		</section>
 
-		<div class="section--box">
-			<section class="section--third">
+		<div class="div div--dashboard-box">
+			<section class="section section--split-three">
 				<SalesOrg :corpId="corpId" />
 			</section>
-			<section class="section--third">
+			<section class="section section--split-three">
 				<DistributionChannel :corpId="corpId" />
 			</section>
-			<section class="section--third">
+			<section class="section section--split-three">
 				<Division :corpId="corpId" />
 			</section>
 		</div>
 
-		<section class="section--full">
+		<section class="section section--split-none">
 			<SalesArea :corpId="corpId" />
 		</section>
 
-		<div class="section--box">
-			<section class="section--second">
+		<div class="div div--dashboard-box">
+			<section class="section section--split-two">
 				<SalesOffice :corpId="corpId" />
 			</section>
-			<section class="section--second">
+			<section class="section section--split-two">
 				<SalesGroup :corpId="corpId" />
 			</section>
 		</div>
 	</main>
-	<footer>
+	<footer class="footer">
 		© 2022 Jongkil Park.
 	</footer>
 </template>
