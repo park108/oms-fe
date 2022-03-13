@@ -7,8 +7,8 @@
 		</div>
         <div class="div div--org-listitem" v-else v-for="group in list" :key="group.id">
             <span class="span span--button-detail" @click="moveDetail" :value="group.salesGroup">{{ group.salesGroup }}</span>
-            <span> : </span>
-            <span>{{ group.salesGroupDesc }}</span>
+            <span class="span"> : </span>
+            <span class="span">{{ group.salesGroupDesc }}</span>
         </div>
     </div>
 </template>

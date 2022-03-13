@@ -9,12 +9,12 @@
             <span class="span span--button-detail" @click="moveDetail" :value="area.salesOrg.salesOrg+'|'+area.distributionChannel.distributionChannel+'|'+area.division.division">
 				{{ area.salesOrg.salesOrg }}/{{ area.distributionChannel.distributionChannel }}/{{ area.division.division }}
 			</span>
-            <span> : </span>
-            <span>{{ area.salesOrg.salesOrgDesc }}, </span>
+            <span class="span"> : </span>
+            <span class="span">{{ area.salesOrg.salesOrgDesc }}, </span>
             <span
                 >{{ area.distributionChannel.distributionChannelDesc }},
             </span>
-            <span>{{ area.division.divisionDesc }} </span>
+            <span class="span">{{ area.division.divisionDesc }} </span>
         </div>
     </div>
 </template>

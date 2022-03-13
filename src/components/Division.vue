@@ -7,8 +7,8 @@
 		</div>
         <div class="div div--org-listitem" v-else v-for="div in list" :key="div.division">
             <span class="span span--button-detail" @click="moveDetail" :value="div.division">{{ div.division }}</span>
-            <span> : </span>
-            <span>{{ div.divisionDesc }}</span>
+            <span class="span"> : </span>
+            <span class="span">{{ div.divisionDesc }}</span>
         </div>
     </div>
 </template>

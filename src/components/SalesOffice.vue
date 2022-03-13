@@ -7,8 +7,8 @@
 		</div>
         <div class="div div--org-listitem" v-else v-for="office in list" :key="office.id">
             <span class="span span--button-detail" @click="moveDetail" :value="office.salesOffice">{{ office.salesOffice }}</span>
-            <span> : </span>
-            <span>{{ office.salesOfficeDesc }}</span>
+            <span class="span"> : </span>
+            <span class="span">{{ office.salesOfficeDesc }}</span>
         </div>
     </div>
 </template>

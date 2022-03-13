@@ -7,8 +7,8 @@
 		</div>
         <div class="div div--org-listitem" v-else v-for="channel in list" :key="channel.distributionChannel">
             <span class="span span--button-detail" @click="moveDetail" :value="channel.distributionChannel">{{ channel.distributionChannel }}</span>
-            <span> : </span>
-            <span>{{ channel.distributionChannelDesc }}</span>
+            <span class="span"> : </span>
+            <span class="span">{{ channel.distributionChannelDesc }}</span>
         </div>
     </div>
 </template>
