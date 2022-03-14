@@ -5,7 +5,7 @@
 		</h1>
 	</header>
 	<main class="main">
-		<section class="section section--split-none">
+		<section class="section section--split-one">
 			<Corporation @setCorpId="setCorpId" />
 		</section>
 
@@ -21,7 +21,7 @@
 			</section>
 		</div>
 
-		<section class="section section--split-none">
+		<section class="section section--split-one">
 			<SalesArea :corpId="corpId" />
 		</section>
 

@@ -40,7 +40,7 @@
 	box-shadow: 3px 3px 4px 2px var(--shadow-color-normal);
 }
 
-.section--split-full {
+.section--split-one {
 	box-sizing: border-box;
 	width: calc(100% - 20px);
 }
