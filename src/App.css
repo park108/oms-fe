@@ -7,6 +7,10 @@
 	--shadow-color-normal: #eeeeee;
 }
 
+* {
+	font-family: Avenir, Helvetica, Arial, sans-serif;
+}
+
 .header {
 	margin: 0;
 	padding: 10px;
