@@ -7,7 +7,7 @@ const routes = [
     name: 'Index',
     component: Index
   },
-//   {
+//   { Routing...
 //     // path: '/about',
 //     // name: 'about',
 //     // // route level code-splitting
