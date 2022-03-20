@@ -26,7 +26,8 @@ export default {
 		},
 		moveDetail: function(e) {
 			const org = e.target;
-			log(org.getAttribute("value"));
+			const routeTo = "/" + orgUri + "/" + org.getAttribute("value");
+			this.$router.push(routeTo);
 		}
 	},
 };
