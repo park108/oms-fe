@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Index from '../views/Index.vue'
-import SalesOrg from '../components/SalesOrg.vue'
-import DistributionChannel from '../components/DistributionChannel.vue'
-import Division from '../components/Division.vue'
-import SalesOffice from '../components/SalesOffice.vue'
-import SalesGroup from '../components/SalesGroup.vue'
+import SalesOrg from '../organizations/SalesOrg.vue'
+import DistributionChannel from '../organizations/DistributionChannel.vue'
+import Division from '../organizations/Division.vue'
+import SalesOffice from '../organizations/SalesOffice.vue'
+import SalesGroup from '../organizations/SalesGroup.vue'
 
 const routes = [
 	{ path: '/', name: 'Index', component: Index },
