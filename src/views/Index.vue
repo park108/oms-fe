@@ -10,9 +10,7 @@
 		</section>
 
 		<div class="div div--dashboard-box">
-			<section class="section section--split-three">
 				<SalesOrg :corpId="corpId" />
-			</section>
 			<section class="section section--split-three">
 				<DistributionChannel :corpId="corpId" />
 			</section>

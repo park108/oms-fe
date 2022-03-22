@@ -1,6 +1,6 @@
 <template>
 	<div class="div div--dashboard-item">
-        <h1 class="h1">Distribution Channels</h1>
+        <h1 class="h1" @click="moveDetail">Distribution Channels</h1>
         <hr class="hr" />
 		<div class="div div--org-loading" v-if="isLoading">
 			Loading ...
