@@ -1,4 +1,4 @@
-import { getApi, log, getGames } from "../common.js"
+import { getApi, log, getGames } from "../../common.js"
 
 export default {
 	data() {

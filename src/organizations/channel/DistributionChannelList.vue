@@ -1,7 +1,7 @@
 <template>
 	<header class="header">
 		<h1 class="h1">
-			Sales Organization
+			Distribution Channels
 		</h1>
 	</header>
 	<footer class="footer">

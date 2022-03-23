@@ -1,11 +1,11 @@
 
-import Corporation from "../organizations/Corporation.vue";
-import SalesOrg from "../organizations/SalesOrg.vue";
-import DistributionChannel from "../organizations/DistributionChannel.vue";
-import Division from "../organizations/Division.vue";
-import SalesArea from "../organizations/SalesArea.vue";
-import SalesOffice from "../organizations/SalesOffice.vue";
-import SalesGroup from "../organizations/SalesGroup.vue";
+import Corporation from "../organizations/corp/Corporation.vue";
+import SalesOrg from "../organizations/org/SalesOrgDashboardItem.vue";
+import DistributionChannel from "../organizations/channel/DistributionChannelDashboardItem.vue";
+import Division from "../organizations/div/DivisionDashboardItem.vue";
+import SalesArea from "../organizations/area/SalesAreaDashboardItem.vue";
+import SalesOffice from "../organizations/office/SalesOfficeDashboardItem.vue";
+import SalesGroup from "../organizations/group/SalesGroupDashboardItem.vue";
 
 export default {
 	data() {

@@ -1,5 +1,5 @@
-import { log, isUuid, dummyData } from "../common.js"
-import { OrganizationDataHandler } from "./OrganizationDataHandler.js";
+import { log, isUuid, dummyData } from "../../common.js"
+import { OrganizationDataHandler } from "../OrganizationDataHandler.js";
 
 export default {
 	data() {
@@ -14,7 +14,7 @@ export default {
 	watch: {
 		corpId: function() {
 			if(isUuid(this.corpId)) this.getList();
-		}
+		},
 	},
 	methods: {
 		getList: async function() {
@@ -25,8 +25,7 @@ export default {
 			this.isLoading = false;
 		},
 		moveDetail: function(e) {
-			const org = e.target;
-			const routeTo = "/" + orgUri + "/" + org.getAttribute("value");
+			const routeTo = "/" + orgUri + "/";
 			this.$router.push(routeTo);
 		}
 	},

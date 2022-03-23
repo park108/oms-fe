@@ -1,5 +1,5 @@
-import { log, isUuid, dummyData } from "../common.js"
-import { OrganizationDataHandler } from "./OrganizationDataHandler.js";
+import { log, isUuid, dummyData } from "../../common.js"
+import { OrganizationDataHandler } from "../OrganizationDataHandler.js";
 
 export default {
 	data() {
@@ -31,4 +31,4 @@ export default {
 	},
 };
 
-const orgUri = "orgs";
+const orgUri = "channels";

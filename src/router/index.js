@@ -1,18 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Index from '../views/Index.vue'
-import SalesOrg from '../organizations/sales-org/SalesOrgList.vue'
-import DistributionChannel from '../organizations/DistributionChannel.vue'
-import Division from '../organizations/Division.vue'
-import SalesOffice from '../organizations/SalesOffice.vue'
-import SalesGroup from '../organizations/SalesGroup.vue'
+import SalesArea from '../organizations/area/SalesAreaList.vue'
+import SalesOrg from '../organizations/org/SalesOrgList.vue'
+import DistributionChannel from '../organizations/channel/DistributionChannelList.vue'
+import Division from '../organizations/div/DivisionList.vue'
+import SalesOffice from '../organizations/office/SalesOfficeList.vue'
+import SalesGroup from '../organizations/group/SalesGroupList.vue'
 
 const routes = [
 	{ path: '/', name: 'Index', component: Index },
+	{ path: '/areas/', name: 'SalesArea', component: SalesArea },
 	{ path: '/orgs/', name: 'SalesOrg', component: SalesOrg },
-	{ path: '/channels/:channel', name: 'DistributionChannel', component: DistributionChannel },
-	{ path: '/divs/:div', name: 'Division', component: Division },
-	{ path: '/offices/:office', name: 'SalesOffice', component: SalesOffice },
-	{ path: '/groups/:group', name: 'SalesGroup', component: SalesGroup },
+	{ path: '/channels/', name: 'DistributionChannel', component: DistributionChannel },
+	{ path: '/divs/', name: 'Division', component: Division },
+	{ path: '/offices/', name: 'SalesOffice', component: SalesOffice },
+	{ path: '/groups/', name: 'SalesGroup', component: SalesGroup },
 ]
 
 const router = createRouter({

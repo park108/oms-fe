@@ -10,26 +10,16 @@
 		</section>
 
 		<div class="div div--dashboard-box">
-				<SalesOrg :corpId="corpId" />
-			<section class="section section--split-three">
-				<DistributionChannel :corpId="corpId" />
-			</section>
-			<section class="section section--split-three">
-				<Division :corpId="corpId" />
-			</section>
+			<SalesOrg :corpId="corpId" />
+			<DistributionChannel :corpId="corpId" />
+			<Division :corpId="corpId" />
 		</div>
 
-		<section class="section section--split-one">
-			<SalesArea :corpId="corpId" />
-		</section>
+		<SalesArea :corpId="corpId" />
 
 		<div class="div div--dashboard-box">
-			<section class="section section--split-two">
-				<SalesOffice :corpId="corpId" />
-			</section>
-			<section class="section section--split-two">
-				<SalesGroup :corpId="corpId" />
-			</section>
+			<SalesOffice :corpId="corpId" />
+			<SalesGroup :corpId="corpId" />
 		</div>
 	</main>
 	<footer class="footer">
