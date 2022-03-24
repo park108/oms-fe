@@ -9,12 +9,12 @@ import SalesGroup from '../organizations/group/SalesGroupList.vue'
 
 const routes = [
 	{ path: '/', name: 'Index', component: Index },
-	{ path: '/areas/', name: 'SalesArea', component: SalesArea },
-	{ path: '/orgs/', name: 'SalesOrg', component: SalesOrg },
-	{ path: '/channels/', name: 'DistributionChannel', component: DistributionChannel },
-	{ path: '/divs/', name: 'Division', component: Division },
-	{ path: '/offices/', name: 'SalesOffice', component: SalesOffice },
-	{ path: '/groups/', name: 'SalesGroup', component: SalesGroup },
+	{ path: '/areas/', name: 'SalesAreaList', component: SalesArea },
+	{ path: '/orgs/', name: 'SalesOrgList', component: SalesOrg },
+	{ path: '/channels/', name: 'DistributionChannelList', component: DistributionChannel },
+	{ path: '/divs/', name: 'DivisionList', component: Division },
+	{ path: '/offices/', name: 'SalesOfficeList', component: SalesOffice },
+	{ path: '/groups/', name: 'SalesGroupList', component: SalesGroup },
 ]
 
 const router = createRouter({

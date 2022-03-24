@@ -26,6 +26,7 @@ export default {
 		},
 		moveDetail: function(e) {
 			const routeTo = "/" + orgUri + "/";
+			this.$store.state.list = this.list;
 			this.$router.push(routeTo);
 		}
 	},

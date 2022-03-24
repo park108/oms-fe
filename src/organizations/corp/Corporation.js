@@ -24,7 +24,8 @@ export default {
 
 				if(404 === res.status) {
 					log(orgUri + " is not found");
-					this.list = dummyData;
+					this.corp = dummyData;
+					this.$emit("setCorpId", this.corp.id);
 				}
 				else {
 					const data = await res.json();
@@ -37,6 +38,7 @@ export default {
 			}
 			finally {
 				log("CORP.finally...")
+				this.$store.state.corp = this.corp;
 				this.isLoading = false;
 			}
 		},
