@@ -9,6 +9,7 @@ const store = createStore({
 		return {
 			corp: null,
 			list: [],
+			org: null,
 		}
 	}
 });

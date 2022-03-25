@@ -17,6 +17,10 @@
 	padding: 10px;
 }
 
+.nav {
+	padding: 10px;
+}
+
 .main {
 	margin: 0;
 	padding: 0;
@@ -97,6 +101,11 @@
 
 .span {
 	background-color: transparent;
+}
+
+.span--button-back {
+	cursor: pointer;
+	color: var(--text-color-link);
 }
 
 .span--button-detail {

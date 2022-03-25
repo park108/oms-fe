@@ -1,7 +1,7 @@
 <template>
-	<section class="section section--split-three section--dashboard-linktodetail" @click="moveDetail">
+	<section class="section section--split-three section--dashboard-linktodetail" @click="moveList">
 		<div class="div div--dashboard-item">
-			<h1 class="h1" @click="moveDetail">Distribution Channels</h1>
+			<h1 class="h1" @click="moveList">Distribution Channels</h1>
 			<hr class="hr" />
 			<div class="div div--org-loading" v-if="isLoading">
 				Loading ...

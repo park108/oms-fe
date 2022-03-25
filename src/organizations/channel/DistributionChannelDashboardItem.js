@@ -24,7 +24,7 @@ export default {
 			}
 			this.isLoading = false;
 		},
-		moveDetail: function(e) {
+		moveList: function(e) {
 			const routeTo = "/" + orgUri + "/";
 			this.$store.state.list = this.list;
 			this.$router.push(routeTo);

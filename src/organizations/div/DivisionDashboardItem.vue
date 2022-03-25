@@ -1,5 +1,5 @@
 <template>
-	<section class="section section--split-three section--dashboard-linktodetail" @click="moveDetail">
+	<section class="section section--split-three section--dashboard-linktodetail" @click="moveList">
 		<div class="div div--dashboard-item">
 			<h1 class="h1">Divisions</h1>
 			<hr class="hr" />
