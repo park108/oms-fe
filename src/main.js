@@ -7,6 +7,7 @@ import router from './router'
 const store = createStore({
 	state() {
 		return {
+			user: null,
 			corp: null,
 			list: [],
 			org: null,

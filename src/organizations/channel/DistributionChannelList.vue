@@ -4,24 +4,39 @@
 			Distribution Channels of {{this.$store.state.corp.companyName}}
 		</h1>
 	</header>
-	<div class="div div--org-listitem" v-for="channel in this.$store.state.list" :key="channel.distributionChannel">
-		<span class="span">{{ channel.distributionChannel }}</span>
+	<Navigation />
+	<div class="div div--org-listitem" v-for="(channel, index) in this.$store.state.list" :key="channel.distributionChannel">
+		<span class="span span--button-detail" @click="moveDetail" :index="index">{{ channel.distributionChannel }}</span>
 		<span class="span"> : </span>
 		<span class="span">{{ channel.distributionChannelDesc }}</span>
 	</div>
-	<footer class="footer">
-		© 2022 Jongkil Park.
-	</footer>
+	<Footer />
 </template>
 <script>
-export default {
-	data() {
-		return {
+	import Navigation from "../../Navigation.vue";
+	import Footer from "../../Footer.vue";
+	
+	export default {
+		data() {
+			return {
+			}
+		},
+		components: {
+			Navigation,
+			Footer,
+		},
+		created() {
+		},
+		mounted() {
+		},
+		methods: {
+			moveDetail: function(e) {
+				const index = e.target.getAttribute("index") * 1;
+				const channel = this.$store.state.list[index];
+				const routeTo = "/channels/" + channel.distributionChannel;
+				this.$store.state.org = channel;
+				this.$router.push(routeTo);
+			}
 		}
-	},
-	created() {
-	},
-	mounted() {
 	}
-}
 </script>

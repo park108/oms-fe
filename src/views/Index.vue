@@ -22,9 +22,7 @@
 			<SalesGroup :corpId="corpId" />
 		</div>
 	</main>
-	<footer class="footer">
-		© 2022 Jongkil Park.
-	</footer>
+	<Footer />
 </template>
 
 <script src="./Index.js"></script>

@@ -15,7 +15,8 @@ export default {
 
 			getGames(10);
 
-			const url = getApi("organization") + "/corps/";
+			// TODO: Remove dummyUser after make User app.
+			const url = getApi("organization") + "/corps/" + dummyUser.corpId;
 
 			try {
 				this.isLoading = true;
@@ -24,20 +25,20 @@ export default {
 
 				if(404 === res.status) {
 					log(orgUri + " is not found");
-					this.corp = dummyData;
-					this.$emit("setCorpId", this.corp.id);
+					this.corp = dummyData; // TODO: Remove
 				}
 				else {
 					const data = await res.json();
-					this.corp = data[0];
-					this.$emit("setCorpId", this.corp.id);
+					this.corp = data;
 				}
 			}
 			catch (err) {
 				console.error(err);
+				this.corp = dummyData; // TODO: Remove
 			}
 			finally {
 				log("CORP.finally...")
+				this.$emit("setCorpId", this.corp.id);
 				this.$store.state.corp = this.corp;
 				this.isLoading = false;
 			}
@@ -51,5 +52,11 @@ const dummyData = {
 	companyCodeDesc: "SK on",
 	countryCode: "KR",
 	vatNumber: "2428702258",
-	id: "287263ec-21d7-4bf3-93e2-4b59bd977fdb",
+	id: "1eb2035d-bb9a-4933-a0ec-438baf8cff0a",
+}
+
+const dummyUser = {
+	name: "Jongkil Park",
+	corpId: "1eb2035d-bb9a-4933-a0ec-438baf8cff0a",
+	id: "9fh39gg1-bb9a-4933-a0ec-438baf8cff0a"
 }

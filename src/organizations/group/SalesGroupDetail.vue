@@ -1,13 +1,13 @@
 <template>
 	<header class="header">
 		<h1 class="h1">
-			Sales Organization > {{ this.$store.state.org.salesOrg }}
+			Sales Group > {{ this.$store.state.org.salesGroup }}
 		</h1>
 	</header>
 	<Navigation />
 	<main class="main">
-		<DetailAttribute name="Code" :value="this.$store.state.org.salesOrg" />
-		<DetailAttribute name="Description" :value="this.$store.state.org.salesOrgDesc" />
+		<DetailAttribute name="Code" :value="this.$store.state.org.salesGroup" />
+		<DetailAttribute name="Description" :value="this.$store.state.org.salesGroupDesc" />
 		<DetailAttribute name="id" :value="this.$store.state.org.id" />
 	</main>
 	<Footer />
