@@ -5,11 +5,13 @@
 		</h1>
 	</header>
 	<Navigation />
-	<div class="div div--org-listitem" v-for="(div, index) in this.$store.state.list" :key="div.division">
-		<span class="span span--button-detail" @click="moveDetail" :index="index">{{ div.division }}</span>
-		<span class="span"> : </span>
-		<span class="span">{{ div.divisionDesc }}</span>
-	</div>
+	<main class="main">
+		<div class="div div--org-listitem" v-for="(div, index) in this.$store.state.list" :key="div.division">
+			<span class="span span--button-detail" @click="moveDetail" :index="index">{{ div.division }}</span>
+			<span class="span"> : </span>
+			<span class="span">{{ div.divisionDesc }}</span>
+		</div>
+	</main>
 	<Footer />
 </template>
 <script>

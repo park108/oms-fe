@@ -5,17 +5,19 @@
 		</h1>
 	</header>
 	<Navigation />
-	<div class="div div--org-listitem" v-for="(area, index) in this.$store.state.list" :key="area.id">
-		<span class="span span--button-detail" @click="moveDetail" :index="index">
-			{{ area.salesOrg.salesOrg }}/{{ area.distributionChannel.distributionChannel }}/{{ area.division.division }}
-		</span>
-		<span class="span"> : </span>
-		<span class="span">{{ area.salesOrg.salesOrgDesc }}, </span>
-		<span
-			>{{ area.distributionChannel.distributionChannelDesc }},
-		</span>
-		<span class="span">{{ area.division.divisionDesc }} </span>
-	</div>
+	<main class="main">
+		<div class="div div--org-listitem" v-for="(area, index) in this.$store.state.list" :key="area.id">
+			<span class="span span--button-detail" @click="moveDetail" :index="index">
+				{{ area.salesOrg.salesOrg }}/{{ area.distributionChannel.distributionChannel }}/{{ area.division.division }}
+			</span>
+			<span class="span"> : </span>
+			<span class="span">{{ area.salesOrg.salesOrgDesc }}, </span>
+			<span
+				>{{ area.distributionChannel.distributionChannelDesc }},
+			</span>
+			<span class="span">{{ area.division.divisionDesc }} </span>
+		</div>
+	</main>
 	<Footer />
 </template>
 <script>
