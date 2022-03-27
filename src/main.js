@@ -17,5 +17,11 @@ const store = createStore({
 
 const app = createApp(App).use(router);
 
+const setHeight = () => {
+	document.getElementById("app").style.minHeight = window.innerHeight + "px"
+}
+
 app.mount("#app");
 app.use(store);
+setHeight();
+window.addEventListener("resize", setHeight);
