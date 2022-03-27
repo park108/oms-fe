@@ -15,7 +15,6 @@
 #app {
 	min-height: 100vh;
 	display: flex;
-	min-height: 100vh;
 	flex-direction: column;
 }
 
@@ -42,7 +41,6 @@
 .footer {
 	margin: 0;
 	padding: 20px 10px;
-	bottom: 0;
 }
 
 .hr {
@@ -95,6 +93,7 @@
 }
 
 .section--dashboard-linktodetail:hover {
+	transition: 0.3s ease;
 	background-color: var(--background-color-hover);
 }
 
