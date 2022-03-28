@@ -4,6 +4,8 @@
 	--text-color-temporary: #666666;
 	--background-color-normal: #ffffff;
 	--background-color-hover: #ffff66;
+	--background-color-ok: #ccffcc;
+	--background-color-error: #ffcccc;
 	--border-color-normal: #cccccc;
 	--shadow-color-normal: #eeeeee;
 }
@@ -97,6 +99,45 @@
 	background-color: var(--background-color-hover);
 }
 
+.section--event-buttons {
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.button {
+	font-size: 1em;
+	height: 3em;
+	flex: 1;
+	border: 0;
+}
+
+.button--event-first {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.button--event-last {
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.button--data-save {
+	background-color: var(--background-color-ok);
+}
+
+.button--data-save:hover {
+	background-color: green;
+}
+
+.button--data-delete {
+	background-color: var(--background-color-error);
+}
+
+.button--data-delete:hover {
+	background-color: red;
+}
+
 .div {
 	margin: 0;
 	padding: 0;
@@ -120,6 +161,7 @@
 
 .div--org-listitem {
 	margin: 1em;
+	display: flex;
 }
 
 .span {
@@ -138,5 +180,20 @@
 }
 
 .span--org-listitem {
-	color: var(--text-color-normal);
+	color: var(--text-color-normal);	
+}
+
+.span--detail-attributename {
+	width: 120px;
+	display: block;
+	float: left;
+}
+
+.input--detail-attribute {
+	width: calc(100% - 122px);
+	font-size: 1em;
+	margin: 0;
+	padding: 1px;
+	border-width: 0 0 1px 0;
+	border-color: var(--border-color-normal);
 }

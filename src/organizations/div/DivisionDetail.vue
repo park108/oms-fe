@@ -6,9 +6,9 @@
 	</header>
 	<Navigation />
 	<main class="main">
-		<DetailAttribute name="Code" :value="this.$store.state.org.division" />
-		<DetailAttribute name="Description" :value="this.$store.state.org.divisionDesc" />
-		<DetailAttribute name="id" :value="this.$store.state.org.id" />
+		<DetailAttribute name="division" attribute-name="Division" :value="this.$store.state.org.division"/>
+		<DetailAttribute name="divisionDesc" attribute-name="Description" :value="this.$store.state.org.divisionDesc" :editable="true" />
+		<DetailAttribute name="id" attribute-name="id" :value="this.$store.state.org.id"/>
 	</main>
 	<Footer />
 </template>

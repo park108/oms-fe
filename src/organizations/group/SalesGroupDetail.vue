@@ -6,9 +6,9 @@
 	</header>
 	<Navigation />
 	<main class="main">
-		<DetailAttribute name="Code" :value="this.$store.state.org.salesGroup" />
-		<DetailAttribute name="Description" :value="this.$store.state.org.salesGroupDesc" />
-		<DetailAttribute name="id" :value="this.$store.state.org.id" />
+		<DetailAttribute name="salesGroup" attribute-name="Sales Group" :value="this.$store.state.org.salesGroup"/>
+		<DetailAttribute name="salesGroupDesc" attribute-name="Description" :value="this.$store.state.org.salesGroupDesc" :editable="true" />
+		<DetailAttribute name="id" attribute-name="id" :value="this.$store.state.org.id"/>
 	</main>
 	<Footer />
 </template>

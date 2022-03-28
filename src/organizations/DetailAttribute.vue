@@ -1,8 +1,11 @@
 <template>
 	<div class="div div--org-listitem">
-		<span class="span">{{ this.name }}</span>
-		<span class="span"> : </span>
-		<span class="span">{{ this.value }}</span>
+		<span class="span span--detail-attributename">{{ this.attributeName }}</span>
+		<input class="input input--detail-attribute"
+			:id="this.name"
+			:value="this.value"
+			:disabled="!this.editable"
+		/>
 	</div>
 </template>
 <script>
@@ -10,6 +13,8 @@
 		props: {
 			name: '',
 			value: '',
+			attributeName: '',
+			editable: false
 		}
 	}
 </script>
