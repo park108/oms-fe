@@ -101,6 +101,10 @@
 
 .section--event-buttons {
 	padding: 0;
+	margin: 0;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -109,17 +113,7 @@
 	font-size: 1em;
 	height: 3em;
 	flex: 1;
-	border: 0;
-}
-
-.button--event-first {
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-}
-
-.button--event-last {
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
+	border: 1px solid var(--border-color-normal);
 }
 
 .button--data-save {
@@ -187,6 +181,10 @@
 	width: 120px;
 	display: block;
 	float: left;
+}
+
+.input {
+	-webkit-appearance: none;
 }
 
 .input--detail-attribute {

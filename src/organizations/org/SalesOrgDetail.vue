@@ -9,11 +9,11 @@
 		<DetailAttribute name="salesOrg" attribute-name="Sales Org" :value="this.$store.state.org.salesOrg"/>
 		<DetailAttribute name="salesOrgDesc" attribute-name="Description" :value="this.$store.state.org.salesOrgDesc" :editable="true" />
 		<DetailAttribute name="id" attribute-name="id" :value="this.$store.state.org.id"/>
-		<section class="section section--event-buttons">
-			<button class="button button--event-first button--data-delete">Delete</button>
-			<button class="button button--event-last button--data-save">Save</button>
-		</section>
 	</main>
+	<section class="section section--event-buttons">
+		<button class="button button--data-delete">Delete</button>
+		<button class="button button--data-save">Save</button>
+	</section>
 	<Footer />
 </template>
 <script>

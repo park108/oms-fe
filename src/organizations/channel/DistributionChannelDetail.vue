@@ -10,6 +10,10 @@
 		<DetailAttribute name="distributionChannelDesc" attribute-name="Description" :value="this.$store.state.org.distributionChannelDesc" :editable="true" />
 		<DetailAttribute name="id" attribute-name="id" :value="this.$store.state.org.id"/>
 	</main>
+	<section class="section section--event-buttons">
+		<button class="button button--data-delete">Delete</button>
+		<button class="button button--data-save">Save</button>
+	</section>
 	<Footer />
 </template>
 <script>
