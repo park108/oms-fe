@@ -7,8 +7,8 @@
 	--background-color-error: #ffcccc;
 	--border-color-normal: #cccccc;
 	--shadow-color-normal: #eeeeee;
-	--event-color-delete: #c46565;
-	--event-color-save: #5c8bb1;
+	--event-color-delete: #cb4c48;
+	--event-color-save: #427ab3;
 	--event-color-active: #fff8bb;
 	--event-active-transition: 0.2s;
 }
@@ -175,9 +175,15 @@
 	background-color: transparent;
 }
 
-.span--button-back {
+.span--navbutton-back {
 	cursor: pointer;
 	color: var(--text-color-link);
+}
+
+.span--navbutton-delete {
+	cursor: pointer;
+	float: right;
+	color: var(--event-color-delete);
 }
 
 .span--button-detail {

@@ -4,14 +4,13 @@
 			Sales Group > {{ this.$store.state.org.salesGroup }}
 		</h1>
 	</header>
-	<Navigation />
+	<Navigation :enableDelete="true" :deleteEventFunc="deleteItem"/>
 	<main class="main">
 		<DetailAttribute name="salesGroup" attribute-name="Sales Group" :value="this.$store.state.org.salesGroup"/>
 		<DetailAttribute name="salesGroupDesc" attribute-name="Description" :value="this.$store.state.org.salesGroupDesc" :editable="true" />
 		<DetailAttribute name="id" attribute-name="id" :value="this.$store.state.org.id"/>
 	</main>
 	<section class="section section--event-buttons">
-		<button class="button button--data-delete">Delete</button>
 		<button class="button button--data-save">Save</button>
 	</section>
 	<Footer />
@@ -38,6 +37,9 @@
 		methods: {
 			goBack: function() {
 				this.$router.go(-1);
+			},
+			deleteItem: function() {
+				console.log("DELETE!");
 			},
 		}
 	}
