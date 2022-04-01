@@ -11,7 +11,7 @@
 			<span class="span">{{ group.salesGroupDesc }}</span>
 		</div>
 	</main>
-	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Create New Group" />
+	<EventButtons :enableSave="true" :saveEventFunc="createItem" saveButtonText="Create New Group" />
 	<Footer />
 </template>
 <script>
@@ -40,7 +40,10 @@
 				const routeTo = "/groups/" + group.salesGroup;
 				this.$store.state.org = group;
 				this.$router.push(routeTo);
-			}
+			},
+			createItem: function() {
+				console.log("CREATE ITEM!!");
+			},
 		}
 	}
 </script>

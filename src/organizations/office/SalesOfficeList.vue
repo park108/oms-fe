@@ -11,7 +11,7 @@
 			<span class="span">{{ office.salesOfficeDesc }}</span>
 		</div>
 	</main>
-	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Create New Office" />
+	<EventButtons :enableSave="true" :saveEventFunc="createItem" saveButtonText="Create New Office" />
 	<Footer />
 </template>
 <script>
@@ -40,7 +40,10 @@
 				const routeTo = "/offices/" + office.salesOffice;
 				this.$store.state.org = office;
 				this.$router.push(routeTo);
-			}
+			},
+			createItem: function() {
+				console.log("CREATE ITEM!!");
+			},
 		}
 	}
 </script>

@@ -10,12 +10,10 @@
 			<span class="span span--detail-attributename span--button-detail" @click="moveDetail" :index="index">
 				{{ area.salesOrg.salesOrg }}/{{ area.distributionChannel.distributionChannel }}/{{ area.division.division }}
 			</span>
-			<span class="span">{{ area.salesOrg.salesOrgDesc }}</span>
-			<span>, {{ area.distributionChannel.distributionChannelDesc }}</span>
-			<span class="span">, {{ area.division.divisionDesc }} </span>
+			<span class="span">{{ area.salesOrg.salesOrgDesc }}, {{ area.distributionChannel.distributionChannelDesc }}, {{ area.division.divisionDesc }} </span>
 		</div>
 	</main>
-	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Create New Area" />
+	<EventButtons :enableSave="true" :saveEventFunc="createItem" saveButtonText="Create New Area" />
 	<Footer />
 </template>
 <script>
@@ -47,7 +45,10 @@
 					+ area.division.division
 				this.$store.state.org = area;
 				this.$router.push(routeTo);
-			}
+			},
+			createItem: function() {
+				console.log("CREATE ITEM!!");
+			},
 		}
 	}
 </script>

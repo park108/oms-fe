@@ -11,7 +11,7 @@
 			<span class="span">{{ org.salesOrgDesc }}</span>
 		</div>
 	</main>
-	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Create New Org." />
+	<EventButtons :enableSave="true" :saveEventFunc="createItem" saveButtonText="Create New Org." />
 	<Footer />
 </template>
 <script>
@@ -40,7 +40,10 @@
 				const routeTo = "/orgs/" + org.salesOrg;
 				this.$store.state.org = org;
 				this.$router.push(routeTo);
-			}
+			},
+			createItem: function() {
+				console.log("CREATE ITEM!!");
+			},
 		}
 	}
 </script>

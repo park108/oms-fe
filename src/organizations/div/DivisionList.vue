@@ -11,7 +11,7 @@
 			<span class="span">{{ div.divisionDesc }}</span>
 		</div>
 	</main>
-	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Create New Division" />
+	<EventButtons :enableSave="true" :saveEventFunc="createItem" saveButtonText="Create New Division" />
 	<Footer />
 </template>
 <script>
@@ -40,7 +40,10 @@
 				const routeTo = "/divs/" + div.division;
 				this.$store.state.org = div;
 				this.$router.push(routeTo);
-			}
+			},
+			createItem: function() {
+				console.log("CREATE ITEM!!");
+			},
 		}
 	}
 </script>

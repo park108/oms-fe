@@ -10,7 +10,7 @@
 		<DetailAttribute name="salesOfficeDesc" attribute-name="Description" :value="this.$store.state.org.salesOfficeDesc" :editable="true" />
 		<DetailAttribute name="id" attribute-name="id" :value="this.$store.state.org.id"/>
 	</main>
-	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Update Office" /> />
+	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Update Office" />
 	<Footer />
 </template>
 <script>

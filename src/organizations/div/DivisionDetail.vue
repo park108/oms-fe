@@ -10,7 +10,7 @@
 		<DetailAttribute name="divisionDesc" attribute-name="Description" :value="this.$store.state.org.divisionDesc" :editable="true" />
 		<DetailAttribute name="id" attribute-name="id" :value="this.$store.state.org.id"/>
 	</main>
-	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Update Division" /> />
+	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Update Division" />
 	<Footer />
 </template>
 <script>

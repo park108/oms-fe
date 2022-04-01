@@ -10,7 +10,7 @@
 		<DetailAttribute name="salesOrgDesc" attribute-name="Description" :value="this.$store.state.org.salesOrgDesc" :editable="true" />
 		<DetailAttribute name="id" attribute-name="id" :value="this.$store.state.org.id"/>
 	</main>
-	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Update Org." /> />
+	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Update Org." />
 	<Footer />
 </template>
 <script>

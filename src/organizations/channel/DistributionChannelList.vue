@@ -11,7 +11,7 @@
 			<span class="span">{{ channel.distributionChannelDesc }}</span>
 		</div>
 	</main>
-	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Create New Channel" />
+	<EventButtons :enableSave="true" :saveEventFunc="createItem" saveButtonText="Create New Channel" />
 	<Footer />
 </template>
 <script>
@@ -40,7 +40,10 @@
 				const routeTo = "/channels/" + channel.distributionChannel;
 				this.$store.state.org = channel;
 				this.$router.push(routeTo);
-			}
+			},
+			createItem: function() {
+				console.log("CREATE ITEM!!");
+			},
 		}
 	}
 </script>
