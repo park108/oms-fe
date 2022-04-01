@@ -6,7 +6,9 @@
 	--background-color-ok: #ccffcc;
 	--background-color-error: #ffcccc;
 	--border-color-normal: #cccccc;
+	--border-color-hover: #ddddaa;
 	--shadow-color-normal: #eeeeee;
+	--shadow-color-hover: #eee4aa;
 	--event-color-delete: #cb4c48;
 	--event-color-save: #427ab3;
 	--event-color-active: #fff8bb;
@@ -62,7 +64,6 @@
 	background-color: var(--background-color-normal);
 	border: 1px solid var(--border-color-normal);
 	border-radius: 10px;
-	box-shadow: 3px 3px 4px 2px var(--shadow-color-normal);
 }
 
 .section--split-one {
@@ -94,11 +95,14 @@
 
 .section--dashboard-linktodetail {
 	cursor: pointer;
+	box-shadow: 0px 0px 4px 1px var(--shadow-color-normal);
 }
 
 .section--dashboard-linktodetail:hover {
 	transition: var(--event-active-transition) ease;
 	background-color: var(--event-color-active);
+	border-color: var(--border-color-hover);
+	box-shadow: 0px 0px 4px 1px var(--shadow-color-hover);
 }
 
 .section--event-buttons {
@@ -140,9 +144,12 @@
 	border-color: var(--event-color-delete);;
 }
 
+.button:hover {
+	transition: var(--event-active-transition) ease;
+}
+
 .button:active {
 	background-color: var(--event-color-active);
-	transition: var(--event-active-transition) ease;
 }
 
 .div {
@@ -168,6 +175,7 @@
 
 .div--org-listitem {
 	margin: 1em;
+	min-height: 1.5em;
 	display: flex;
 }
 

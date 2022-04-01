@@ -7,16 +7,17 @@
 	<Navigation />
 	<main class="main">
 		<div class="div div--org-listitem" v-for="(div, index) in this.$store.state.list" :key="div.division">
-			<span class="span span--button-detail" @click="moveDetail" :index="index">{{ div.division }}</span>
-			<span class="span"> : </span>
+			<span class="span span--detail-attributename span--button-detail" @click="moveDetail" :index="index">{{ div.division }}</span>
 			<span class="span">{{ div.divisionDesc }}</span>
 		</div>
 	</main>
+	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Create New Division" />
 	<Footer />
 </template>
 <script>
-	import Navigation from "../../Navigation.vue";
-	import Footer from "../../Footer.vue";
+	import Navigation from "@/Navigation.vue";
+	import Footer from "@/Footer.vue";
+	import EventButtons from "@/EventButtons.vue";
 	
 	export default {
 		data() {
@@ -26,6 +27,7 @@
 		components: {
 			Navigation,
 			Footer,
+			EventButtons,
 		},
 		created() {
 		},

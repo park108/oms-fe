@@ -7,22 +7,21 @@
 	<Navigation />
 	<main class="main">
 		<div class="div div--org-listitem" v-for="(area, index) in this.$store.state.list" :key="area.id">
-			<span class="span span--button-detail" @click="moveDetail" :index="index">
+			<span class="span span--detail-attributename span--button-detail" @click="moveDetail" :index="index">
 				{{ area.salesOrg.salesOrg }}/{{ area.distributionChannel.distributionChannel }}/{{ area.division.division }}
 			</span>
-			<span class="span"> : </span>
-			<span class="span">{{ area.salesOrg.salesOrgDesc }}, </span>
-			<span
-				>{{ area.distributionChannel.distributionChannelDesc }},
-			</span>
-			<span class="span">{{ area.division.divisionDesc }} </span>
+			<span class="span">{{ area.salesOrg.salesOrgDesc }}</span>
+			<span>, {{ area.distributionChannel.distributionChannelDesc }}</span>
+			<span class="span">, {{ area.division.divisionDesc }} </span>
 		</div>
 	</main>
+	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Create New Area" />
 	<Footer />
 </template>
 <script>
-	import Navigation from "../../Navigation.vue";
-	import Footer from "../../Footer.vue";
+	import Navigation from "@/Navigation.vue";
+	import Footer from "@/Footer.vue";
+	import EventButtons from "@/EventButtons.vue";
 	
 	export default {
 		data() {
@@ -32,6 +31,7 @@
 		components: {
 			Navigation,
 			Footer,
+			EventButtons,
 		},
 		created() {
 		},

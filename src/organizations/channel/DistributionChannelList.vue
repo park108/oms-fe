@@ -7,16 +7,17 @@
 	<Navigation />
 	<main class="main">
 		<div class="div div--org-listitem" v-for="(channel, index) in this.$store.state.list" :key="channel.distributionChannel">
-			<span class="span span--button-detail" @click="moveDetail" :index="index">{{ channel.distributionChannel }}</span>
-			<span class="span"> : </span>
+			<span class="span span--detail-attributename span--button-detail" @click="moveDetail" :index="index">{{ channel.distributionChannel }}</span>
 			<span class="span">{{ channel.distributionChannelDesc }}</span>
 		</div>
 	</main>
+	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Create New Channel" />
 	<Footer />
 </template>
 <script>
-	import Navigation from "../../Navigation.vue";
-	import Footer from "../../Footer.vue";
+	import Navigation from "@/Navigation.vue";
+	import Footer from "@/Footer.vue";
+	import EventButtons from "@/EventButtons.vue";
 	
 	export default {
 		data() {
@@ -26,6 +27,7 @@
 		components: {
 			Navigation,
 			Footer,
+			EventButtons,
 		},
 		created() {
 		},

@@ -10,15 +10,14 @@
 		<DetailAttribute name="salesGroupDesc" attribute-name="Description" :value="this.$store.state.org.salesGroupDesc" :editable="true" />
 		<DetailAttribute name="id" attribute-name="id" :value="this.$store.state.org.id"/>
 	</main>
-	<section class="section section--event-buttons">
-		<button class="button button--data-save">Save</button>
-	</section>
+	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Update Group" /> />
 	<Footer />
 </template>
 <script>
-	import Navigation from "../../Navigation.vue";
+	import Navigation from "@/Navigation.vue";
 	import DetailAttribute from "../DetailAttribute.vue";
-	import Footer from "../../Footer.vue";
+	import Footer from "@/Footer.vue";
+	import EventButtons from "@/EventButtons.vue";
 
 	export default {
 		data() {
@@ -29,14 +28,15 @@
 			Navigation,
 			DetailAttribute,
 			Footer,
+			EventButtons
 		},
 		created() {
 		},
 		mounted() {
 		},
 		methods: {
-			goBack: function() {
-				this.$router.go(-1);
+			saveItem: function() {
+				console.log("SAVE!");
 			},
 			deleteItem: function() {
 				console.log("DELETE!");

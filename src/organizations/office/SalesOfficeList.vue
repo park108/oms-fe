@@ -7,16 +7,17 @@
 	<Navigation />
 	<main class="main">
 		<div class="div div--org-listitem" v-for="(office, index) in this.$store.state.list" :key="office.salesOffice">
-			<span class="span span--button-detail" @click="moveDetail" :index="index">{{ office.salesOffice }}</span>
-			<span class="span"> : </span>
+			<span class="span span--detail-attributename span--button-detail" @click="moveDetail" :index="index">{{ office.salesOffice }}</span>
 			<span class="span">{{ office.salesOfficeDesc }}</span>
 		</div>
 	</main>
+	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Create New Office" />
 	<Footer />
 </template>
 <script>
-	import Navigation from "../../Navigation.vue";
-	import Footer from "../../Footer.vue";
+	import Navigation from "@/Navigation.vue";
+	import Footer from "@/Footer.vue";
+	import EventButtons from "@/EventButtons.vue";
 	
 	export default {
 		data() {
@@ -26,6 +27,7 @@
 		components: {
 			Navigation,
 			Footer,
+			EventButtons,
 		},
 		created() {
 		},
