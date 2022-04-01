@@ -20,6 +20,18 @@ export const log = (str) => {
 	}
 }
 
+export const confirmCreateItem = () => {
+	return window.confirm("Do you want to create?");
+}
+
+export const confirmUpdateItem = () => {
+	return window.confirm("Do you want to update?");
+}
+
+export const confirmDeleteItem = () => {
+	return window.confirm("Do you want to delete?");
+}
+
 export const dummyData = {
 	"orgs": [
 		{
@@ -177,9 +189,9 @@ export const dummyData = {
 
 export function getGames(games) {
 
-   console.log("==================================================");
-   console.log(new Date());
-   console.log("--------------------------------------------------");
+   log("==================================================");
+   log(new Date());
+   log("--------------------------------------------------");
 
    let game = [];
    let slot = [];
@@ -208,14 +220,14 @@ export function getGames(games) {
 		   slot.sort((a, b) =>{ return a*1-b*1});
 
 		   if(slot.length === 45) {
-			   console.log("------------ Slot is full.  Flush it. ------------");
+			   log("------------ Slot is full.  Flush it. ------------");
 			   slot = [];
 		   }
 	   }
 
-	   console.log("GAME(" + (i+1) + ") = " + game);
+	   log("GAME(" + (i+1) + ") = " + game);
 	   game = [];
    }
 
-   console.log("==================================================");
+   log("==================================================");
 }

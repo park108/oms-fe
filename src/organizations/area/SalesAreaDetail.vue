@@ -18,6 +18,7 @@
 	import DetailAttribute from "../DetailAttribute.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
+	import { log, confirmDeleteItem } from "@/common.js";
 
 	export default {
 		data() {
@@ -35,11 +36,14 @@
 		mounted() {
 		},
 		methods: {
-			saveItem: function() {
-				console.log("SAVE!");
-			},
 			deleteItem: function() {
-				console.log("DELETE!");
+				if(!confirmDeleteItem()) return;
+
+				log("Yes delete it!");
+
+				// TODO: make item delete logic
+
+				this.$router.go(-1);
 			},
 		}
 	}

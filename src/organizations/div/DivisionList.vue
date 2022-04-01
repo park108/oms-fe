@@ -18,6 +18,7 @@
 	import Navigation from "@/Navigation.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
+	import { log } from "@/common.js";
 	
 	export default {
 		data() {
@@ -42,7 +43,7 @@
 				this.$router.push(routeTo);
 			},
 			createItem: function() {
-				console.log("CREATE ITEM!!");
+				log("CREATE ITEM!!");
 			},
 		}
 	}
