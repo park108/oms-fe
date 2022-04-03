@@ -5,7 +5,7 @@ import Division from "../organizations/div/DivisionDashboardItem.vue";
 import SalesArea from "../organizations/area/SalesAreaDashboardItem.vue";
 import SalesOffice from "../organizations/office/SalesOfficeDashboardItem.vue";
 import SalesGroup from "../organizations/group/SalesGroupDashboardItem.vue";
-import Footer from "../Footer.vue";
+import Footer from "@/Footer.vue";
 
 export default {
 	data() {

@@ -1,4 +1,4 @@
-import { getApi, log } from "../common.js"
+import { getApi, log, dummyData } from "@/common.js"
 
 export class OrganizationDataHandler {
 
@@ -28,6 +28,12 @@ export class OrganizationDataHandler {
 			result = null;
 		}
 		finally {
+
+			// TODO: Delete before deilvery backend
+			if(null == result) {
+				result = dummyData[uri];
+			}
+			
 			return result;
 		}
 	}

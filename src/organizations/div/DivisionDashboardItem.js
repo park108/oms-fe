@@ -1,4 +1,4 @@
-import { log, isUuid, dummyData } from "../../common.js"
+import { isUuid } from "@/common.js"
 import { OrganizationDataHandler } from "../OrganizationDataHandler.js";
 
 export default {
@@ -9,27 +9,22 @@ export default {
 		}
 	},
 	props: {
-		corpId: ''
+		corpId: '',
+		orgUri: '',
 	},
 	watch: {
-		corpId: function() {
-			if(isUuid(this.corpId)) this.getList();
+		corpId: async function() {
+			if(isUuid(this.corpId)) {
+				this.list = await OrganizationDataHandler.getList(this.corpId, this.orgUri);
+				this.isLoading = false;
+			}
 		},
 	},
 	methods: {
-		getList: async function() {
-			this.list = await OrganizationDataHandler.getList(this.corpId, orgUri);
-			if(null === this.list) {
-				this.list = dummyData[orgUri];
-			}
-			this.isLoading = false;
-		},
 		moveList: function(e) {
-			const routeTo = "/" + orgUri + "/";
+			const routeTo = "/" + this.orgUri + "/";
 			this.$store.state.list = this.list;
 			this.$router.push(routeTo);
 		}
 	},
 };
-
-const orgUri = "divs";
