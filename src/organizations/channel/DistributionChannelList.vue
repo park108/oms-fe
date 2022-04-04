@@ -6,7 +6,10 @@
 	</header>
 	<Navigation />
 	<main class="main">
-		<div class="div div--org-listitem" v-for="(channel, index) in this.$store.state.list" :key="channel.distributionChannel">
+		<div class="div div--org-loading" v-if="isLoading">
+			Loading ...
+		</div>
+		<div class="div div--org-listitem" v-else v-for="(channel, index) in list" :key="channel.distributionChannel">
 			<span class="span span--detail-attributename span--button-detail" @click="moveDetail" :index="index">{{ channel.distributionChannel }}</span>
 			<span class="span">{{ channel.distributionChannelDesc }}</span>
 		</div>
@@ -18,28 +21,34 @@
 	import Navigation from "@/Navigation.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
+	import { OrganizationDataHandler } from "../OrganizationDataHandler.js";
 	import { log } from "@/common.js";
 	
 	export default {
 		data() {
 			return {
+				isLoading: true,
+				orgUri: '',
+				list: []
 			}
 		},
 		components: {
 			Navigation,
 			Footer,
 			EventButtons,
+			OrganizationDataHandler,
 		},
-		created() {
-		},
-		mounted() {
+		async mounted() {
+			this.orgUri = this.$store.state.orgUri;
+			this.list = await OrganizationDataHandler.getList(this.$store.state.corp.id, this.orgUri);
+			this.isLoading = false;
 		},
 		methods: {
 			moveDetail: function(e) {
 				const index = e.target.getAttribute("index") * 1;
-				const channel = this.$store.state.list[index];
-				const routeTo = "/channels/" + channel.distributionChannel;
-				this.$store.state.org = channel;
+				const org = this.list[index];
+				const routeTo = "/" + this.orgUri + "/" + org.id;
+				this.$store.state.org = org;
 				this.$router.push(routeTo);
 			},
 			createItem: function() {

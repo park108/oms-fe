@@ -23,7 +23,7 @@ export default {
 	methods: {
 		moveList: function(e) {
 			const routeTo = "/" + this.orgUri + "/";
-			this.$store.state.list = this.list;
+			this.$store.state.orgUri = this.orgUri;
 			this.$router.push(routeTo);
 		}
 	},

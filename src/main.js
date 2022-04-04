@@ -11,6 +11,7 @@ const store = createStore({
 			corp: null,
 			list: [],
 			org: null,
+			orgUri: '',
 		}
 	}
 });
