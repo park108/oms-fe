@@ -34,6 +34,7 @@
 		created() {
 		},
 		mounted() {
+			log(this.$route.params);
 		},
 		methods: {
 			saveItem: function() {

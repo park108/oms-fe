@@ -42,7 +42,7 @@ export class OrganizationDataHandler {
 
 		log("CALL OrganizationDataHandler.getOrg(" + corpId + ", " + uri + ", " + orgCode + " = " + id + ")");
 
-		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/" + id;
+		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/" + id + "/";
 		let result;
 
 		try {
@@ -60,14 +60,16 @@ export class OrganizationDataHandler {
 			}
 		}
 		catch(err) {
-			console.error(err);	
+			console.error(err);
 			result = null;
 		}
 		finally {
 
 			// TODO: Delete before deilvery backend
 			if(null == result) {
-				result = dummyData[uri].filter( item => item.id = id);
+				result = dummyData[uri].filter(item => {
+					return item.id === id;
+				})[0];
 			}
 			
 			return result;

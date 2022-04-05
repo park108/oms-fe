@@ -1,5 +1,5 @@
 <template>
-	<div class="div div--org-listitem">
+	<div class="div div--org-listitem" role="listitem">
 		<span class="span span--detail-attributename">{{ this.attributeName }}</span>
 		<input class="input input--detail-attribute"
 			:id="this.name"

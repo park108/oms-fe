@@ -37,12 +37,12 @@ export const dummyData = {
 		{
 			salesOrg: "S000",
 			salesOrgDesc: "Battery District",
-			id: "57738ddb-cdbb-4901-b8d4-49897142e8ab",
+			id: "f68f0c61-ea6a-474a-b77a-60dfa830fed0",
 		},
 		{
 			salesOrg: "S100",
 			salesOrgDesc: "Material District",
-			id: "15e70991-b766-4538-99da-cb7f4f4dd42c",
+			id: "bffa0dc1-24d1-4dd9-9afb-1c8201fbb911",
 		},
 	],
 	"channels": [

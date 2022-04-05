@@ -1,14 +1,19 @@
 <template>
 	<header class="header">
 		<h1 class="h1">
-			Sales Organization > {{ this.$store.state.org.salesOrg }}
+			Sales Organization > {{ orgCode }}
 		</h1>
 	</header>
 	<Navigation :enableDelete="true" :deleteEventFunc="deleteItem"/>
 	<main class="main">
-		<DetailAttribute name="salesOrg" attribute-name="Sales Org" :value="this.$store.state.org.salesOrg"/>
-		<DetailAttribute name="salesOrgDesc" attribute-name="Description" :value="this.$store.state.org.salesOrgDesc" :editable="true" />
-		<DetailAttribute name="id" attribute-name="id" :value="this.$store.state.org.id"/>
+		<div class="div div--org-loading" v-if="isLoading">
+			Loading ...
+		</div>
+		<div class="div div--org-list" role="list" v-else>
+			<DetailAttribute name="salesOrg" attribute-name="Sales Org" :value="org.salesOrg"/>
+			<DetailAttribute name="salesOrgDesc" attribute-name="Description" :value="org.salesOrgDesc" :editable="true" />
+			<DetailAttribute name="id" attribute-name="id" :value="org.id"/>
+		</div>
 	</main>
 	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Update Org." />
 	<Footer />
@@ -18,11 +23,15 @@
 	import DetailAttribute from "../DetailAttribute.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
+	import { OrganizationDataHandler } from '../OrganizationDataHandler';
 	import { log, confirmUpdateItem, confirmDeleteItem } from "@/common.js";
 
 	export default {
 		data() {
 			return {
+				isLoading: true,
+				org: null,
+				orgCode: '',
 			}
 		},
 		components: {
@@ -31,9 +40,12 @@
 			Footer,
 			EventButtons
 		},
-		created() {
-		},
-		mounted() {
+		async mounted() {
+			const corpId = this.$store.state.corp.id;
+			const orgId = this.$route.params.org;
+			this.org = await OrganizationDataHandler.getOrg(corpId, "orgs", "salesOrg", orgId);
+			this.orgCode = this.org.salesOrg;
+			this.isLoading = false;
 		},
 		methods: {
 			saveItem: function() {
