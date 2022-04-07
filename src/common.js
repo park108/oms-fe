@@ -49,12 +49,12 @@ export const dummyData = {
 		{
 			distributionChannel: "20",
 			distributionChannelDesc: "Domestic",
-			id: "d9e0125f-e0bb-47aa-953d-aa9075a554d1",
+			id: "4a4782bd-8eed-40ec-a57e-2fa48270171a",
 		},
 		{
 			distributionChannel: "40",
 			distributionChannelDesc: "Export",
-			id: "809b30d1-6ab2-4192-a93f-590a2a7e24ae",
+			id: "18162d86-6030-42cf-bec2-7b632e636fde",
 		},
 	],
 	"divs": [
