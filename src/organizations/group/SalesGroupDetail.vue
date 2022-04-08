@@ -42,9 +42,8 @@
 		},
 		async mounted() {
 			const corpId = this.$store.state.corp.id;
-			const orgId = this.$route.params.group;
-			this.org = await OrganizationDataHandler.getOrg(corpId, "groups", "salesGroup", orgId);
-			this.orgCode = this.org.salesGroup;
+			this.orgCode = this.$route.params.group;
+			this.org = await OrganizationDataHandler.getOrg(corpId, "groups", "salesGroup", this.orgCode);
 			this.isLoading = false;
 		},
 		methods: {

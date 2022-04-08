@@ -32,29 +32,30 @@ export class OrganizationDataHandler {
 			// TODO: Delete before deilvery backend
 			if(null == result) {
 				result = dummyData[uri];
+				log("Set " + uri + " from dummy data for test");
 			}
 			
 			return result;
 		}
 	}
 
-	static async getOrg(corpId, uri, orgCode, id) {
+	static async getOrg(corpId, uri, orgName, orgCode) {
 
-		log("CALL OrganizationDataHandler.getOrg(" + corpId + ", " + uri + ", " + orgCode + " = " + id + ")");
+		log("CALL OrganizationDataHandler.getOrg(" + corpId + ", " + uri + ", " + orgName + " = " + orgCode + ")");
 
-		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/" + id + "/";
+		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/" + orgCode + "/";
 		let result;
 
 		try {
 			const res = await fetch(url);
 
 			if(404 == res.status) {
-				log(orgCode + " is not found");
+				log(orgName + " is not found");
 				result = null;
 			}
 			else {
 				const data = await res.json();
-				log(orgCode + " fetched successfully.");
+				log(orgName + " fetched successfully.");
 				log(data);
 				result = data;
 			}
@@ -68,8 +69,9 @@ export class OrganizationDataHandler {
 			// TODO: Delete before deilvery backend
 			if(null == result) {
 				result = dummyData[uri].filter(item => {
-					return item.id === id;
+					return item[orgName] === orgCode;
 				})[0];
+				log("Set " + orgName + " from dummy data for test");
 			}
 			
 			return result;

@@ -53,7 +53,7 @@
 			moveDetail: function(e) {
 				const index = e.target.getAttribute("index") * 1;
 				const org = this.list[index];
-				const routeTo = "/" + this.orgUri + "/" + org.id;
+				const routeTo = "/" + this.orgUri + "/" + org.division;
 				this.$store.state.org = org;
 				this.$router.push(routeTo);
 			},
