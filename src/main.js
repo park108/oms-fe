@@ -9,8 +9,6 @@ const store = createStore({
 		return {
 			user: null,
 			corp: null,
-			org: null,
-			orgUri: '',
 		}
 	}
 });

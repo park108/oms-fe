@@ -42,10 +42,12 @@
 			EventButtons,
 			OrganizationDataHandler,
 		},
-		async mounted() {
+		created() {
 			this.corp = this.$store.state.corp;
 			this.companyName = this.corp.companyName;
-			this.orgUri = this.$store.state.orgUri;
+			this.orgUri = this.$route.path.replaceAll("/", "");
+		},
+		async mounted() {
 			this.list = await OrganizationDataHandler.getList(this.corp.id, this.orgUri);
 			this.isLoading = false;
 		},
@@ -54,7 +56,6 @@
 				const index = e.target.getAttribute("index") * 1;
 				const org = this.list[index];
 				const routeTo = "/" + this.orgUri + "/" + org.distributionChannel;
-				this.$store.state.org = org;
 				this.$router.push(routeTo);
 			},
 			createItem: function() {

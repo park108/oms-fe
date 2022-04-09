@@ -40,10 +40,11 @@
 			Footer,
 			EventButtons
 		},
-		async mounted() {
-			const corpId = this.$store.state.corp.id;
+		created() {
 			this.orgCode = this.$route.params.div;
-			this.org = await OrganizationDataHandler.getOrg(corpId, "divs", "division", this.orgCode);
+		},
+		async mounted() {
+			this.org = await OrganizationDataHandler.getOrg(this.$store.state.corp.id, "divs", "division", this.orgCode);
 			this.isLoading = false;
 		},
 		methods: {

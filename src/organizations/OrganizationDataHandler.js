@@ -77,4 +77,45 @@ export class OrganizationDataHandler {
 			return result;
 		}
 	}
+
+	static async getSalesArea(corpId, org, channel, div) {
+
+		log("CALL OrganizationDataHandler.getSalesArea(" + corpId + ", " + org + "/" + channel + "/" + div + ")");
+
+		const url = getApi("organization") + "/corps/" + corpId + "/areas/" + org + "/" + channel + "/" + div + "/";
+		let result;
+
+		try {
+			const res = await fetch(url);
+
+			if(404 == res.status) {
+				log("Sales Area is not found");
+				result = null;
+			}
+			else {
+				const data = await res.json();
+				log("Sales Area fetched successfully.");
+				log(data);
+				result = data;
+			}
+		}
+		catch(err) {
+			console.error(err);
+			result = null;
+		}
+		finally {
+
+			// TODO: Delete before deilvery backend
+			if(null == result) {
+				result = dummyData.areas.filter(item => {
+					return item.salesOrg.salesOrg === org
+						&& item.distributionChannel.distributionChannel === channel
+						&& item.division.division === div;
+				})[0];
+				log("Set Sales Area from dummy data for test");
+			}
+			
+			return result;
+		}
+	}
 }
