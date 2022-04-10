@@ -59,7 +59,8 @@
 				this.$router.push(routeTo);
 			},
 			createItem: function() {
-				log("CREATE ITEM!!");
+				const routeTo = "/" + this.orgUri + "/NEW/";
+				this.$router.push(routeTo);
 			},
 		}
 	}

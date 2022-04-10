@@ -1,5 +1,5 @@
 <template>
-	<div class="div div--org-listitem" role="listitem">
+	<div class="div div--org-listitem" role="listitem" v-show="!this.hidden">
 		<span class="span span--detail-attributename">{{ this.attributeName }}</span>
 		<input class="input input--detail-attribute"
 			:id="this.name"
@@ -14,7 +14,8 @@
 			name: '',
 			value: '',
 			attributeName: '',
-			editable: false
+			editable: false,
+			hidden: false,
 		}
 	}
 </script>
