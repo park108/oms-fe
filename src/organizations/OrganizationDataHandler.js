@@ -118,4 +118,127 @@ export class OrganizationDataHandler {
 			return result;
 		}
 	}
+
+	static async postOrg(corpId, uri, body) {
+
+		log("CALL OrganizationDataHandler.postOrg(" + corpId + ", " + uri + ")");
+
+		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/";
+		let result;
+
+		try {
+			const res = await fetch(url,{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(body)
+			});
+
+			if(200 === res.status || 201 === res.status) {
+				log("Org is posted successfully.");
+				result = res;
+				result.isSuccess = true;
+				result.message = "Success";
+
+				log(result);
+			}
+			else {
+				result = res;
+				result.isSuccess = false;
+				result.message = "Server Error";
+
+				console.error(result);
+			}
+		}
+		catch(err) {
+			console.error(err);
+			result = { isSuccess: false, message: "Client Error" };
+		}
+		finally {
+			return result;
+		}
+	}
+
+	static async putOrg(corpId, uri, orgCode, body) {
+
+		log("CALL OrganizationDataHandler.putOrg(" + corpId + ", " + uri + ", " + orgCode + ")");
+
+		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/" + orgCode + "/";
+		let result;
+
+		try {
+			const res = await fetch(url,{
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(body)
+			});
+
+			if(200 === res.status || 201 === res.status) {
+				log("Org is putted successfully.");
+				result = res;
+				result.isSuccess = true;
+				result.message = "Success";
+
+				log(result);
+			}
+			else {
+				result = res;
+				result.isSuccess = false;
+				result.message = "Server Error";
+
+				console.error(result);
+			}
+		}
+		catch(err) {
+			console.error(err);
+			result = { isSuccess: false, message: "Client Error" };
+		}
+		finally {
+			return result;
+		}
+	}
+
+	static async deleteOrg(corpId, uri, orgCode, body) {
+
+		log("CALL OrganizationDataHandler.deleteOrg(" + corpId + ", " + uri + ", " + orgCode + ")");
+
+		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/" + orgCode + "/";
+		let result;
+
+		try {
+			const res = await fetch(url,{
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(body)
+			});
+
+			if(200 === res.status) {
+				log("Org is deleted successfully.");
+				result = res;
+				result.isSuccess = true;
+				result.message = "Success";
+
+				log(result);
+			}
+			else {
+				result = res;
+				result.isSuccess = false;
+				result.message = "Server Error";
+
+				console.error(result);
+			}
+		}
+		catch(err) {
+			console.error(err);
+			result = { message: "Client Error" }
+		}
+		finally {
+			return result;
+		}
+	}
 }

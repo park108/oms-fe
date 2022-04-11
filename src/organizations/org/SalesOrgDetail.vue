@@ -15,7 +15,7 @@
 			<DetailAttribute name="id" attribute-name="id" :value="org.id" :hidden="isCreate" />
 		</div>
 	</main>
-	<EventButtons :enableSave="true" :saveEventFunc="saveItem" :saveButtonText="buttonText" />
+	<EventButtons :enableSave="true" :saveEventFunc="saveItem" :saveButtonText="isCreate ? 'Create Org.' : 'Update Org.'" />
 	<Footer />
 </template>
 <script>
@@ -33,7 +33,6 @@
 				isCreate: false,
 				org: null,
 				orgCode: '',
-				buttonText: '',
 			}
 		},
 		components: {
@@ -52,10 +51,6 @@
 					salesOrgDesc: "",
 					id: "",
 				}
-				this.buttonText = "Create Org."
-			}
-			else {
-				this.buttonText = "Update Org."
 			}
 		},
 		async mounted() {
@@ -64,63 +59,97 @@
 				if(null !== this.org) {
 					this.isLoading = false;
 				}
+				else {
+
+					// TODO: Make error logic
+					
+				}
 			}
 		},
 		methods: {
-			saveItem: function() {
+			saveItem: async function() {
 
 				const salesOrg = document.getElementById("salesOrg").value;
 				const salesOrgDesc = document.getElementById("salesOrgDesc").value;
 				const id = document.getElementById("id").value;
 
 				if("" === salesOrg) {
-					// TODO: Make alert toast
+
+					// TODO: Make error toast
+
 					log("Please input Sales Org");
 					return;
 				}
 
 				if("" === salesOrgDesc) {
-					// TODO: Make alert toast
+
+					// TODO: Make error toast
+
 					log("Please input Sales Org Description");
 					return;
 				}
 
 				if(this.isCreate) {
 					if(!confirmCreateItem()) return;
-
-					const orgBody = {
+					const res = await OrganizationDataHandler.postOrg(this.$store.state.corp.id, "orgs", {
 						salesOrg: salesOrg,
 						salesOrgDesc: salesOrgDesc,
-					};
-					log(orgBody);
+					});
+					if(res.isSuccess === true) {
+						this.$router.go(-1);
+					}
+					else {
+						// TODO: Make error toast
+					}
 				}
 				else {
 					if("" === id) {
-						// TODO: Make alert toast
+
+						// TODO: Make error toast
+
 						console.error("Error! id is empty!");
 						return;
 					}
 
 					if(!confirmUpdateItem()) return;
-
-					const orgBody = {
+					const res = await OrganizationDataHandler.putOrg(this.$store.state.corp.id, "orgs", salesOrg, {
 						salesOrg: salesOrg,
 						salesOrgDesc: salesOrgDesc,
 						id: id,
-					};
-					log(orgBody);
+					});
+					if(res.isSuccess === true) {
+						this.$router.go(-1);
+					}
+					else {
+						// TODO: Make error toast
+					}
 				}
-
-				this.$router.go(-1);
 			},
-			deleteItem: function() {
+			deleteItem: async function() {
 				if(!confirmDeleteItem()) return;
 
-				log("Yes delete it!");
+				const salesOrg = document.getElementById("salesOrg").value;
 
-				// TODO: make item delete logic
+				if("" === salesOrg) {
 
-				this.$router.go(-1);
+					// TODO: Make error toast
+
+					console.error("Error! Sales Org. is empty!");
+					return;
+				}
+
+				const res = await OrganizationDataHandler.deleteOrg(this.$store.state.corp.id, "orgs", salesOrg, {
+					salesOrg: salesOrg
+				});
+
+				// TODO: Make result toast
+
+				if(res.isSuccess === true) {
+					this.$router.go(-1);
+				}
+				else {
+					// TODO: Make error toast
+				}
 			},
 		}
 	}
