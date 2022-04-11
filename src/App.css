@@ -13,6 +13,10 @@
 	--event-color-save: #427ab3;
 	--event-color-active: #fff8bb;
 	--event-active-transition: 0.2s;
+	--toast-color-info: #eeeeee;
+	--toast-color-success: #66cc99;
+	--toast-color-warning: #eee4aa;
+	--toast-color-error: #cb4c48;;
 }
 
 * {
@@ -113,6 +117,32 @@
 	box-shadow: none;
 	display: flex;
 	flex-wrap: wrap;
+}
+
+.section--toaster-box {
+	border-radius: 5px;
+	margin-bottom: 30px;
+	opacity: 0;
+}
+
+.section--toaster-activate {
+	transition: opacity var(--event-active-transition) ease;
+	opacity: 1;
+}
+
+.section--toaster-info {
+	background-color: var(--toast-color-info);
+}
+
+.section--toaster-success {
+	border: 0;
+	background-color: var(--toast-color-success);
+}
+
+.section--toaster-error {
+	color: white;
+	border: 0;
+	background-color: var(--toast-color-error);
 }
 
 .button {

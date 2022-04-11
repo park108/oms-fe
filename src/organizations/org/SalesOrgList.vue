@@ -24,7 +24,6 @@
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import { OrganizationDataHandler } from "../OrganizationDataHandler.js";
-	import { log } from "@/common.js";
 	
 	export default {
 		data() {
@@ -61,7 +60,7 @@
 			createItem: function() {
 				const routeTo = "/" + this.orgUri + "/NEW/";
 				this.$router.push(routeTo);
-			},
+			}
 		}
 	}
 </script>

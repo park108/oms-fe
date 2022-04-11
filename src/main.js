@@ -9,6 +9,10 @@ const store = createStore({
 		return {
 			user: null,
 			corp: null,
+			toast: {
+				type: "INFO",
+				message: ""
+			},
 		}
 	}
 });

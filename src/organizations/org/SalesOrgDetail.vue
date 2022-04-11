@@ -10,11 +10,12 @@
 			Loading ...
 		</div>
 		<div class="div div--org-list" role="list" v-else>
-			<DetailAttribute name="salesOrg" attribute-name="Sales Org" :value="org.salesOrg" :editable="isCreate" />
-			<DetailAttribute name="salesOrgDesc" attribute-name="Description" :value="org.salesOrgDesc" :editable="true" />
+			<DetailAttribute name="salesOrg" attribute-name="Sales Org" :value="org.salesOrg" :editable="isCreate&&!isPending" />
+			<DetailAttribute name="salesOrgDesc" attribute-name="Description" :value="org.salesOrgDesc" :editable="!isPending" />
 			<DetailAttribute name="id" attribute-name="id" :value="org.id" :hidden="isCreate" />
 		</div>
 	</main>
+	<Toaster />
 	<EventButtons :enableSave="true" :saveEventFunc="saveItem" :saveButtonText="isCreate ? 'Create Org.' : 'Update Org.'" />
 	<Footer />
 </template>
@@ -23,13 +24,15 @@
 	import DetailAttribute from "../DetailAttribute.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
+	import Toaster from "@/Toaster.vue";
 	import { OrganizationDataHandler } from '../OrganizationDataHandler';
-	import { log, confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
+	import { confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
 
 	export default {
 		data() {
 			return {
 				isLoading: true,
+				isPending: false,
 				isCreate: false,
 				org: null,
 				orgCode: '',
@@ -39,7 +42,8 @@
 			Navigation,
 			DetailAttribute,
 			Footer,
-			EventButtons
+			EventButtons,
+			Toaster
 		},
 		created() {
 			this.orgCode = this.$route.params.org;
@@ -57,12 +61,12 @@
 			if(!this.isCreate) {
 				this.org = await OrganizationDataHandler.getOrg(this.$store.state.corp.id, "orgs", "salesOrg", this.orgCode);
 				if(null !== this.org) {
-					this.isLoading = false;
+					this.isLoading = false;	
 				}
 				else {
 
 					// TODO: Make error logic
-					
+
 				}
 			}
 		},
@@ -74,18 +78,17 @@
 				const id = document.getElementById("id").value;
 
 				if("" === salesOrg) {
-
-					// TODO: Make error toast
-
-					log("Please input Sales Org");
+					this.$store.state.toast = {
+						type: "ERROR",
+						message: "Please input Sales Org",
+					};
 					return;
 				}
-
 				if("" === salesOrgDesc) {
-
-					// TODO: Make error toast
-
-					log("Please input Sales Org Description");
+					this.$store.state.toast = {
+						type: "ERROR",
+						message: "Please input Sales Org Description",
+					};
 					return;
 				}
 
@@ -95,19 +98,27 @@
 						salesOrg: salesOrg,
 						salesOrgDesc: salesOrgDesc,
 					});
-					if(res.isSuccess === true) {
-						this.$router.go(-1);
+					if(true === res.isSuccess) {
+						this.$store.state.toast = {
+							type: "SUCCESS",
+							message: "Sales Org. " + salesOrg + " is created.",
+						};
+						this.isPending = true;
+						setTimeout(() => this.$router.go(-1), 2000);
 					}
 					else {
-						// TODO: Make error toast
+						this.$store.state.toast = {
+							type: "ERROR",
+							message: "Server Error. Please contact administrator.",
+						};
 					}
 				}
 				else {
 					if("" === id) {
-
-						// TODO: Make error toast
-
-						console.error("Error! id is empty!");
+						this.$store.state.toast = {
+							type: "ERROR",
+							message: "id is empty. Please contact administrator.",
+						};
 						return;
 					}
 
@@ -117,11 +128,19 @@
 						salesOrgDesc: salesOrgDesc,
 						id: id,
 					});
-					if(res.isSuccess === true) {
-						this.$router.go(-1);
+					if(true === res.isSuccess) {
+						this.$store.state.toast = {
+							type: "SUCCESS",
+							message: "Sales Org. " + salesOrg + " is updated.",
+						};
+						this.isPending = true;
+						setTimeout(() => this.$router.go(-1), 2000);
 					}
 					else {
-						// TODO: Make error toast
+						this.$store.state.toast = {
+							type: "ERROR",
+							message: "Server Error. Please contact administrator.",
+						};
 					}
 				}
 			},
@@ -131,10 +150,10 @@
 				const salesOrg = document.getElementById("salesOrg").value;
 
 				if("" === salesOrg) {
-
-					// TODO: Make error toast
-
-					console.error("Error! Sales Org. is empty!");
+					this.$store.state.toast = {
+						type: "ERROR",
+						message: "Sales Org. is empty. Please contact administrator.",
+					};
 					return;
 				}
 
@@ -142,13 +161,19 @@
 					salesOrg: salesOrg
 				});
 
-				// TODO: Make result toast
-
-				if(res.isSuccess === true) {
-					this.$router.go(-1);
+				if(true === res.isSuccess) {
+					this.$store.state.toast = {
+						type: "SUCCESS",
+						message: "Sales Org. " + salesOrg + " is deleted.",
+					};
+					this.isPending = true;
+					setTimeout(() => this.$router.go(-1), 2000);
 				}
 				else {
-					// TODO: Make error toast
+					this.$store.state.toast = {
+						type: "ERROR",
+						message: "Server Error. Please contact administrator.",
+					};
 				}
 			},
 		}
