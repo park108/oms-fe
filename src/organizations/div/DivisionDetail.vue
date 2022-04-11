@@ -4,18 +4,19 @@
 			Division > {{ orgCode }}
 		</h1>
 	</header>
-	<Navigation :enableDelete="true" :deleteEventFunc="deleteItem"/>
+	<Navigation :enableDelete="!isCreate" :deleteEventFunc="deleteItem"/>
 	<main class="main">
 		<div class="div div--org-loading" v-if="isLoading">
 			Loading ...
 		</div>
 		<div class="div div--org-list" role="list" v-else>
-			<DetailAttribute name="division" attribute-name="Division" :value="org.division"/>
-			<DetailAttribute name="divisionDesc" attribute-name="Description" :value="org.divisionDesc" :editable="true" />
-			<DetailAttribute name="id" attribute-name="id" :value="org.id"/>
+			<DetailAttribute name="division" attribute-name="Division" :value="org.division" :editable="isCreate&&!isPending" />
+			<DetailAttribute name="divisionDesc" attribute-name="Description" :value="org.divisionDesc" :editable="!isPending" />
+			<DetailAttribute name="id" attribute-name="id" :value="org.id" :hidden="isCreate" />
 		</div>
 	</main>
-	<EventButtons :enableSave="true" :saveEventFunc="saveItem" saveButtonText="Update Division" />
+	<Toaster />
+	<EventButtons :enableSave="true" :saveEventFunc="saveItem" :saveButtonText="isCreate ? 'Create Division' : 'Update Division'" />
 	<Footer />
 </template>
 <script>
@@ -23,6 +24,7 @@
 	import DetailAttribute from "../DetailAttribute.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
+	import Toaster from "@/Toaster.vue";
 	import { OrganizationDataHandler } from '../OrganizationDataHandler';
 	import { log, confirmUpdateItem, confirmDeleteItem } from "@/common.js";
 
@@ -30,6 +32,8 @@
 		data() {
 			return {
 				isLoading: true,
+				isPending: false,
+				isCreate: false,
 				org: null,
 				orgCode: '',
 			}
@@ -38,14 +42,34 @@
 			Navigation,
 			DetailAttribute,
 			Footer,
-			EventButtons
+			EventButtons,
+			Toaster,
 		},
 		created() {
 			this.orgCode = this.$route.params.div;
+			if("NEW" === this.orgCode) {
+				this.isCreate = true;
+				this.isLoading = false;
+				this.org = {
+					salesOrg: "",
+					salesOrgDesc: "",
+					id: "",
+				}
+			}
 		},
 		async mounted() {
-			this.org = await OrganizationDataHandler.getOrg(this.$store.state.corp.id, "divs", "division", this.orgCode);
-			this.isLoading = false;
+			if(!this.isCreate) {
+				this.org = await OrganizationDataHandler.getOrg(this.$store.state.corp.id, "divs", "division", this.orgCode);
+				if(null !== this.org) {
+					this.isLoading = false;	
+				}
+				else {
+					this.$store.state.toast = {
+						type: "WARNING",
+						message: "Division not found",
+					};
+				}
+			}
 		},
 		methods: {
 			saveItem: function() {

@@ -12,6 +12,8 @@
 	</section>
 </template>
 <script>
+	import { log } from "@/common.js";
+	
 	export default {
 		data() {
 			return {
@@ -24,7 +26,7 @@
 		},
 		watch: {
 			'$store.state.toast.message': function() {
-				console.log(this.$store.state.toast)
+				log(this.$store.state.toast)
 				if("" === this.$store.state.toast.message) {
 					this.isActivated = false;
 				}

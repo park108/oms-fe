@@ -43,7 +43,7 @@
 			DetailAttribute,
 			Footer,
 			EventButtons,
-			Toaster
+			Toaster,
 		},
 		created() {
 			this.orgCode = this.$route.params.org;
@@ -64,9 +64,10 @@
 					this.isLoading = false;	
 				}
 				else {
-
-					// TODO: Make error logic
-
+					this.$store.state.toast = {
+						type: "WARNING",
+						message: "Sales Org. not found",
+					};
 				}
 			}
 		},
