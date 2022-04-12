@@ -26,7 +26,7 @@
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
 	import { OrganizationDataHandler } from '../OrganizationDataHandler';
-	import { log, confirmUpdateItem, confirmDeleteItem } from "@/common.js";
+	import { confirmCreateItem, confirmUpdateItem, confirmDeleteItem } from "@/common.js";
 
 	export default {
 		data() {
@@ -51,8 +51,8 @@
 				this.isCreate = true;
 				this.isLoading = false;
 				this.org = {
-					salesOrg: "",
-					salesOrgDesc: "",
+					salesOffice: "",
+					salesOfficeDesc: "",
 					id: "",
 				}
 			}
@@ -72,23 +72,110 @@
 			}
 		},
 		methods: {
-			saveItem: function() {
-				if(!confirmUpdateItem()) return;
+			saveItem: async function() {
 
-				log("Yes update it!");
+				const salesOffice = document.getElementById("salesOffice").value;
+				const salesOfficeDesc = document.getElementById("salesOfficeDesc").value;
+				const id = document.getElementById("id").value;
 
-				// TODO: make item delete logic
+				if("" === salesOffice) {
+					this.$store.state.toast = {
+						type: "ERROR",
+						message: "Please input Sales Org",
+					};
+					return;
+				}
+				if("" === salesOfficeDesc) {
+					this.$store.state.toast = {
+						type: "ERROR",
+						message: "Please input Sales Org Description",
+					};
+					return;
+				}
 
-				this.$router.go(-1);
+				if(this.isCreate) {
+					if(!confirmCreateItem()) return;
+					const res = await OrganizationDataHandler.postOrg(this.$store.state.corp.id, "offices", {
+						salesOffice: salesOffice,
+						salesOfficeDesc: salesOfficeDesc,
+					});
+					if(true === res.isSuccess) {
+						this.$store.state.toast = {
+							type: "SUCCESS",
+							message: "Sales Office " + salesOffice + " is created.",
+						};
+						this.isPending = true;
+						setTimeout(() => this.$router.go(-1), 2000);
+					}
+					else {
+						this.$store.state.toast = {
+							type: "ERROR",
+							message: "Server Error. Please contact administrator.",
+						};
+					}
+				}
+				else {
+					if("" === id) {
+						this.$store.state.toast = {
+							type: "ERROR",
+							message: "id is empty. Please contact administrator.",
+						};
+						return;
+					}
+
+					if(!confirmUpdateItem()) return;
+					const res = await OrganizationDataHandler.putOrg(this.$store.state.corp.id, "offices", salesOffice, {
+						salesOffice: salesOffice,
+						salesOfficeDesc: salesOfficeDesc,
+						id: id,
+					});
+					if(true === res.isSuccess) {
+						this.$store.state.toast = {
+							type: "SUCCESS",
+							message: "Sales Office " + salesOffice + " is updated.",
+						};
+						this.isPending = true;
+						setTimeout(() => this.$router.go(-1), 2000);
+					}
+					else {
+						this.$store.state.toast = {
+							type: "ERROR",
+							message: "Server Error. Please contact administrator.",
+						};
+					}
+				}
 			},
-			deleteItem: function() {
+			deleteItem: async function() {
 				if(!confirmDeleteItem()) return;
 
-				log("Yes delete it!");
+				const salesOffice = document.getElementById("salesOffice").value;
 
-				// TODO: make item delete logic
+				if("" === salesOffice) {
+					this.$store.state.toast = {
+						type: "ERROR",
+						message: "Sales Office is empty. Please contact administrator.",
+					};
+					return;
+				}
 
-				this.$router.go(-1);
+				const res = await OrganizationDataHandler.deleteOrg(this.$store.state.corp.id, "offices", salesOffice, {
+					salesOffice: salesOffice
+				});
+
+				if(true === res.isSuccess) {
+					this.$store.state.toast = {
+						type: "SUCCESS",
+						message: "Sales Office " + salesOffice + " is deleted.",
+					};
+					this.isPending = true;
+					setTimeout(() => this.$router.go(-1), 2000);
+				}
+				else {
+					this.$store.state.toast = {
+						type: "ERROR",
+						message: "Server Error. Please contact administrator.",
+					};
+				}
 			},
 		}
 	}
