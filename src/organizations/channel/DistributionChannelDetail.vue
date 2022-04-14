@@ -1,7 +1,7 @@
 <template>
 	<header class="header">
 		<h1 class="h1">
-			Distribution Channel > {{ orgCode }}
+			{{ ORG_DESC }} > {{ orgCode }}
 		</h1>
 	</header>
 	<Navigation :enableDelete="!isCreate" :deleteEventFunc="deleteItem"/>
@@ -10,13 +10,13 @@
 			Loading ...
 		</div>
 		<div class="div div--org-list" role="list" v-else>
-			<DetailAttribute name="distributionChannel" attribute-name="Distribution Channel" :value="org.distributionChannel" :editable="isCreate&&!isPending" />
-			<DetailAttribute name="distributionChannelDesc" attribute-name="Description" :value="org.distributionChannelDesc" :editable="!isPending" />
+			<DetailAttribute :name="ORG_NAME" :attribute-name="ORG_DESC" :value="org[ORG_NAME]" :editable="isCreate&&!isPending" />
+			<DetailAttribute :name="ORG_NAME + 'Desc'" attribute-name="Description" :value="org[ORG_NAME + 'Desc']" :editable="!isPending" />
 			<DetailAttribute name="id" attribute-name="id" :value="org.id" :hidden="isCreate" />
 		</div>
 	</main>
 	<Toaster />
-	<EventButtons :enableSave="true" :saveEventFunc="saveItem" :saveButtonText="isCreate ? 'Create Channel' : 'Update Channel'" />
+	<EventButtons :enableSave="true" :saveEventFunc="saveItem" :saveButtonText="isCreate ? 'Create ' + ORG_DESC : 'Update ' + ORG_DESC" />
 	<Footer />
 </template>
 <script>
@@ -28,9 +28,18 @@
 	import { OrganizationDataHandler } from '../OrganizationDataHandler';
 	import { confirmCreateItem, confirmUpdateItem, confirmDeleteItem } from "@/common.js";
 
+	const ORG_DESC = "Distribution Channel";
+	const ORG_NAME = "distributionChannel";
+	const ORG_URI = "channels";
+	const ORG_PARAM_NAME = "channel";
+
 	export default {
 		data() {
 			return {
+				ORG_DESC: ORG_DESC,
+				ORG_NAME: ORG_NAME,
+				ORG_URI: ORG_URI,
+
 				isLoading: true,
 				isPending: false,
 				isCreate: false,
@@ -46,27 +55,27 @@
 			Toaster,
 		},
 		created() {
-			this.orgCode = this.$route.params.channel;
+			this.orgCode = this.$route.params[ORG_PARAM_NAME];
 			if("NEW" === this.orgCode) {
 				this.isCreate = true;
 				this.isLoading = false;
 				this.org = {
-					salesOrg: "",
-					salesOrgDesc: "",
+					[ORG_NAME]: "",
+					[ORG_NAME + "Desc"]: "",
 					id: "",
 				}
 			}
 		},
 		async mounted() {
 			if(!this.isCreate) {
-				this.org = await OrganizationDataHandler.getOrg(this.$store.state.corp.id, "channels", "distributionChannel", this.orgCode);
+				this.org = await OrganizationDataHandler.getOrg(this.$store.state.corp.id, ORG_URI, ORG_NAME, this.orgCode);
 				if(null !== this.org) {
 					this.isLoading = false;	
 				}
 				else {
 					this.$store.state.toast = {
 						type: "WARNING",
-						message: "Sales Office not found",
+						message: ORG_DESC + " not found",
 					};
 				}
 			}
@@ -74,35 +83,35 @@
 		methods: {
 			saveItem: async function() {
 
-				const distributionChannel = document.getElementById("distributionChannel").value;
-				const distributionChannelDesc = document.getElementById("distributionChannelDesc").value;
+				const orgCode = document.getElementById(ORG_NAME).value;
+				const orgDesc = document.getElementById(ORG_NAME + "Desc").value;
 				const id = document.getElementById("id").value;
 
-				if("" === distributionChannel) {
+				if("" === orgCode) {
 					this.$store.state.toast = {
 						type: "ERROR",
-						message: "Please input Sales Org",
+						message: "Please input " + ORG_DESC,
 					};
 					return;
 				}
-				if("" === distributionChannelDesc) {
+				if("" === orgDesc) {
 					this.$store.state.toast = {
 						type: "ERROR",
-						message: "Please input Sales Org Description",
+						message: "Please input " +  ORG_DESC + " Description",
 					};
 					return;
 				}
 
 				if(this.isCreate) {
 					if(!confirmCreateItem()) return;
-					const res = await OrganizationDataHandler.postOrg(this.$store.state.corp.id, "channels", {
-						distributionChannel: distributionChannel,
-						distributionChannelDesc: distributionChannelDesc,
+					const res = await OrganizationDataHandler.postOrg(this.$store.state.corp.id, ORG_URI, {
+						[ORG_NAME]: orgCode,
+						[ORG_NAME + "Desc"]: orgDesc,
 					});
 					if(true === res.isSuccess) {
 						this.$store.state.toast = {
 							type: "SUCCESS",
-							message: "Distribution Channel " + distributionChannel + " is created.",
+							message: ORG_DESC + " " + orgCode + " is created.",
 						};
 						this.isPending = true;
 						setTimeout(() => this.$router.go(-1), 2000);
@@ -124,15 +133,15 @@
 					}
 
 					if(!confirmUpdateItem()) return;
-					const res = await OrganizationDataHandler.putOrg(this.$store.state.corp.id, "channels", distributionChannel, {
-						distributionChannel: distributionChannel,
-						distributionChannelDesc: distributionChannelDesc,
+					const res = await OrganizationDataHandler.putOrg(this.$store.state.corp.id, ORG_URI, orgCode, {
+						[ORG_NAME]: orgCode,
+						[ORG_NAME + "Desc"]: orgDesc,
 						id: id,
 					});
 					if(true === res.isSuccess) {
 						this.$store.state.toast = {
 							type: "SUCCESS",
-							message: "Distribution Channel " + distributionChannel + " is updated.",
+							message: ORG_DESC + " " + orgCode + " is updated.",
 						};
 						this.isPending = true;
 						setTimeout(() => this.$router.go(-1), 2000);
@@ -148,24 +157,24 @@
 			deleteItem: async function() {
 				if(!confirmDeleteItem()) return;
 
-				const distributionChannel = document.getElementById("distributionChannel").value;
+				const orgCode = document.getElementById(ORG_NAME).value;
 
-				if("" === distributionChannel) {
+				if("" === orgCode) {
 					this.$store.state.toast = {
 						type: "ERROR",
-						message: "Sales Org. is empty. Please contact administrator.",
+						message: ORG_DESC + " is empty. Please contact administrator.",
 					};
 					return;
 				}
 
-				const res = await OrganizationDataHandler.deleteOrg(this.$store.state.corp.id, "channels", distributionChannel, {
-					distributionChannel: distributionChannel
+				const res = await OrganizationDataHandler.deleteOrg(this.$store.state.corp.id, ORG_URI, orgCode, {
+					[ORG_NAME]: orgCode,
 				});
 
 				if(true === res.isSuccess) {
 					this.$store.state.toast = {
 						type: "SUCCESS",
-						message: "Distribution Channel " + distributionChannel + " is deleted.",
+						message: ORG_DESC + " " + orgCode + " is deleted.",
 					};
 					this.isPending = true;
 					setTimeout(() => this.$router.go(-1), 2000);

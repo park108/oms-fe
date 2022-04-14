@@ -54,12 +54,30 @@
 			moveDetail: function(e) {
 				const index = e.target.getAttribute("index") * 1;
 				const org = this.list[index];
-				const routeTo = "/" + this.orgUri + "/" + org.salesGroup;
-				this.$router.push(routeTo);
+				// const routeTo = "/" + this.orgUri + "/" + org.salesGroup;
+				// this.$router.push(routeTo);
+				this.$router.push({
+					name: "SalesGroupDetail",
+					params: {
+						orgCode: org.salesGroup,
+						orgDesc: "Sales Group",
+						orgName: "salesGroup",
+						orgUri: "groups",
+					}
+				});
 			},
 			createItem: function() {
-				const routeTo = "/" + this.orgUri + "/NEW/";
-				this.$router.push(routeTo);
+				// const routeTo = "/" + this.orgUri + "/NEW/";
+				// this.$router.push(routeTo);
+				this.$router.push({
+					name: "SalesGroupDetail",
+					params: {
+						orgCode: "NEW",
+						orgDesc: "Sales Group",
+						orgName: "salesGroup",
+						orgUri: "groups",
+					}
+				});
 			},
 		}
 	}

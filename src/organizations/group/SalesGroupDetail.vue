@@ -1,7 +1,7 @@
 <template>
 	<header class="header">
 		<h1 class="h1">
-			Sales Group > {{ orgCode }}
+			{{ ORG_DESC }} > {{ orgCode }}
 		</h1>
 	</header>
 	<Navigation :enableDelete="!isCreate" :deleteEventFunc="deleteItem"/>
@@ -10,13 +10,13 @@
 			Loading ...
 		</div>
 		<div class="div div--org-list" role="list" v-else>
-			<DetailAttribute name="salesGroup" attribute-name="Sales Group" :value="org.salesGroup" :editable="isCreate&&!isPending" />
-			<DetailAttribute name="salesGroupDesc" attribute-name="Description" :value="org.salesGroupDesc" :editable="!isPending" />
+			<DetailAttribute :name="ORG_NAME" :attribute-name="ORG_DESC" :value="org[ORG_NAME]" :editable="isCreate&&!isPending" />
+			<DetailAttribute :name="ORG_NAME + 'Desc'" attribute-name="Description" :value="org[ORG_NAME + 'Desc']" :editable="!isPending" />
 			<DetailAttribute name="id" attribute-name="id" :value="org.id" :hidden="isCreate" />
 		</div>
 	</main>
 	<Toaster />
-	<EventButtons :enableSave="true" :saveEventFunc="saveItem" :saveButtonText="isCreate ? 'Create Group' : 'Update Group'" />
+	<EventButtons :enableSave="true" :saveEventFunc="saveItem" :saveButtonText="isCreate ? 'Create ' + ORG_DESC : 'Update ' + ORG_DESC" />
 	<Footer />
 </template>
 <script>
@@ -26,11 +26,19 @@
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
 	import { OrganizationDataHandler } from '../OrganizationDataHandler';
-	import { confirmCreateItem, confirmUpdateItem, confirmDeleteItem } from "@/common.js";
+	import { confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
+
+	export const ORG_DESC = "Sales Group";
+	export const ORG_NAME = "salesGroup";
+	export const ORG_URI = "groups";
 
 	export default {
 		data() {
 			return {
+				ORG_DESC: ORG_DESC,
+				ORG_NAME: ORG_NAME,
+				ORG_URI: ORG_URI,
+
 				isLoading: true,
 				isPending: false,
 				isCreate: false,
@@ -59,14 +67,14 @@
 		},
 		async mounted() {
 			if(!this.isCreate) {
-				this.org = await OrganizationDataHandler.getOrg(this.$store.state.corp.id, "groups", "salesGroup", this.orgCode);
+				this.org = await OrganizationDataHandler.getOrg(this.$store.state.corp.id, ORG_URI, ORG_NAME, this.orgCode);
 				if(null !== this.org) {
 					this.isLoading = false;	
 				}
 				else {
 					this.$store.state.toast = {
 						type: "WARNING",
-						message: "Sales Group not found",
+						message: ORG_DESC + " not found",
 					};
 				}
 			}
@@ -74,35 +82,35 @@
 		methods: {
 			saveItem: async function() {
 
-				const salesGroup = document.getElementById("salesGroup").value;
-				const salesGroupDesc = document.getElementById("salesGroupDesc").value;
+				const orgCode = document.getElementById(ORG_NAME).value;
+				const orgDesc = document.getElementById(ORG_NAME + "Desc").value;
 				const id = document.getElementById("id").value;
 
-				if("" === salesGroup) {
+				if("" === orgCode) {
 					this.$store.state.toast = {
 						type: "ERROR",
-						message: "Please input Sales Org",
+						message: "Please input " + ORG_DESC,
 					};
 					return;
 				}
-				if("" === salesGroupDesc) {
+				if("" === orgDesc) {
 					this.$store.state.toast = {
 						type: "ERROR",
-						message: "Please input Sales Org Description",
+						message: "Please input " +  ORG_DESC + " Description",
 					};
 					return;
 				}
 
 				if(this.isCreate) {
 					if(!confirmCreateItem()) return;
-					const res = await OrganizationDataHandler.postOrg(this.$store.state.corp.id, "groups", {
-						salesGroup: salesGroup,
-						salesGroupDesc: salesGroupDesc,
+					const res = await OrganizationDataHandler.postOrg(this.$store.state.corp.id, ORG_URI, {
+						salesGroup: orgCode,
+						salesGroupDesc: orgDesc,
 					});
 					if(true === res.isSuccess) {
 						this.$store.state.toast = {
 							type: "SUCCESS",
-							message: "Sales Group " + salesGroup + " is created.",
+							message: ORG_DESC + " " + orgCode + " is created.",
 						};
 						this.isPending = true;
 						setTimeout(() => this.$router.go(-1), 2000);
@@ -124,15 +132,15 @@
 					}
 
 					if(!confirmUpdateItem()) return;
-					const res = await OrganizationDataHandler.putOrg(this.$store.state.corp.id, "groups", salesGroup, {
-						salesGroup: salesGroup,
-						salesGroupDesc: salesGroupDesc,
+					const res = await OrganizationDataHandler.putOrg(this.$store.state.corp.id, ORG_URI, orgCode, {
+						division: orgCode,
+						divisionDesc: orgDesc,
 						id: id,
 					});
 					if(true === res.isSuccess) {
 						this.$store.state.toast = {
 							type: "SUCCESS",
-							message: "Sales Group " + salesGroup + " is updated.",
+							message: ORG_DESC + " " + orgCode + " is updated.",
 						};
 						this.isPending = true;
 						setTimeout(() => this.$router.go(-1), 2000);
@@ -148,24 +156,24 @@
 			deleteItem: async function() {
 				if(!confirmDeleteItem()) return;
 
-				const salesGroup = document.getElementById("salesGroup").value;
+				const orgCode = document.getElementById(ORG_NAME).value;
 
-				if("" === salesGroup) {
+				if("" === orgCode) {
 					this.$store.state.toast = {
 						type: "ERROR",
-						message: "Sales Group is empty. Please contact administrator.",
+						message: ORG_DESC + " is empty. Please contact administrator.",
 					};
 					return;
 				}
 
-				const res = await OrganizationDataHandler.deleteOrg(this.$store.state.corp.id, "orgs", salesGroup, {
-					salesGroup: salesGroup
+				const res = await OrganizationDataHandler.deleteOrg(this.$store.state.corp.id, ORG_URI, orgCode, {
+					salesGroup: orgCode
 				});
 
 				if(true === res.isSuccess) {
 					this.$store.state.toast = {
 						type: "SUCCESS",
-						message: "Sales Group " + salesGroup + " is deleted.",
+						message: ORG_DESC + " " + orgCode + " is deleted.",
 					};
 					this.isPending = true;
 					setTimeout(() => this.$router.go(-1), 2000);

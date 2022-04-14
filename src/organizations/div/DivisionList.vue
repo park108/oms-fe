@@ -54,12 +54,30 @@
 			moveDetail: function(e) {
 				const index = e.target.getAttribute("index") * 1;
 				const org = this.list[index];
-				const routeTo = "/" + this.orgUri + "/" + org.division;
-				this.$router.push(routeTo);
+				// const routeTo = "/" + this.orgUri + "/" + org.division;
+				// this.$router.push(routeTo);
+				this.$router.push({
+					name: "DivisionDetail",
+					params: {
+						orgCode: org.division,
+						orgDesc: "Division",
+						orgName: "division",
+						orgUri: "divs",
+					}
+				});
 			},
 			createItem: function() {
-				const routeTo = "/" + this.orgUri + "/NEW/";
-				this.$router.push(routeTo);
+				// const routeTo = "/" + this.orgUri + "/NEW/";
+				// this.$router.push(routeTo);
+				this.$router.push({
+					name: "DivisionDetail",
+					params: {
+						orgCode: "NEW",
+						orgDesc: "Division",
+						orgName: "division",
+						orgUri: "divs",
+					}
+				});
 			},
 		}
 	}

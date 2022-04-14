@@ -1,7 +1,7 @@
 <template>
 	<header class="header">
 		<h1 class="h1">
-			Sales Organizations {{ companyName }}
+			Sales Organizations of {{ companyName }}
 		</h1>
 	</header>
 	<Navigation />
@@ -54,12 +54,30 @@
 			moveDetail: function(e) {
 				const index = e.target.getAttribute("index") * 1;
 				const org = this.list[index];
-				const routeTo = "/" + this.orgUri + "/" + org.salesOrg;
-				this.$router.push(routeTo);
+				// const routeTo = "/" + this.orgUri + "/" + org.salesOrg;
+				// this.$router.push(routeTo);
+				this.$router.push({
+					name: "SalesOrgDetail",
+					params: {
+						orgCode: org.salesOrg,
+						orgDesc: "Sales Org.",
+						orgName: "salesOrg",
+						orgUri: "orgs",
+					}
+				});
 			},
 			createItem: function() {
-				const routeTo = "/" + this.orgUri + "/NEW/";
-				this.$router.push(routeTo);
+				// const routeTo = "/" + this.orgUri + "/NEW";
+				// this.$router.push(routeTo);
+				this.$router.push({
+					name: "SalesOrgDetail",
+					params: {
+						orgCode: "NEW",
+						orgDesc: "Sales Org.",
+						orgName: "salesOrg",
+						orgUri: "orgs",
+					}
+				});
 			}
 		}
 	}

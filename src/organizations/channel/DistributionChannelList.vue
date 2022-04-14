@@ -54,12 +54,30 @@
 			moveDetail: function(e) {
 				const index = e.target.getAttribute("index") * 1;
 				const org = this.list[index];
-				const routeTo = "/" + this.orgUri + "/" + org.distributionChannel;
-				this.$router.push(routeTo);
+				// const routeTo = "/" + this.orgUri + "/" + org.distributionChannel;
+				// this.$router.push(routeTo);
+				this.$router.push({
+					name: "DistributionChannelDetail",
+					params: {
+						orgCode: org.distributionChannel,
+						orgDesc: "Distribution Channel",
+						orgName: "distributionChannel",
+						orgUri: "channels",
+					}
+				});
 			},
 			createItem: function() {
-				const routeTo = "/" + this.orgUri + "/NEW/";
-				this.$router.push(routeTo);
+				// const routeTo = "/" + this.orgUri + "/NEW/";
+				// this.$router.push(routeTo);
+				this.$router.push({
+					name: "DistributionChannelDetail",
+					params: {
+						orgCode: "NEW",
+						orgDesc: "Distribution Channel",
+						orgName: "distributionChannel",
+						orgUri: "channels",
+					}
+				});
 			},
 		}
 	}

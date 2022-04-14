@@ -1,7 +1,7 @@
 <template>
 	<header class="header">
 		<h1 class="h1">
-			{{ ORG_DESC }} > {{ orgCode }}
+			{{ orgDesc }} > {{ orgCode }}
 		</h1>
 	</header>
 	<Navigation :enableDelete="!isCreate" :deleteEventFunc="deleteItem"/>
@@ -10,42 +10,39 @@
 			Loading ...
 		</div>
 		<div class="div div--org-list" role="list" v-else>
-			<DetailAttribute :name="ORG_NAME" :attribute-name="ORG_DESC" :value="org[ORG_NAME]" :editable="isCreate&&!isPending" />
-			<DetailAttribute :name="ORG_NAME + 'Desc'" attribute-name="Description" :value="org[ORG_NAME + 'Desc']" :editable="!isPending" />
-			<DetailAttribute name="id" attribute-name="id" :value="org.id" :hidden="isCreate" />
+			<DetailAttribute :name="orgName" :attribute-name="orgDesc" :value="orgData[orgName]" :editable="isCreate&&!isPending" />
+			<DetailAttribute :name="orgName + 'Desc'" attribute-name="Description" :value="orgData[orgName + 'Desc']" :editable="!isPending" />
+			<DetailAttribute name="id" attribute-name="id" :value="orgData.id" :hidden="isCreate" />
 		</div>
 	</main>
 	<Toaster />
-	<EventButtons :enableSave="true" :saveEventFunc="saveItem" :saveButtonText="isCreate ? 'Create ' + ORG_DESC : 'Update ' + ORG_DESC" />
+	<EventButtons :enableSave="true" :saveEventFunc="saveItem" :saveButtonText="isCreate ? 'Create ' + orgDesc : 'Update ' + orgDesc" />
 	<Footer />
 </template>
 <script>
 	import Navigation from "@/Navigation.vue";
-	import DetailAttribute from "../DetailAttribute.vue";
+	import DetailAttribute from "./DetailAttribute.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
-	import { OrganizationDataHandler } from '../OrganizationDataHandler';
+	import { OrganizationDataHandler } from './OrganizationDataHandler';
 	import { confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
-
-	const ORG_DESC = "Sales Org.";
-	const ORG_NAME = "salesOrg";
-	const ORG_URI = "orgs";
-	const ORG_PARAM_NAME = "org";
 
 	export default {
 		data() {
 			return {
-				ORG_DESC: ORG_DESC,
-				ORG_NAME: ORG_NAME,
-				ORG_URI: ORG_URI,
-
 				isLoading: true,
 				isPending: false,
 				isCreate: false,
-				org: null,
-				orgCode: '',
+				orgData: null,
 			}
+		},
+		props: {
+			orgCode: String,
+			orgDesc: String,
+			orgName: String,
+			orgUri: String,
+			orgParamName: String,
 		},
 		components: {
 			Navigation,
@@ -55,27 +52,26 @@
 			Toaster,
 		},
 		created() {
-			this.orgCode = this.$route.params[ORG_PARAM_NAME];
 			if("NEW" === this.orgCode) {
 				this.isCreate = true;
 				this.isLoading = false;
-				this.org = {
-					[ORG_NAME]: "",
-					[ORG_NAME + "Desc"]: "",
+				this.orgData = {
+					[this.orgName]: "",
+					[this.orgName + "Desc"]: "",
 					id: "",
 				}
 			}
 		},
 		async mounted() {
 			if(!this.isCreate) {
-				this.org = await OrganizationDataHandler.getOrg(this.$store.state.corp.id, ORG_URI, ORG_NAME, this.orgCode);
-				if(null !== this.org) {
+				this.orgData = await OrganizationDataHandler.getOrg(this.$store.state.corp.id, this.orgUri, this.orgName, this.orgCode);
+				if(null !== this.orgData) {
 					this.isLoading = false;	
 				}
 				else {
 					this.$store.state.toast = {
 						type: "WARNING",
-						message: ORG_DESC + " not found",
+						message: this.orgDesc + " not found",
 					};
 				}
 			}
@@ -83,35 +79,35 @@
 		methods: {
 			saveItem: async function() {
 
-				const orgCode = document.getElementById(ORG_NAME).value;
-				const orgDesc = document.getElementById(ORG_NAME + "Desc").value;
+				const orgCode = document.getElementById(this.orgName).value;
+				const orgDesc = document.getElementById(this.orgName + "Desc").value;
 				const id = document.getElementById("id").value;
 
 				if("" === orgCode) {
 					this.$store.state.toast = {
 						type: "ERROR",
-						message: "Please input " + ORG_DESC,
+						message: "Please input " + this.orgDesc,
 					};
 					return;
 				}
 				if("" === orgDesc) {
 					this.$store.state.toast = {
 						type: "ERROR",
-						message: "Please input " +  ORG_DESC + " Description",
+						message: "Please input " +  this.orgDesc + " Description",
 					};
 					return;
 				}
 
 				if(this.isCreate) {
 					if(!confirmCreateItem()) return;
-					const res = await OrganizationDataHandler.postOrg(this.$store.state.corp.id, ORG_URI, {
-						[ORG_NAME]: orgCode,
-						[ORG_NAME + "Desc"]: orgDesc,
+					const res = await OrganizationDataHandler.postOrg(this.$store.state.corp.id, this.orgUri, {
+						[this.orgName]: orgCode,
+						[this.orgName + "Desc"]: orgDesc,
 					});
 					if(true === res.isSuccess) {
 						this.$store.state.toast = {
 							type: "SUCCESS",
-							message: ORG_DESC + " " + orgCode + " is created.",
+							message: this.orgDesc + " " + orgCode + " is created.",
 						};
 						this.isPending = true;
 						setTimeout(() => this.$router.go(-1), 2000);
@@ -133,15 +129,15 @@
 					}
 
 					if(!confirmUpdateItem()) return;
-					const res = await OrganizationDataHandler.putOrg(this.$store.state.corp.id, ORG_URI, orgCode, {
-						[ORG_NAME]: orgCode,
-						[ORG_NAME + "Desc"]: orgDesc,
+					const res = await OrganizationDataHandler.putOrg(this.$store.state.corp.id, this.orgUri, orgCode, {
+						[this.orgName]: orgCode,
+						[this.orgName + "Desc"]: orgDesc,
 						id: id,
 					});
 					if(true === res.isSuccess) {
 						this.$store.state.toast = {
 							type: "SUCCESS",
-							message: ORG_DESC + " " + orgCode + " is updated.",
+							message: this.orgDesc + " " + orgCode + " is updated.",
 						};
 						this.isPending = true;
 						setTimeout(() => this.$router.go(-1), 2000);
@@ -157,24 +153,24 @@
 			deleteItem: async function() {
 				if(!confirmDeleteItem()) return;
 
-				const orgCode = document.getElementById(ORG_NAME).value;
+				const orgCode = document.getElementById(this.orgName).value;
 
 				if("" === orgCode) {
 					this.$store.state.toast = {
 						type: "ERROR",
-						message: ORG_DESC + " is empty. Please contact administrator.",
+						message: this.orgDesc + " is empty. Please contact administrator.",
 					};
 					return;
 				}
 
-				const res = await OrganizationDataHandler.deleteOrg(this.$store.state.corp.id, ORG_URI, orgCode, {
-					[ORG_NAME]: orgCode,
+				const res = await OrganizationDataHandler.deleteOrg(this.$store.state.corp.id, this.orgUri, orgCode, {
+					[this.orgName]: orgCode,
 				});
 
 				if(true === res.isSuccess) {
 					this.$store.state.toast = {
 						type: "SUCCESS",
-						message: ORG_DESC + " " + orgCode + " is deleted.",
+						message: this.orgDesc + " " + orgCode + " is deleted.",
 					};
 					this.isPending = true;
 					setTimeout(() => this.$router.go(-1), 2000);

@@ -54,12 +54,30 @@
 			moveDetail: function(e) {
 				const index = e.target.getAttribute("index") * 1;
 				const org = this.list[index];
-				const routeTo = "/" + this.orgUri + "/" + org.salesOffice;
-				this.$router.push(routeTo);
+				// const routeTo = "/" + this.orgUri + "/" + org.salesOffice;
+				// this.$router.push(routeTo);
+				this.$router.push({
+					name: "SalesOfficeDetail",
+					params: {
+						orgCode: org.salesOffice,
+						orgDesc: "Sales Office",
+						orgName: "salesOffice",
+						orgUri: "offices",
+					}
+				});
 			},
 			createItem: function() {
-				const routeTo = "/" + this.orgUri + "/NEW/";
-				this.$router.push(routeTo);
+				// const routeTo = "/" + this.orgUri + "/NEW/";
+				// this.$router.push(routeTo);
+				this.$router.push({
+					name: "SalesOfficeDetail",
+					params: {
+						orgCode: "NEW",
+						orgDesc: "Sales Office",
+						orgName: "salesOffice",
+						orgUri: "offices",
+					}
+				});
 			},
 		}
 	}
