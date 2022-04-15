@@ -10,19 +10,42 @@
 		</section>
 
 		<div class="div div--dashboard-box">
-			<SalesOrg :corpId="corpId" orgUri="orgs" />
-			<DistributionChannel :corpId="corpId" orgUri="channels" />
-			<Division :corpId="corpId" orgUri="divs" />
+			<DashboardItem :corpId="corpId" :isSplitThree="true" orgDesc="Sales Orgs" orgName="salesOrg" orgUri="orgs" />
+			<DashboardItem :corpId="corpId" :isSplitThree="true" orgDesc="Distribution Channels" orgName="distributionChannel" orgUri="channels" />
+			<DashboardItem :corpId="corpId" :isSplitThree="true" orgDesc="Divisions" orgName="division" orgUri="divs" />
 		</div>
 
 		<SalesArea :corpId="corpId" orgUri="areas" />
 
 		<div class="div div--dashboard-box">
-			<SalesOffice :corpId="corpId" orgUri="offices" />
-			<SalesGroup :corpId="corpId" orgUri="groups" />
+			<DashboardItem :corpId="corpId" :isSplitTwo="true" orgDesc="Sales Offices" orgName="salesOffice" orgUri="offices" />
+			<DashboardItem :corpId="corpId" :isSplitTwo="true" orgDesc="Sales Groups" orgName="salesGroup" orgUri="groups" />
 		</div>
 	</main>
 	<Footer />
 </template>
+<script>
+	import Corporation from "../organizations/corp/Corporation.vue";
+	import DashboardItem from "@/organizations/DashboardItem.vue";
+	import SalesArea from "../organizations/area/SalesAreaDashboardItem.vue";
+	import Footer from "@/Footer.vue";
 
-<script src="./Index.js"></script>
+	export default {
+		data() {
+			return {
+				corpId: String
+			}
+		},
+		components: {
+			Corporation,
+			DashboardItem,
+			SalesArea,
+			Footer,
+		},
+		methods: {
+			setCorpId(value) {
+				this.corpId = value;
+			}
+		},
+	};
+</script>

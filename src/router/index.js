@@ -8,20 +8,23 @@ import Division from '@/organizations/div/DivisionList.vue'
 import SalesOffice from '@/organizations/office/SalesOfficeList.vue'
 import SalesGroup from '@/organizations/group/SalesGroupList.vue'
 import OrgDetail from '@/organizations/OrgDetail.vue'
+// import OrgList from '@/organizations/OrgList.vue'
 
 const routes = [
 	{ path: '/', name: 'Index', component: Index },
-	{ path: '/areas/', name: 'SalesAreaList', component: SalesArea },
+	{ path: '/areas/', name: 'salesAreaList', component: SalesArea },
 	{ path: '/areas/:org/:channel/:div', name: 'SalesAreaDetail', component: SalesAreaDetail },
-	{ path: '/orgs/', name: 'SalesOrgList', component: SalesOrg },
+
+	{ path: '/orgs/', name: 'salesOrgList', component: SalesOrg },
 	{ path: '/orgs/:orgCode', name: 'SalesOrgDetail', component: OrgDetail, props: true },
-	{ path: '/channels/', name: 'DistributionChannelList', component: DistributionChannel },
+	
+	{ path: '/channels/', name: 'distributionChannelList', component: DistributionChannel },
 	{ path: '/channels/:orgCode', name: 'DistributionChannelDetail', component: OrgDetail, props: true },
-	{ path: '/divs/', name: 'DivisionList', component: Division },
+	{ path: '/divs/', name: 'divisionList', component: Division },
 	{ path: '/divs/:orgCode', name: 'DivisionDetail', component: OrgDetail, props: true },
-	{ path: '/offices/', name: 'SalesOfficeList', component: SalesOffice },
+	{ path: '/offices/', name: 'salesOfficeList', component: SalesOffice },
 	{ path: '/offices/:orgCode', name: 'SalesOfficeDetail', component: OrgDetail, props: true },
-	{ path: '/groups/', name: 'SalesGroupList', component: SalesGroup },
+	{ path: '/groups/', name: 'salesGroupList', component: SalesGroup },
 	{ path: '/groups/:orgCode', name: 'SalesGroupDetail', component: OrgDetail, props: true },
 ]
 
