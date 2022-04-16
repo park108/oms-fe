@@ -15,7 +15,7 @@
 	--event-active-transition: 0.2s;
 	--toast-color-info: #eeeeee;
 	--toast-color-success: #66cc99;
-	--toast-color-warning: #eee4aa;
+	--toast-color-warning: #ffe4aa;
 	--toast-color-error: #cb4c48;;
 }
 
@@ -137,6 +137,11 @@
 .section--toaster-success {
 	border: 0;
 	background-color: var(--toast-color-success);
+}
+
+.section--toaster-warning {
+	border: 0;
+	background-color: var(--toast-color-warning);
 }
 
 .section--toaster-error {

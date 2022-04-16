@@ -79,35 +79,37 @@
 		methods: {
 			saveItem: async function() {
 
-				const orgCode = document.getElementById(this.orgName).value;
-				const orgDesc = document.getElementById(this.orgName + "Desc").value;
+				const code = document.getElementById(this.orgName);
+				const desc = document.getElementById(this.orgName + "Desc");
 				const id = document.getElementById("id").value;
 
-				if("" === orgCode) {
+				if("" === code.value) {
 					this.$store.state.toast = {
-						type: "ERROR",
+						type: "WARNING",
 						message: "Please input " + this.orgDesc,
 					};
+					code.focus();
 					return;
 				}
-				if("" === orgDesc) {
+				if("" === desc.value) {
 					this.$store.state.toast = {
-						type: "ERROR",
+						type: "WARNING",
 						message: "Please input " +  this.orgDesc + " Description",
 					};
+					desc.focus();
 					return;
 				}
 
 				if(this.isCreate) {
 					if(!confirmCreateItem()) return;
 					const res = await OrganizationDataHandler.postOrg(this.$store.state.corp.id, this.orgUri, {
-						[this.orgName]: orgCode,
-						[this.orgName + "Desc"]: orgDesc,
+						[this.orgName]: code.value,
+						[this.orgName + "Desc"]: desc.value,
 					});
 					if(true === res.isSuccess) {
 						this.$store.state.toast = {
 							type: "SUCCESS",
-							message: this.orgDesc + " " + orgCode + " is created.",
+							message: this.orgDesc + " " + orgCode.value + " is created.",
 						};
 						this.isPending = true;
 						setTimeout(() => this.$router.go(-1), 2000);
@@ -129,15 +131,15 @@
 					}
 
 					if(!confirmUpdateItem()) return;
-					const res = await OrganizationDataHandler.putOrg(this.$store.state.corp.id, this.orgUri, orgCode, {
-						[this.orgName]: orgCode,
-						[this.orgName + "Desc"]: orgDesc,
+					const res = await OrganizationDataHandler.putOrg(this.$store.state.corp.id, this.orgUri, code.value, {
+						[this.orgName]: code.value,
+						[this.orgName + "Desc"]: desc.value,
 						id: id,
 					});
 					if(true === res.isSuccess) {
 						this.$store.state.toast = {
 							type: "SUCCESS",
-							message: this.orgDesc + " " + orgCode + " is updated.",
+							message: this.orgDesc + " " + code.value + " is updated.",
 						};
 						this.isPending = true;
 						setTimeout(() => this.$router.go(-1), 2000);
@@ -153,9 +155,9 @@
 			deleteItem: async function() {
 				if(!confirmDeleteItem()) return;
 
-				const orgCode = document.getElementById(this.orgName).value;
+				const code = document.getElementById(this.orgName);
 
-				if("" === orgCode) {
+				if("" === code.value) {
 					this.$store.state.toast = {
 						type: "ERROR",
 						message: this.orgDesc + " is empty. Please contact administrator.",
@@ -163,14 +165,14 @@
 					return;
 				}
 
-				const res = await OrganizationDataHandler.deleteOrg(this.$store.state.corp.id, this.orgUri, orgCode, {
-					[this.orgName]: orgCode,
+				const res = await OrganizationDataHandler.deleteOrg(this.$store.state.corp.id, this.orgUri, code.value, {
+					[this.orgName]: code.value,
 				});
 
 				if(true === res.isSuccess) {
 					this.$store.state.toast = {
 						type: "SUCCESS",
-						message: this.orgDesc + " " + orgCode + " is deleted.",
+						message: this.orgDesc + " " + code.value + " is deleted.",
 					};
 					this.isPending = true;
 					setTimeout(() => this.$router.go(-1), 2000);
