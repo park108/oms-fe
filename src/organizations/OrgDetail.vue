@@ -26,7 +26,7 @@
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
 	import { OrganizationDataHandler } from './OrganizationDataHandler';
-	import { confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
+	import { log, confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
 
 	export default {
 		data() {
@@ -34,6 +34,7 @@
 				isLoading: true,
 				isPending: false,
 				isCreate: false,
+				orgUri: '',
 				orgCode: '',
 				orgData: null,
 			}
@@ -41,7 +42,6 @@
 		props: {
 			orgDesc: String,
 			orgName: String,
-			orgUri: String,
 		},
 		components: {
 			Navigation,
@@ -51,6 +51,7 @@
 			Toaster,
 		},
 		created() {
+			this.orgUri = this.$route.path.substr(1, this.$route.path.indexOf("/", 1) - 1);
 			this.orgCode = this.$route.params.orgCode;
 			if("NEW" === this.orgCode) {
 				this.isCreate = true;

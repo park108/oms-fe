@@ -24,6 +24,7 @@
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import { OrganizationDataHandler } from "./OrganizationDataHandler.js";
+	import { log } from "@/common.js";
 	
 	export default {
 		data() {
@@ -31,13 +32,13 @@
 				isLoading: true,
 				corp: null,
 				companyName: '',
+				orgUri: '',
 				list: []
 			}
 		},
 		props: {
 			orgDesc: String,
 			orgName: String,
-			orgUri: String,
 		},
 		components: {
 			Navigation,
@@ -48,6 +49,7 @@
 		created() {
 			this.corp = this.$store.state.corp;
 			this.companyName = this.corp.companyName;
+			this.orgUri = this.$route.path.substr(1, this.$route.path.indexOf("/", 1) - 1);
 		},
 		async mounted() {
 			this.list = await OrganizationDataHandler.getList(this.corp.id, this.orgUri);
