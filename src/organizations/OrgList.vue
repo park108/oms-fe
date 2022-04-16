@@ -1,7 +1,7 @@
 <template>
 	<header class="header">
 		<h1 class="h1">
-			{{ listTitle }} of {{ companyName }}
+			{{ orgDesc }} of {{ companyName }}
 		</h1>
 	</header>
 	<Navigation />
@@ -35,7 +35,6 @@
 			}
 		},
 		props: {
-			listTitle: String,
 			orgDesc: String,
 			orgName: String,
 			orgUri: String,
@@ -62,9 +61,6 @@
 					name: this.orgName + "Detail",
 					params: {
 						orgCode: org[this.orgName],
-						orgDesc: this.orgDesc,
-						orgName: this.orgName,
-						orgUri: this.orgUri,
 					}
 				});
 			},
@@ -73,9 +69,6 @@
 					name: this.orgName + "Detail",
 					params: {
 						orgCode: "NEW",
-						orgDesc: this.orgDesc,
-						orgName: this.orgName,
-						orgUri: this.orgUri,
 					}
 				});
 			}

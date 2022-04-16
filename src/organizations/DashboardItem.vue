@@ -53,15 +53,7 @@
 		},
 		methods: {
 			moveList: function(e) {
-				this.$router.push({
-					name: this.orgName + "List",
-					params: {
-						listTitle: this.orgDesc,
-						orgDesc: this.orgDesc,
-						orgName: this.orgName,
-						orgUri: this.orgUri,
-					}
-				});
+				this.$router.push({name: this.orgName + "List"});
 			}
 		},
 	};

@@ -34,15 +34,14 @@
 				isLoading: true,
 				isPending: false,
 				isCreate: false,
+				orgCode: '',
 				orgData: null,
 			}
 		},
 		props: {
-			orgCode: String,
 			orgDesc: String,
 			orgName: String,
 			orgUri: String,
-			orgParamName: String,
 		},
 		components: {
 			Navigation,
@@ -52,6 +51,7 @@
 			Toaster,
 		},
 		created() {
+			this.orgCode = this.$route.params.orgCode;
 			if("NEW" === this.orgCode) {
 				this.isCreate = true;
 				this.isLoading = false;
