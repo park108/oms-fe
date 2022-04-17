@@ -14,8 +14,8 @@
 			<DetailAttribute :name="orgName + 'Desc'" attribute-name="Description" :value="orgData[orgName + 'Desc']" :editable="!isPending" />
 			<DetailAttribute name="id" attribute-name="id" :value="orgData.id" :hidden="isCreate" />
 		</div>
+		<Toaster />
 	</main>
-	<Toaster />
 	<EventButtons :enableSave="true" :saveEventFunc="saveItem" :saveButtonText="isCreate ? 'Create ' + orgDesc : 'Update ' + orgDesc" />
 	<Footer />
 </template>
@@ -25,8 +25,9 @@
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
+	import { popToast } from "@/Toaster.vue";
 	import { OrganizationDataHandler } from './OrganizationDataHandler';
-	import { log, confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
+	import { confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
 
 	export default {
 		data() {
@@ -66,37 +67,25 @@
 		async mounted() {
 			if(!this.isCreate) {
 				this.orgData = await OrganizationDataHandler.getOrg(this.$store.state.corp.id, this.orgUri, this.orgName, this.orgCode);
-				if(null !== this.orgData) {
-					this.isLoading = false;	
+				if(null === this.orgData) {
+					popToast("WARNING", this.orgDesc + " not found", this.$store);
 				}
-				else {
-					this.$store.state.toast = {
-						type: "WARNING",
-						message: this.orgDesc + " not found",
-					};
-				}
+				this.isLoading = false;	
 			}
 		},
 		methods: {
 			saveItem: async function() {
-
 				const code = document.getElementById(this.orgName);
 				const desc = document.getElementById(this.orgName + "Desc");
 				const id = document.getElementById("id").value;
 
 				if("" === code.value) {
-					this.$store.state.toast = {
-						type: "WARNING",
-						message: "Please input " + this.orgDesc,
-					};
+					popToast("WARNING", "Please input " + this.orgDesc, this.$store);
 					code.focus();
 					return;
 				}
 				if("" === desc.value) {
-					this.$store.state.toast = {
-						type: "WARNING",
-						message: "Please input " +  this.orgDesc + " Description",
-					};
+					popToast("WARNING", "Please input " +  this.orgDesc + " Description", this.$store);
 					desc.focus();
 					return;
 				}
@@ -108,26 +97,17 @@
 						[this.orgName + "Desc"]: desc.value,
 					});
 					if(true === res.isSuccess) {
-						this.$store.state.toast = {
-							type: "SUCCESS",
-							message: this.orgDesc + " " + orgCode.value + " is created.",
-						};
+						popToast("SUCCESS", this.orgDesc + " " + orgCode.value + " is created.", this.$store);
 						this.isPending = true;
 						setTimeout(() => this.$router.go(-1), 2000);
 					}
 					else {
-						this.$store.state.toast = {
-							type: "ERROR",
-							message: "Server Error. Please contact administrator.",
-						};
+						popToast("ERROR", "Server Error. Please contact administrator.", this.$store);
 					}
 				}
 				else {
 					if("" === id) {
-						this.$store.state.toast = {
-							type: "ERROR",
-							message: "id is empty. Please contact administrator.",
-						};
+						popToast("ERROR", "id is empty. Please contact administrator.", this.$store);
 						return;
 					}
 
@@ -138,51 +118,36 @@
 						id: id,
 					});
 					if(true === res.isSuccess) {
-						this.$store.state.toast = {
-							type: "SUCCESS",
-							message: this.orgDesc + " " + code.value + " is updated.",
-						};
+						popToast("SUCCESS", this.orgDesc + " " + code.value + " is updated.", this.$store);
 						this.isPending = true;
 						setTimeout(() => this.$router.go(-1), 2000);
 					}
 					else {
-						this.$store.state.toast = {
-							type: "ERROR",
-							message: "Server Error. Please contact administrator.",
-						};
+						popToast("ERROR", "Server Error. Please contact administrator.", this.$store);
 					}
 				}
 			},
 			deleteItem: async function() {
-				if(!confirmDeleteItem()) return;
-
 				const code = document.getElementById(this.orgName);
 
 				if("" === code.value) {
-					this.$store.state.toast = {
-						type: "ERROR",
-						message: this.orgDesc + " is empty. Please contact administrator.",
-					};
+					popToast("ERROR", this.orgDesc + " is empty. Please contact administrator.", this.$store);
 					return;
 				}
+
+				if(!confirmDeleteItem()) return;
 
 				const res = await OrganizationDataHandler.deleteOrg(this.$store.state.corp.id, this.orgUri, code.value, {
 					[this.orgName]: code.value,
 				});
 
 				if(true === res.isSuccess) {
-					this.$store.state.toast = {
-						type: "SUCCESS",
-						message: this.orgDesc + " " + code.value + " is deleted.",
-					};
+					popToast("SUCCESS", this.orgDesc + " " + code.value + " is deleted.", this.$store);
 					this.isPending = true;
 					setTimeout(() => this.$router.go(-1), 2000);
 				}
 				else {
-					this.$store.state.toast = {
-						type: "ERROR",
-						message: "Server Error. Please contact administrator.",
-					};
+					popToast("ERROR", "Server Error. Please contact administrator.", this.$store);
 				}
 			},
 		}

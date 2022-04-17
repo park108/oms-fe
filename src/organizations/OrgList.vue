@@ -15,6 +15,7 @@
 				<span class="span">{{ orgItem[orgName + 'Desc'] }}</span>
 			</div>
 		</div>
+		<Toaster />
 	</main>
 	<EventButtons :enableSave="true" :saveEventFunc="createItem" :saveButtonText="'Create New ' + orgDesc" />
 	<Footer />
@@ -23,8 +24,8 @@
 	import Navigation from "@/Navigation.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
+	import Toaster from "@/Toaster.vue";
 	import { OrganizationDataHandler } from "./OrganizationDataHandler.js";
-	import { log } from "@/common.js";
 	
 	export default {
 		data() {
@@ -45,14 +46,18 @@
 			Footer,
 			EventButtons,
 			OrganizationDataHandler,
+			Toaster,
 		},
 		created() {
+			this.orgUri = this.$route.path.substr(1, this.$route.path.indexOf("/", 1) - 1);
 			this.corp = this.$store.state.corp;
 			this.companyName = this.corp.companyName;
-			this.orgUri = this.$route.path.substr(1, this.$route.path.indexOf("/", 1) - 1);
 		},
 		async mounted() {
 			this.list = await OrganizationDataHandler.getList(this.corp.id, this.orgUri);
+			if(null === this.list) {
+				popToast("WARNING", this.orgDesc + " not found", this.$store);
+			}
 			this.isLoading = false;
 		},
 		methods: {

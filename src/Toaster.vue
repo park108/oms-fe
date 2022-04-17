@@ -12,11 +12,11 @@
 	</section>
 </template>
 <script>
-	import { log } from "@/common.js";
-	
 	export default {
 		data() {
 			return {
+				type: "",
+				message: "",
 				isActivated: false,
 				isInfo: false,
 				isSuccess: false,
@@ -26,7 +26,6 @@
 		},
 		watch: {
 			'$store.state.toast.message': function() {
-				log(this.$store.state.toast)
 				if("" === this.$store.state.toast.message) {
 					this.isActivated = false;
 				}
@@ -44,5 +43,12 @@
 				}
 			}
 		}
+	}
+
+	export const popToast = (type, message, store) => {		
+		store.state.toast = {
+			type: type,
+			message: message,
+		};
 	}
 </script>
