@@ -32,7 +32,7 @@ export class OrganizationDataHandler {
 			// TODO: Delete before deilvery backend
 			if(null == result) {
 				result = dummyData[uri];
-				log("[DEV] Set " + uri + " from dummy data for test");
+				log("Set " + uri + " from dummy data for test");
 			}
 			
 			return result;
@@ -71,7 +71,7 @@ export class OrganizationDataHandler {
 				result = dummyData[uri].filter(item => {
 					return item[orgName] === orgCode;
 				})[0];
-				log("[DEV] Set " + orgName + " from dummy data for test");
+				log("Set " + orgName + " from dummy data for test");
 			}
 			
 			return result;
@@ -112,7 +112,7 @@ export class OrganizationDataHandler {
 						&& item.distributionChannel.distributionChannel === channel
 						&& item.division.division === div;
 				})[0];
-				log("[DEV] Set Sales Area from dummy data for test");
+				log("Set Sales Area from dummy data for test");
 			}
 			
 			return result;

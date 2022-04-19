@@ -16,7 +16,7 @@ export const isUuid = (id) => {
 
 export const log = (str) => {
 	if("development" === process.env.NODE_ENV) {
-		console.log(str);
+		console.log("[DEV] " + str);
 	}
 }
 
