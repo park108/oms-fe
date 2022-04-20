@@ -20,16 +20,16 @@ export const log = (str) => {
 	}
 }
 
-export const confirmCreateItem = () => {
-	return window.confirm("Do you want to create?");
+export const confirmCreateItem = (orgDesc) => {
+	return window.confirm("Do you want to create a " + orgDesc + " ?");
 }
 
-export const confirmUpdateItem = () => {
-	return window.confirm("Do you want to update?");
+export const confirmUpdateItem = (orgDesc) => {
+	return window.confirm("Do you want to update a " + orgDesc + " ?");
 }
 
-export const confirmDeleteItem = () => {
-	return window.confirm("Do you want to delete?");
+export const confirmDeleteItem = (orgDesc) => {
+	return window.confirm("Do you want to delete a " + orgDesc + " ?");
 }
 
 export const dummyData = {

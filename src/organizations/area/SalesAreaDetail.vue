@@ -113,7 +113,7 @@
 				}
 
 				if(this.isCreate) {
-					if(!confirmCreateItem()) return;
+					if(!confirmCreateItem("Sales Area")) return;
 					const res = await OrganizationDataHandler.postOrg(this.$store.state.corp.id, "areas", {
 						salesOrg: salesOrg,
 						distributionChannel: distributionChannel,
@@ -136,7 +136,7 @@
 				}
 			},
 			deleteItem: function() {
-				if(!confirmDeleteItem()) return;
+				if(!confirmDeleteItem("Sales Area")) return;
 
 				log("Yes delete it!");
 

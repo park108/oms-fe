@@ -91,7 +91,7 @@
 				}
 
 				if(this.isCreate) {
-					if(!confirmCreateItem()) return;
+					if(!confirmCreateItem(this.orgDesc)) return;
 					const res = await OrganizationDataHandler.postOrg(this.$store.state.corp.id, this.orgUri, {
 						[this.orgName]: code.value,
 						[this.orgName + "Desc"]: desc.value,
@@ -111,7 +111,7 @@
 						return;
 					}
 
-					if(!confirmUpdateItem()) return;
+					if(!confirmUpdateItem(this.orgDesc)) return;
 					const res = await OrganizationDataHandler.putOrg(this.$store.state.corp.id, this.orgUri, code.value, {
 						[this.orgName]: code.value,
 						[this.orgName + "Desc"]: desc.value,
@@ -135,7 +135,7 @@
 					return;
 				}
 
-				if(!confirmDeleteItem()) return;
+				if(!confirmDeleteItem(this.orgDesc)) return;
 
 				const res = await OrganizationDataHandler.deleteOrg(this.$store.state.corp.id, this.orgUri, code.value, {
 					[this.orgName]: code.value,
