@@ -10,8 +10,8 @@
 			Loading ...
 		</div>
 		<div class="div div--org-list" role="list" v-else>
-			<div class="div div--org-listitem" role="listitem" v-for="(orgItem, index) in list" :key="orgItem.id">
-				<span class="span span--detail-attributename span--button-detail" @click="moveDetail" :index="index">{{ orgItem[orgName] }}</span>
+			<div class="div div--org-listitem div--org-button" role="listitem" v-for="(orgItem, index) in list" @click="moveDetail" :index="index" :key="orgItem.id">
+				<span class="span span--detail-attributename">{{ orgItem[orgName] }}</span>
 				<span class="span">{{ orgItem[orgName + 'Desc'] }}</span>
 			</div>
 		</div>

@@ -10,8 +10,8 @@
 			Loading ...
 		</div>
 		<div class="div div--org-list" role="list" v-else>
-			<div class="div div--org-listitem" v-for="(area, index) in this.list" :key="area.id">
-				<span class="span span--detail-attributename span--button-detail" @click="moveDetail" :index="index">
+			<div class="div div--org-listitem div--org-button" v-for="(area, index) in this.list" @click="moveDetail" :index="index" :key="area.id">
+				<span class="span span--detail-attributename">
 					{{ area.salesOrg.salesOrg }}/{{ area.distributionChannel.distributionChannel }}/{{ area.division.division }}
 				</span>
 				<span class="span">{{ area.salesOrg.salesOrgDesc }}, {{ area.distributionChannel.distributionChannelDesc }}, {{ area.division.divisionDesc }} </span>
