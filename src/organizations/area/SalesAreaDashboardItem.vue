@@ -10,7 +10,7 @@
 				<span class="span">
 					{{ area.salesOrg.salesOrg }}/{{ area.distributionChannel.distributionChannel }}/{{ area.division.division }}
 				</span>
-				<span class="span"> : </span>
+				<span class="span">-</span>
 				<span class="span">{{ area.salesOrg.salesOrgDesc }}, </span>
 				<span
 					>{{ area.distributionChannel.distributionChannelDesc }},

@@ -15,7 +15,7 @@
 			</div>
 			<div class="div div--org-listitem" v-else v-for="orgItem in list" :key="orgItem.id">
 				<span class="span">{{ orgItem[orgName] }}</span>
-				<span class="span"> : </span>
+				<span class="span"> - </span>
 				<span class="span">{{ orgItem[orgName + "Desc" ] }}</span>
 			</div>
 		</div>
