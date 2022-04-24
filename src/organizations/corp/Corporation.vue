@@ -1,14 +1,17 @@
 <template>
     <div class="div div--dashboard-item">
-        <h1 class="h1">Your Corporation</h1>
+        <h1 class="h1">{{ corp.companyName }}</h1>
         <hr class="hr" />
 		<div class="div div--org-loading" v-if="isLoading">
 			Loading ...
 		</div>
-		<div class="div div--org-listitem" v-else>
-			<span class="span span--org-listitem">{{ corp.companyName }}</span>
-			<span class="span span--org-listitem">, {{ corp.countryCode }}</span>
-			<span class="span span--org-listitem">, {{ corp.vatNumber }}</span>
+		<div class="div" role="list">
+			<div class="div div--org-listitem" role="listitem" >
+				<span class="span span--org-listitem">VAT Number: {{ corp.vatNumber }}</span>
+			</div>
+			<div class="div div--org-listitem" role="listitem" >
+				<span class="span span--org-listitem">Country: {{ corp.countryCode }}</span>
+			</div>
 		</div>
     </div>
 </template>
