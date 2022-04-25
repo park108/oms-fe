@@ -202,7 +202,7 @@ export function getGames(games) {
 
 	   while(6 > pick) {
 
-		   let no = Math.floor((45 * Math.random()) % 46) + 1;
+		   let no = Math.floor((45 * Math.random()) % 45) + 1;
 
 		   if(slot.indexOf(no) > -1) {
 			   continue;

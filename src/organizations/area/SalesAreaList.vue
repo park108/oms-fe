@@ -1,9 +1,5 @@
 <template>
-	<header class="header">
-		<h1 class="h1">
-			Sales Areas of {{ companyName }}
-		</h1>
-	</header>
+	<Header :title="'Sales Areas of ' + companyName" />
 	<Navigation />
 	<main class="main">
 		<div class="div div--org-loading" v-if="isLoading">
@@ -22,6 +18,7 @@
 	<Footer />
 </template>
 <script>
+	import Header from "@/Header.vue";
 	import Navigation from "@/Navigation.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
@@ -38,6 +35,7 @@
 			}
 		},
 		components: {
+			Header,
 			Navigation,
 			Footer,
 			EventButtons,

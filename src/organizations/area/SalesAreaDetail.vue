@@ -1,9 +1,5 @@
 <template>
-	<header class="header">
-		<h1 class="h1">
-			Sales Area > {{ org }}/{{ channel }}/{{ div }}
-		</h1>
-	</header>
+	<Header :title="'Sales Area > ' + org + '/' + channel + '/' + div" />
 	<Navigation :enableDelete="!isCreate" :deleteEventFunc="deleteItem"/>
 	<main class="main">
 		<div class="div div--org-loading" v-if="isLoading">
@@ -21,6 +17,7 @@
 	<Footer />
 </template>
 <script>
+	import Header from "@/Header.vue";
 	import Navigation from "@/Navigation.vue";
 	import DetailAttribute from "../DetailAttribute.vue";
 	import Footer from "@/Footer.vue";
@@ -42,6 +39,7 @@
 			}
 		},
 		components: {
+			Header,
 			Navigation,
 			DetailAttribute,
 			Footer,

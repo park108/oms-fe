@@ -1,9 +1,5 @@
 <template>
-	<header class="header">
-		<h1 class="h1">
-			Order Management System Console
-		</h1>
-	</header>
+	<Header title="Order Management System" />
 	<main class="main">
 		<section class="section section--split-one">
 			<Corporation @setCorpId="setCorpId" />
@@ -25,6 +21,7 @@
 	<Footer />
 </template>
 <script>
+	import Header from "@/Header.vue";
 	import Corporation from "../organizations/corp/Corporation.vue";
 	import DashboardItem from "@/organizations/DashboardItem.vue";
 	import SalesArea from "../organizations/area/SalesAreaDashboardItem.vue";
@@ -37,6 +34,7 @@
 			}
 		},
 		components: {
+			Header,
 			Corporation,
 			DashboardItem,
 			SalesArea,

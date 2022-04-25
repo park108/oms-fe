@@ -1,4 +1,6 @@
 :root {
+	--header-color: #000000;
+	--header-text-color: #ffffff;
 	--text-color-normal: #000000;
 	--text-color-link: #666666;
 	--text-color-temporary: #666666;
@@ -38,6 +40,11 @@
 	padding: 10px;
 }
 
+.header--top-bar {
+	color: var(--header-text-color);
+	background-color: var(--header-color);
+}
+
 .nav {
 	padding: 10px;
 }
@@ -60,6 +67,10 @@
 .h1 {
 	margin: 0;
 	padding: 0;
+}
+
+.h1--main-title {
+	float: left;
 }
 
 .section {
@@ -190,6 +201,18 @@
 .div {
 	margin: 0;
 	padding: 0;
+}
+
+.div--user-status {
+	float: right;
+}
+
+.div--user-icon {
+    height: 44px;
+	width: 44px;
+	background-color: white;
+	border-radius: 22em;
+	text-align: center;
 }
 
 .div--dashboard-box {
