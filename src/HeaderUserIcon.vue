@@ -13,6 +13,8 @@
 	</div>
 </template>
 <script>
+	import { log } from "./common.js"
+
 	export default {
 		data() {
 			return {
@@ -24,13 +26,16 @@
 				this.isMenuOpen = !this.isMenuOpen;
 			},
 			moveProfile: function() {
-
+				log("moveProfile");
+				this.isMenuOpen = false;
 			},
 			moveSettings: function() {
-
+				log("moveSettings");
+				this.isMenuOpen = false;
 			},
 			logout: function() {
-
+				log("logout");
+				this.isMenuOpen = false;
 			},
 		}
 	}

@@ -1,7 +1,10 @@
 <template>
-	<Header :title="orgDesc + ': ' + orgCode" />
+	<Header />
 	<Navigation :enableDelete="!isCreate" :deleteEventFunc="deleteItem"/>
 	<main class="main">
+		<div class="div div--org-title">
+			{{orgDesc}}: {{orgCode}}
+		</div>
 		<div class="div div--org-loading" v-if="isLoading">
 			Loading ...
 		</div>

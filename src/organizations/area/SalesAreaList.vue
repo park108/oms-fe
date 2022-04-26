@@ -1,7 +1,10 @@
 <template>
-	<Header :title="'Sales Area List'" />
+	<Header />
 	<Navigation />
 	<main class="main">
+		<div class="div div--org-title">
+			Sales Area List
+		</div>
 		<div class="div div--org-loading" v-if="isLoading">
 			Loading ...
 		</div>

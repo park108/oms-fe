@@ -1,7 +1,10 @@
 <template>
-	<Header :title="orgDesc + ' List'" />
+	<Header />
 	<Navigation />
 	<main class="main">
+		<div class="div div--org-title">
+			{{orgDesc}} List
+		</div>
 		<div class="div div--org-loading" v-if="isLoading">
 			Loading ...
 		</div>
@@ -31,7 +34,7 @@
 				corp: null,
 				companyName: '',
 				orgUri: '',
-				list: []
+				list: [],
 			}
 		},
 		props: {

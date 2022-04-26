@@ -1,7 +1,7 @@
 <template>
 	<header class="header header--top-bar">
-		<h1 class="h1 h1--main-title">
-			{{ title }}
+		<h1 class="h1 h1--main-title" @click="moveHome">
+			OMS Organization Manager
 		</h1>
 		<HeaderUserIcon />
 	</header>
@@ -14,6 +14,11 @@
     },
     components: {
 		HeaderUserIcon,
+	},
+	methods: {
+		moveHome: function() {
+			this.$router.push({name: "Index"});
+		},
 	}
 }
 </script>

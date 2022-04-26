@@ -72,6 +72,7 @@
 .h1--main-title {
 	float: left;
 	font-size: 20px;
+	cursor: pointer;
 }
 
 .section {
@@ -239,6 +240,12 @@
 
 .div--dashboard-item {
 	width: 100%;
+}
+
+.div--org-title {
+	margin: 0 1em;
+	font-size: 1.5em;
+	font-weight: bold;
 }
 
 .div--org-loading {
