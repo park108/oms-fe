@@ -1,6 +1,6 @@
 <template>
 	<Header />
-	<Navigation />
+	<Navigation prevName="Home" />
 	<main class="main">
 		<div class="div div--org-title">
 			Sales Area List
@@ -17,7 +17,11 @@
 			</div>
 		</div>
 	</main>
-	<EventButtons :enableSave="true" :saveEventFunc="createItem" saveButtonText="Create New Area" />
+	<EventButtons
+		:enableSave="true"
+		:saveEventFunc="createItem"
+		saveButtonText="Create New Area"
+	/>
 	<Footer />
 </template>
 <script>

@@ -1,6 +1,10 @@
 <template>
 	<Header />
-	<Navigation :enableDelete="!isCreate" :deleteEventFunc="deleteItem"/>
+	<Navigation
+		:prevName="orgDesc + ' List'"
+		:enableDelete="!isCreate"
+		:deleteEventFunc="deleteItem"
+	/>
 	<main class="main">
 		<div class="div div--org-title">
 			{{orgDesc}}: {{orgCode}}
@@ -15,7 +19,11 @@
 		</div>
 		<Toaster />
 	</main>
-	<EventButtons :enableSave="true" :saveEventFunc="saveItem" :saveButtonText="isCreate ? 'Create ' + orgDesc : 'Update ' + orgDesc" />
+	<EventButtons
+		:enableSave="true"
+		:saveEventFunc="saveItem"
+		:saveButtonText="isCreate ? 'Create ' + orgDesc : 'Update ' + orgDesc"
+	/>
 	<Footer />
 </template>
 <script>

@@ -282,10 +282,18 @@
 	color: var(--text-color-link);
 }
 
+.span--navbutton-back:hover {
+	text-decoration: underline;
+}
+
 .span--navbutton-delete {
 	cursor: pointer;
 	float: right;
 	color: var(--event-color-delete);
+}
+
+.span--navbutton-delete:hover {
+	text-decoration: underline;
 }
 
 .span--org-listitem {

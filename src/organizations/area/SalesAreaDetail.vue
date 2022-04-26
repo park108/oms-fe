@@ -1,6 +1,10 @@
 <template>
 	<Header />
-	<Navigation :enableDelete="!isCreate" :deleteEventFunc="deleteItem"/>
+	<Navigation
+		prevName="Sales Area List"
+		:enableDelete="!isCreate"
+		:deleteEventFunc="deleteItem"
+	/>
 	<main class="main">
 		<div class="div div--org-title">
 			Sales Area: {{org}}/{{channel}}/{{div}}
@@ -16,7 +20,11 @@
 		</div>
 	</main>
 	<Toaster />
-	<EventButtons :enableSave="isCreate" :saveEventFunc="saveItem" :saveButtonText="isCreate ? 'Create Org.' : 'Update Org.'" />
+	<EventButtons
+		:enableSave="isCreate"
+		:saveEventFunc="saveItem"
+		:saveButtonText="isCreate ? 'Create Org.' : 'Update Org.'"
+	/>
 	<Footer />
 </template>
 <script>

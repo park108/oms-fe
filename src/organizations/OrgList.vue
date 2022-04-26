@@ -1,6 +1,6 @@
 <template>
 	<Header />
-	<Navigation />
+	<Navigation prevName="Home" />
 	<main class="main">
 		<div class="div div--org-title">
 			{{orgDesc}} List
@@ -16,7 +16,11 @@
 		</div>
 		<Toaster />
 	</main>
-	<EventButtons :enableSave="true" :saveEventFunc="createItem" :saveButtonText="'Create New ' + orgDesc" />
+	<EventButtons
+		:enableSave="true"
+		:saveEventFunc="createItem"
+		:saveButtonText="'Create New ' + orgDesc"
+	/>
 	<Footer />
 </template>
 <script>

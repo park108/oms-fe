@@ -43,7 +43,7 @@
 					const res = await fetch(url);
 
 					if(404 === res.status) {
-						log(orgUri + " is not found");
+						log("corps is not found");
 						this.corp = dummyData; // TODO: Remove
 					}
 					else {
@@ -56,7 +56,6 @@
 					this.corp = dummyData; // TODO: Remove
 				}
 				finally {
-					log("CORP.finally...")
 					this.$emit("setCorpId", this.corp.id);
 					this.$store.state.corp = this.corp;
 					this.isLoading = false;
