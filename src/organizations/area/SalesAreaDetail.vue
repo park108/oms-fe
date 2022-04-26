@@ -1,5 +1,5 @@
 <template>
-	<Header :title="'Sales Area > ' + org + '/' + channel + '/' + div" />
+	<Header :title="'Sales Area: ' + org + '/' + channel + '/' + div" />
 	<Navigation :enableDelete="!isCreate" :deleteEventFunc="deleteItem"/>
 	<main class="main">
 		<div class="div div--org-loading" v-if="isLoading">

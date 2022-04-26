@@ -1,5 +1,5 @@
 <template>
-	<Header :title="orgDesc + ' of ' + companyName" />
+	<Header :title="orgDesc + ' List'" />
 	<Navigation />
 	<main class="main">
 		<div class="div div--org-loading" v-if="isLoading">

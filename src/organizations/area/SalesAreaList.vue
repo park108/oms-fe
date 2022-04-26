@@ -1,5 +1,5 @@
 <template>
-	<Header :title="'Sales Areas of ' + companyName" />
+	<Header :title="'Sales Area List'" />
 	<Navigation />
 	<main class="main">
 		<div class="div div--org-loading" v-if="isLoading">

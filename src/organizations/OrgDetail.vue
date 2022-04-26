@@ -1,5 +1,5 @@
 <template>
-	<Header :title="orgDesc + ' > ' + orgCode" />
+	<Header :title="orgDesc + ': ' + orgCode" />
 	<Navigation :enableDelete="!isCreate" :deleteEventFunc="deleteItem"/>
 	<main class="main">
 		<div class="div div--org-loading" v-if="isLoading">
