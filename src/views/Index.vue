@@ -1,5 +1,5 @@
 <template>
-	<Header title="Order Management System" />
+	<Header title="Order Management System Console" />
 	<main class="main">
 		<section class="section section--split-one">
 			<Corporation @setCorpId="setCorpId" />

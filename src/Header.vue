@@ -3,17 +3,17 @@
 		<h1 class="h1 h1--main-title">
 			{{ title }}
 		</h1>
-		<div class="div div--user-status">
-			<div class="div div--user-icon">
-				^^
-			</div>
-		</div>
+		<HeaderUserIcon />
 	</header>
 </template>
 <script>
+	import HeaderUserIcon from "./HeaderUserIcon.vue";
 	export default {
-		props: {
-			title: String,
-		},
+    props: {
+        title: String,
+    },
+    components: {
+		HeaderUserIcon,
 	}
+}
 </script>
