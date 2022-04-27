@@ -77,7 +77,7 @@
 			if(!this.isCreate) {
 				this.orgData = await OrganizationDataHandler.getOrg(this.$store.state.corp.id, this.orgUri, this.orgName, this.orgCode);
 				if(null === this.orgData) {
-					popToast("WARNING", this.orgDesc + " not found", this.$store);
+					popToast("WARNING", this.orgDesc + " not found.", this.$store);
 				}
 				this.isLoading = false;	
 			}
@@ -89,12 +89,17 @@
 				const id = document.getElementById("id").value;
 
 				if("" === code.value) {
-					popToast("WARNING", "Please input " + this.orgDesc, this.$store);
+					popToast("WARNING", "Please input " + this.orgDesc + ".", this.$store);
+					code.focus();
+					return;
+				}
+				if(code.value.indexOf(' ') > -1) {
+					popToast("WARNING", "Please remove space in the " + this.orgDesc + " code.", this.$store);
 					code.focus();
 					return;
 				}
 				if("" === desc.value) {
-					popToast("WARNING", "Please input " +  this.orgDesc + " Description", this.$store);
+					popToast("WARNING", "Please input " +  this.orgDesc + " Description.", this.$store);
 					desc.focus();
 					return;
 				}

@@ -61,7 +61,7 @@
 		async mounted() {
 			this.list = await OrganizationDataHandler.getList(this.corp.id, this.orgUri);
 			if(null === this.list) {
-				popToast("WARNING", this.orgDesc + " not found", this.$store);
+				popToast("WARNING", this.orgDesc + " not found.", this.$store);
 			}
 			this.isLoading = false;
 		},

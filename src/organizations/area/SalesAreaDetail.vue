@@ -34,6 +34,7 @@
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
+	import { popToast } from "@/Toaster.vue";
 	import { OrganizationDataHandler } from '../OrganizationDataHandler';
 	import { log, confirmCreateItem, confirmUpdateItem, confirmDeleteItem } from "@/common.js";
 
@@ -85,62 +86,46 @@
 				this.isLoading = false;	
 			}
 			else {
-				this.$store.state.toast = {
-					type: "WARNING",
-					message: "Sales Area not found",
-				};
+				popToast("WARNING", "Sales Area not found.", this.$store);
 			}
 		},
 		methods: {
 			saveItem: async function() {
 
-				const salesOrg = document.getElementById("salesOrg").value;
-				const distributionChannel = document.getElementById("distributionChannel").value;
-				const division = document.getElementById("division").value;
-				const id = document.getElementById("id").value;
+				const salesOrg = document.getElementById("salesOrg");
+				const distributionChannel = document.getElementById("distributionChannel");
+				const division = document.getElementById("division");
 
-				if("" === salesOrg) {
-					this.$store.state.toast = {
-						type: "ERROR",
-						message: "Please input Sales Org",
-					};
+				if("" === salesOrg.value) {
+					popToast("WARNING", "Please input Sales Org.", this.$store);
+					salesOrg.focus();
 					return;
 				}
-				if("" === distributionChannel) {
-					this.$store.state.toast = {
-						type: "ERROR",
-						message: "Please input Distribution Channel",
-					};
+				if("" === distributionChannel.value) {
+					popToast("WARNING", "Please input Distribution Channel.", this.$store);
+					distributionChannel.focus();
 					return;
 				}
-				if("" === division) {
-					this.$store.state.toast = {
-						type: "ERROR",
-						message: "Please input Division",
-					};
+				if("" === division.value) {
+					popToast("WARNING", "Please input Division.", this.$store);
+					division.focus();
 					return;
 				}
 
 				if(this.isCreate) {
 					if(!confirmCreateItem("Sales Area")) return;
 					const res = await OrganizationDataHandler.postOrg(this.$store.state.corp.id, "areas", {
-						salesOrg: salesOrg,
-						distributionChannel: distributionChannel,
-						division: division,
+						salesOrg: salesOrg.value,
+						distributionChannel: distributionChannel.value,
+						division: division.value,
 					});
 					if(true === res.isSuccess) {
-						this.$store.state.toast = {
-							type: "SUCCESS",
-							message: "Sales Area " + salesOrg + "/" + distributionChannel + "/" + division + " is created.",
-						};
+						popToast("SUCCESS", "Sales Area " + salesOrg.value + "/" + distributionChannel.value + "/" + division.value + " is created.", this.$store);
 						this.isPending = true;
 						setTimeout(() => this.$router.go(-1), 2000);
 					}
 					else {
-						this.$store.state.toast = {
-							type: "ERROR",
-							message: "Server Error. Please contact administrator.",
-						};
+						popToast("ERROR", "Server Error. Please contact administrator.", this.$store);
 					}
 				}
 			},
