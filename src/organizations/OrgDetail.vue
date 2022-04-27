@@ -13,9 +13,9 @@
 			Loading ...
 		</div>
 		<div class="div div--org-list" role="list" v-else>
-			<DetailAttribute :name="orgName" :attribute-name="orgDesc" :value="orgData[orgName]" :editable="isCreate&&!isPending" />
-			<DetailAttribute :name="orgName + 'Desc'" attribute-name="Description" :value="orgData[orgName + 'Desc']" :editable="!isPending" />
-			<DetailAttribute name="id" attribute-name="id" :value="orgData.id" :hidden="isCreate" />
+			<AttInput :name="orgName" :attribute-name="orgDesc" :value="orgData[orgName]" :editable="isCreate&&!isPending" />
+			<AttInput :name="orgName + 'Desc'" attribute-name="Description" :value="orgData[orgName + 'Desc']" :editable="!isPending" />
+			<AttInput name="id" attribute-name="id" :value="orgData.id" :hidden="isCreate" />
 		</div>
 		<Toaster />
 	</main>
@@ -29,7 +29,7 @@
 <script>
 	import Header from "@/Header.vue";
 	import Navigation from "@/Navigation.vue";
-	import DetailAttribute from "./DetailAttribute.vue";
+	import AttInput from "./DetailAttributeInput.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
@@ -55,7 +55,7 @@
 		components: {
 			Header,
 			Navigation,
-			DetailAttribute,
+			AttInput,
 			Footer,
 			EventButtons,
 			Toaster,

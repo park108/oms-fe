@@ -6,37 +6,41 @@
 		:deleteEventFunc="deleteItem"
 	/>
 	<main class="main">
-		<div class="div div--org-title">
+		<div class="div div--org-title" v-if="!isCreate">
 			Sales Area: {{org}}/{{channel}}/{{div}}
+		</div>
+		<div class="div div--org-title" v-else>
+			Sales Area: NEW
 		</div>
 		<div class="div div--org-loading" v-if="isLoading">
 			Loading ...
 		</div>
 		<div class="div div--org-list" role="list" v-else>
-			<DetailAttribute name="salesOrg" attribute-name="Sales Organization" :value="this.area.salesOrg.salesOrg + ', ' + this.area.salesOrg.salesOrgDesc" :editable="isCreate&&!isPending" />
-			<DetailAttribute name="distributionChannel" attribute-name="Distiribution Channel" :value="this.area.distributionChannel.distributionChannel + ', ' + this.area.distributionChannel.distributionChannelDesc" :editable="isCreate&&!isPending" />
-			<DetailAttribute name="division" attribute-name="Division" :value="this.area.division.division + ', ' + this.area.division.divisionDesc" :editable="isCreate&&!isPending" />
-			<DetailAttribute name="id" attribute-name="id" :value="this.area.id" :hidden="isCreate" />
+			<AttSelect name="salesOrg" attribute-name="Sales Organization" :option-list="this.orgList" :editable="isCreate&&!isPending" :selectedValue="this.area.salesOrg.salesOrg" />
+			<AttSelect name="distributionChannel" attribute-name="Distiribution Channel" :option-list="this.channelList" :editable="isCreate&&!isPending" :selectedValue="this.area.distributionChannel.distributionChannel" />
+			<AttSelect name="division" attribute-name="Division" :option-list="this.divList" :editable="isCreate&&!isPending" :selectedValue="this.area.division.division" />
+			<AttInput name="id" attribute-name="id" :value="this.area.id" :hidden="isCreate" />
 		</div>
+		<Toaster />
 	</main>
-	<Toaster />
 	<EventButtons
 		:enableSave="isCreate"
 		:saveEventFunc="saveItem"
-		:saveButtonText="isCreate ? 'Create Org.' : 'Update Org.'"
+		:saveButtonText="isCreate ? 'Create Sales Area' : 'Update Sales Area'"
 	/>
 	<Footer />
 </template>
 <script>
 	import Header from "@/Header.vue";
 	import Navigation from "@/Navigation.vue";
-	import DetailAttribute from "../DetailAttribute.vue";
+	import AttInput from "../DetailAttributeInput.vue";
+	import AttSelect from "../DetailAttributeSelect.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
 	import { popToast } from "@/Toaster.vue";
 	import { OrganizationDataHandler } from '../OrganizationDataHandler';
-	import { log, confirmCreateItem, confirmUpdateItem, confirmDeleteItem } from "@/common.js";
+	import { confirmCreateItem, confirmDeleteItem } from "@/common.js";
 
 	export default {
 		data() {
@@ -48,12 +52,16 @@
 				org: '',
 				channel: '',
 				div: '',
+				orgList: [],
+				channelList: [],
+				divList: [],
 			}
 		},
 		components: {
 			Header,
 			Navigation,
-			DetailAttribute,
+			AttInput,
+			AttSelect,
 			Footer,
 			EventButtons,
 			Toaster,
@@ -64,7 +72,6 @@
 			this.div = this.$route.params.div;
 			if("NEW" === this.org && "NEW" === this.channel && "NEW" === this.div) {
 				this.isCreate = true;
-				this.isLoading = false;
 				this.area = {
 					salesOrg: {
 						salesOrg: "",
@@ -80,14 +87,29 @@
 			}
 		},
 		async mounted() {
-			this.area = await OrganizationDataHandler.getSalesArea(this.$store.state.corp.id, this.org, this.channel, this.div);
+			this.orgList = await OrganizationDataHandler.getList(this.$store.state.corp.id, "orgs");
+			if(null === this.orgList) {
+				popToast("WARNING", "Sales Org. not found.", this.$store);
+			}
+
+			this.channelList = await OrganizationDataHandler.getList(this.$store.state.corp.id, "channels");
+			if(null === this.channelList) {
+				popToast("WARNING", "Channel not found.", this.$store);
+			}
+
+			this.divList = await OrganizationDataHandler.getList(this.$store.state.corp.id, "divs");
+			if(null === this.divList) {
+				popToast("WARNING", "Division not found.", this.$store);
+			}
+
+			if(!this.isCreate) {
+				this.area = await OrganizationDataHandler.getSalesArea(this.$store.state.corp.id, this.org, this.channel, this.div);
+				if(null === this.area) {
+					popToast("WARNING", "Sales Area not found.", this.$store);
+				}
+			}
+
 			this.isLoading = false;
-			if(null !== this.org) {
-				this.isLoading = false;	
-			}
-			else {
-				popToast("WARNING", "Sales Area not found.", this.$store);
-			}
 		},
 		methods: {
 			saveItem: async function() {

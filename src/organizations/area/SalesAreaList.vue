@@ -20,7 +20,7 @@
 	<EventButtons
 		:enableSave="true"
 		:saveEventFunc="createItem"
-		saveButtonText="Create New Area"
+		saveButtonText="Create New Sales Area"
 	/>
 	<Footer />
 </template>
