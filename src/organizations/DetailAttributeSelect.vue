@@ -23,7 +23,7 @@
 		props: {
 			name: '',
 			attributeName: '',
-			optionList: [],
+			optionList: Array,
 			selectedValue: '',
 			editable: false,
 			hidden: false,

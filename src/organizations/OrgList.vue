@@ -10,8 +10,8 @@
 		</div>
 		<div class="div div--org-list" role="list" v-else>
 			<div class="div div--org-listitem div--org-button" role="listitem" v-for="(orgItem, index) in list" @click="moveDetail" :index="index" :key="orgItem.id">
-				<span class="span span--detail-attributename">{{ orgItem[orgName] }}</span>
-				<span class="span">{{ orgItem[orgName + 'Desc'] }}</span>
+				<span class="span span--detail-attributename" :index="index">{{ orgItem[orgName] }}</span>
+				<span class="span" :index="index">{{ orgItem[orgName + 'Desc'] }}</span>
 			</div>
 		</div>
 		<Toaster />

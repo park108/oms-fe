@@ -1,6 +1,7 @@
 :root {
 	--header-color: #000000;
 	--header-text-color: #ffffff;
+	--header-text-hover: #427ab3;
 	--text-color-normal: #000000;
 	--text-color-link: #666666;
 	--text-color-temporary: #666666;
@@ -73,6 +74,12 @@
 	float: left;
 	font-size: 20px;
 	cursor: pointer;
+}
+
+.h1--main-title:hover {
+	color: var(--header-text-hover);
+	text-shadow: var(--header-text-hover) 0 0 4px;
+	transition: color var(--event-active-transition) ease;
 }
 
 .section {
