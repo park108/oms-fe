@@ -5,9 +5,7 @@
 		<div class="div div--org-title">
 			Sales Area List
 		</div>
-		<div class="div div--org-loading" v-if="isLoading">
-			Loading ...
-		</div>
+		<OrgLoading v-if="isLoading" />
 		<div class="div div--org-list" role="list" v-else>
 			<div class="div div--org-listitem div--org-button" v-for="(area, index) in this.list" @click="moveDetail" :index="index" :key="area.id">
 				<span class="span span--detail-attributename" :index="index">
@@ -27,6 +25,7 @@
 <script>
 	import Header from "@/Header.vue";
 	import Navigation from "@/Navigation.vue";
+	import OrgLoading from "@/organizations/OrgLoading.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import { OrganizationDataHandler } from "../OrganizationDataHandler.js";
@@ -44,6 +43,7 @@
 		components: {
 			Header,
 			Navigation,
+			OrgLoading,
 			Footer,
 			EventButtons,
 			OrganizationDataHandler,

@@ -3,9 +3,7 @@
 		<div class="div div--dashboard-item">
 			<h1 class="h1">Sales Areas</h1>
 			<hr class="hr" />
-			<div class="div div--org-loading" v-if="isLoading">
-				Loading ...
-			</div>
+			<OrgLoading v-if="isLoading" />
 			<div class="div div--org-listitem" v-else v-for="area in list" :key="area.id">
 				<span class="span">
 					{{ area.salesOrg.salesOrg }}/{{ area.distributionChannel.distributionChannel }}/{{ area.division.division }}
@@ -22,6 +20,7 @@
 </template>
 
 <script>
+	import OrgLoading from "@/organizations/OrgLoading.vue";
 	import { isUuid } from "@/common.js"
 	import { OrganizationDataHandler } from "../OrganizationDataHandler.js";
 
@@ -35,6 +34,9 @@
 		props: {
 			corpId: '',
 			orgUri: '',
+		},
+		components: {
+			OrgLoading,
 		},
 		watch: {
 			corpId: async function() {

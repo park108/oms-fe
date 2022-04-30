@@ -10,9 +10,7 @@
 		<div class="div div--dashboard-item">
 			<h1 class="h1">{{ orgDesc }}</h1>
 			<hr class="hr" />
-			<div class="div div--org-loading" v-if="isLoading">
-				Loading ...
-			</div>
+			<OrgLoading v-if="isLoading" />
 			<div class="div div--org-listitem" v-else v-for="orgItem in list" :key="orgItem.id">
 				<span class="span">{{ orgItem[orgName] }}</span>
 				<span class="span"> - </span>
@@ -22,6 +20,7 @@
 	</section>
 </template>
 <script>
+	import OrgLoading from "@/organizations/OrgLoading.vue";
 	import { isUuid } from "@/common.js"
 	import { OrganizationDataHandler } from "./OrganizationDataHandler.js";
 
@@ -30,11 +29,11 @@
 			return {
 				isLoading: true,
 				list: []
-			}
+			};
 		},
 		props: {
 			corpId: {
-				default: '',
+				default: "",
 			},
 			orgUri: String,
 			orgDesc: String,
@@ -43,18 +42,22 @@
 			isSplitTwo: Boolean,
 			isSplitThree: Boolean,
 		},
+		components: {
+			OrgLoading,
+		},
 		watch: {
-			corpId: async function() {
-				if(isUuid(this.corpId)) {
+			corpId: async function () {
+				if (isUuid(this.corpId)) {
 					this.list = await OrganizationDataHandler.getList(this.corpId, this.orgUri);
 					this.isLoading = false;
 				}
 			},
 		},
 		methods: {
-			moveList: function(e) {
-				this.$router.push({name: this.orgName + "List"});
+			moveList: function (e) {
+				this.$router.push({ name: this.orgName + "List" });
 			}
 		},
+		components: { OrgLoading }
 	};
 </script>

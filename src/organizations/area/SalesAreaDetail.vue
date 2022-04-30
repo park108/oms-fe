@@ -12,9 +12,7 @@
 		<div class="div div--org-title" v-else>
 			Sales Area: NEW
 		</div>
-		<div class="div div--org-loading" v-if="isLoading">
-			Loading ...
-		</div>
+		<OrgLoading v-if="isLoading" />
 		<div class="div div--org-list" role="list" v-else>
 			<AttSelect name="salesOrg" attribute-name="Sales Organization" :option-list="this.orgList" :editable="isCreate&&!isPending" :selectedValue="this.area.salesOrg.salesOrg" />
 			<AttSelect name="distributionChannel" attribute-name="Distiribution Channel" :option-list="this.channelList" :editable="isCreate&&!isPending" :selectedValue="this.area.distributionChannel.distributionChannel" />
@@ -33,6 +31,7 @@
 <script>
 	import Header from "@/Header.vue";
 	import Navigation from "@/Navigation.vue";
+	import OrgLoading from "@/organizations/OrgLoading.vue";
 	import AttInput from "../DetailAttributeInput.vue";
 	import AttSelect from "../DetailAttributeSelect.vue";
 	import Footer from "@/Footer.vue";
@@ -60,6 +59,7 @@
 		components: {
 			Header,
 			Navigation,
+			OrgLoading,
 			AttInput,
 			AttSelect,
 			Footer,

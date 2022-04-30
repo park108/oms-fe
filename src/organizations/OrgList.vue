@@ -5,9 +5,7 @@
 		<div class="div div--org-title">
 			{{orgDesc}} List
 		</div>
-		<div class="div div--org-loading" v-if="isLoading">
-			Loading ...
-		</div>
+		<OrgLoading v-if="isLoading" />
 		<div class="div div--org-list" role="list" v-else>
 			<div class="div div--org-listitem div--org-button" role="listitem" v-for="(orgItem, index) in list" @click="moveDetail" :index="index" :key="orgItem.id">
 				<span class="span span--detail-attributename" :index="index">{{ orgItem[orgName] }}</span>
@@ -26,6 +24,7 @@
 <script>
 	import Header from "@/Header.vue";
 	import Navigation from "@/Navigation.vue";
+	import OrgLoading from "@/organizations/OrgLoading.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
@@ -48,6 +47,7 @@
 		components: {
 			Header,
 			Navigation,
+			OrgLoading,
 			Footer,
 			EventButtons,
 			OrganizationDataHandler,

@@ -2,9 +2,7 @@
     <div class="div div--dashboard-item">
         <h1 class="h1">{{ corp.companyName }}</h1>
         <hr class="hr" />
-		<div class="div div--org-loading" v-if="isLoading">
-			Loading ...
-		</div>
+		<OrgLoading v-if="isLoading" />
 		<div class="div" role="list">
 			<div class="div div--org-listitem" role="listitem" >
 				<span class="span span--org-listitem">VAT Number: {{ corp.vatNumber }}</span>
@@ -17,6 +15,7 @@
 </template>
 
 <script>
+	import OrgLoading from "@/organizations/OrgLoading.vue";
 	import { getApi, log, getGames } from "../../common.js"
 
 	export default {
@@ -25,6 +24,9 @@
 				isLoading: true,
 				corp: {}
 			}
+		},
+		components: {
+			OrgLoading,
 		},
 		mounted() {
 			this.getCorprations();

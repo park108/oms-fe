@@ -9,9 +9,7 @@
 		<div class="div div--org-title">
 			{{orgDesc}}: {{orgCode}}
 		</div>
-		<div class="div div--org-loading" v-if="isLoading">
-			Loading ...
-		</div>
+		<OrgLoading v-if="isLoading" />
 		<div class="div div--org-list" role="list" v-else>
 			<AttInput :name="orgName" :attribute-name="orgDesc" :value="orgData[orgName]" :editable="isCreate&&!isPending" />
 			<AttInput :name="orgName + 'Desc'" attribute-name="Description" :value="orgData[orgName + 'Desc']" :editable="!isPending" />
@@ -29,6 +27,7 @@
 <script>
 	import Header from "@/Header.vue";
 	import Navigation from "@/Navigation.vue";
+	import OrgLoading from "@/organizations/OrgLoading.vue";
 	import AttInput from "./DetailAttributeInput.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
@@ -55,6 +54,7 @@
 		components: {
 			Header,
 			Navigation,
+			OrgLoading,
 			AttInput,
 			Footer,
 			EventButtons,
