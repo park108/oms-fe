@@ -256,8 +256,13 @@
 }
 
 .div--org-loading {
-	margin: 1em;
 	color: var(--text-color-temporary);
+}
+
+.div--org-skeletonbox {
+	margin: 1em;
+	padding: 0.5em;
+	display: flex;
 }
 
 .div--org-listitem {
@@ -310,6 +315,13 @@
 .span--detail-attributename {
 	width: 120px;
 	display: block;
+}
+
+.span--org-skeletonbox {
+	display: inline-block;
+	background-color: var(--text-color-temporary);
+	width: 100%;
+	height: 100%;
 }
 
 .input {
