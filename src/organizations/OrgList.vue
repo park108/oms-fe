@@ -36,11 +36,11 @@
 				isLoading: true,
 				corp: null,
 				companyName: '',
-				orgUri: '',
 				list: [],
 			}
 		},
 		props: {
+			orgUri: String,
 			orgDesc: String,
 			orgName: String,
 		},
@@ -54,7 +54,6 @@
 			Toaster,
 		},
 		created() {
-			this.orgUri = this.$route.path.substr(1, this.$route.path.indexOf("/", 1) - 1);
 			this.corp = this.$store.state.corp;
 			this.companyName = this.corp.companyName;
 		},

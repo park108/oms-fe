@@ -1,56 +1,72 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Index from '@/views/Index.vue'
+import Index from '@/Index.vue'
 import SalesArea from '@/organizations/area/SalesAreaList.vue'
 import SalesAreaDetail from '@/organizations/area/SalesAreaDetail.vue'
 import OrgDetail from '@/organizations/OrgDetail.vue'
 import OrgList from '@/organizations/OrgList.vue'
 
-const routes = [
-	{ path: '/', name: 'Index', component: Index },
-	{ path: '/areas/', name: 'salesAreaList', component: SalesArea },
-	{ path: '/areas/:org/:channel/:div', name: 'SalesAreaDetail', component: SalesAreaDetail },
+const pathPrefix = "/org";
 
-	{ path: '/orgs/', name: 'salesOrgList', component: OrgList, props: {
+const routes = [
+	{ path: pathPrefix + '/', name: 'Index', component: Index },
+
+	{ path: pathPrefix + '/areas/', name: 'salesAreaList', component: SalesArea, props: {
+		orgUri: "areas",
+	}},
+
+	{ path: pathPrefix + '/areas/:org/:channel/:div', name: 'SalesAreaDetail', component: SalesAreaDetail },
+
+	{ path: pathPrefix + '/orgs/', name: 'salesOrgList', component: OrgList, props: {
+		orgUri: "orgs",
 		orgDesc: "Sales Org.",
 		orgName: "salesOrg",
 	}},
-	{ path: '/orgs/:orgCode', name: 'salesOrgDetail', component: OrgDetail, props: {
+	{ path: pathPrefix + '/orgs/:orgCode', name: 'salesOrgDetail', component: OrgDetail, props: {
+		orgUri: "orgs",
 		orgDesc: "Sales Org.",
 		orgName: "salesOrg",
 	}},
 	
-	{ path: '/channels/', name: 'distributionChannelList', component: OrgList, props: {
+	{ path: pathPrefix + '/channels/', name: 'distributionChannelList', component: OrgList, props: {
+		orgUri: "channels",
 		orgDesc: "Distribution Channel",
 		orgName: "distributionChannel",
 	}},
-	{ path: '/channels/:orgCode', name: 'distributionChannelDetail', component: OrgDetail, props: {
+	{ path: pathPrefix + '/channels/:orgCode', name: 'distributionChannelDetail', component: OrgDetail, props: {
+		orgUri: "channels",
 		orgDesc: "Distribution Channel",
 		orgName: "distributionChannel",
 	}},
 
-	{ path: '/divs/', name: 'divisionList', component: OrgList, props: {
+	{ path: pathPrefix + '/divs/', name: 'divisionList', component: OrgList, props: {
+		orgUri: "divs",
 		orgDesc: "Division",
 		orgName: "division",
 	}},
-	{ path: '/divs/:orgCode', name: 'divisionDetail', component: OrgDetail, props: {
+	{ path: pathPrefix + '/divs/:orgCode', name: 'divisionDetail', component: OrgDetail, props: {
+		orgUri: "divs",
 		orgDesc: "Division",
 		orgName: "division",
 	}},
 
-	{ path: '/offices/', name: 'salesOfficeList', component: OrgList, props: {
+	{ path: pathPrefix + '/offices/', name: 'salesOfficeList', component: OrgList, props: {
+		orgUri: "offices",
 		orgDesc: "Sales Office",
 		orgName: "salesOffice",
 	}},
-	{ path: '/offices/:orgCode', name: 'salesOfficeDetail', component: OrgDetail, props: {
+	{ path: pathPrefix + '/offices/:orgCode', name: 'salesOfficeDetail', component: OrgDetail, props: {
+		orgUri: "offices",
 		orgDesc: "Sales Office",
 		orgName: "salesOffice",
 	}},
 
-	{ path: '/groups/', name: 'salesGroupList', component: OrgList, props: {
+	{ path: pathPrefix + '/groups/', name: 'salesGroupList', component: OrgList, props: {
+		orgUri: "groups",
 		orgDesc: "Sales Group",
 		orgName: "salesGroup",
 	}},
-	{ path: '/groups/:orgCode', name: 'salesGroupDetail', component: OrgDetail, props: {
+	{ path: pathPrefix + '/groups/:orgCode', name: 'salesGroupDetail', component: OrgDetail, props: {
+		orgUri: "groups",
 		orgDesc: "Sales Group",
 		orgName: "salesGroup",
 	}},

@@ -36,9 +36,11 @@
 				isLoading: true,
 				corp: null,
 				companyName: '',
-				orgUri: '',
 				list: []
 			}
+		},
+		props: {
+			orgUri: String,
 		},
 		components: {
 			Header,
@@ -51,7 +53,6 @@
 		created() {
 			this.corp = this.$store.state.corp;
 			this.companyName = this.corp.companyName;
-			this.orgUri = this.$route.path.replaceAll("/", "");
 		},
 		async mounted() {
 			this.list = await OrganizationDataHandler.getList(this.corp.id, this.orgUri);
@@ -64,14 +65,14 @@
 			moveDetail: function(e) {
 				const index = e.target.getAttribute("index") * 1;
 				const org = this.list[index];
-				const routeTo = "/areas/"
+				const routeTo = "/org/areas/"
 					+ org.salesOrg.salesOrg + "/"
 					+ org.distributionChannel.distributionChannel + "/"
 					+ org.division.division + "/"
 				this.$router.push(routeTo);
 			},
 			createItem: function() {
-				const routeTo = "/" + this.orgUri + "/NEW/NEW/NEW/";
+				const routeTo = "/org/" + this.orgUri + "/NEW/NEW/NEW/";
 				this.$router.push(routeTo);
 			},
 		}

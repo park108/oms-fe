@@ -42,12 +42,12 @@
 				isLoading: true,
 				isPending: false,
 				isCreate: false,
-				orgUri: '',
 				orgCode: '',
 				orgData: null,
 			}
 		},
 		props: {
+			orgUri: String,
 			orgDesc: String,
 			orgName: String,
 		},
@@ -61,7 +61,6 @@
 			Toaster,
 		},
 		created() {
-			this.orgUri = this.$route.path.substr(1, this.$route.path.indexOf("/", 1) - 1);
 			this.orgCode = this.$route.params.orgCode;
 			if("NEW" === this.orgCode) {
 				this.isCreate = true;

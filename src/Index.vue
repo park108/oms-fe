@@ -22,9 +22,9 @@
 </template>
 <script>
 	import Header from "@/Header.vue";
-	import Corporation from "../organizations/corp/Corporation.vue";
+	import Corporation from "./organizations/corp/Corporation.vue";
 	import DashboardItem from "@/organizations/DashboardItem.vue";
-	import SalesArea from "../organizations/area/SalesAreaDashboardItem.vue";
+	import SalesArea from "./organizations/area/SalesAreaDashboardItem.vue";
 	import Footer from "@/Footer.vue";
 
 	export default {

@@ -49,7 +49,7 @@
 		},
 		methods: {
 			moveList: function(e) {
-				const routeTo = "/" + this.orgUri + "/";
+				const routeTo = "/org/" + this.orgUri + "/";
 				this.$router.push(routeTo);
 			}
 		},
