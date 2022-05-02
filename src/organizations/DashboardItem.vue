@@ -8,7 +8,8 @@
 		@click="moveList"
 	>
 		<div class="div div--dashboard-item">
-			<h1 class="h1">{{ orgDesc }}</h1>
+			<h1 class="h1 h1--dashboard-skeleton" v-if="isLoading">LOADING</h1>
+			<h1 class="h1" v-else >{{ orgDesc }}</h1>
 			<hr class="hr" />
 			<OrgLoading v-if="isLoading" />
 			<div class="div div--org-listitem" v-else v-for="orgItem in list" :key="orgItem.id">
