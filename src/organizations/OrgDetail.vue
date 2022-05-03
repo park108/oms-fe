@@ -7,7 +7,7 @@
 	/>
 	<main class="main">
 		<div class="div div--org-title">
-			{{orgDesc}}: {{orgCode}}
+			{{orgDesc}}: {{selectedOrgCode}}
 		</div>
 		<OrgLoading v-if="isLoading" />
 		<div class="div div--org-list" role="list" v-else>
@@ -42,7 +42,7 @@
 				isLoading: true,
 				isPending: false,
 				isCreate: false,
-				orgCode: '',
+				selectedOrgCode: '',
 				orgData: null,
 			}
 		},
@@ -61,8 +61,8 @@
 			Toaster,
 		},
 		created() {
-			this.orgCode = this.$route.params.orgCode;
-			if("NEW" === this.orgCode) {
+			this.selectedOrgCode = this.$route.params.orgCode;
+			if("NEW" === this.selectedOrgCode) {
 				this.isCreate = true;
 				this.isLoading = false;
 				this.orgData = {
@@ -74,7 +74,7 @@
 		},
 		async mounted() {
 			if(!this.isCreate) {
-				this.orgData = await OrganizationDataHandler.getOrg(this.$store.state.corp.id, this.orgUri, this.orgName, this.orgCode);
+				this.orgData = await OrganizationDataHandler.getOrg(this.$store.state.corp.id, this.orgUri, this.orgName, this.selectedOrgCode);
 				if(null === this.orgData) {
 					popToast("WARNING", this.orgDesc + " not found.", this.$store);
 				}
@@ -110,7 +110,7 @@
 						[this.orgName + "Desc"]: desc.value,
 					});
 					if(true === res.isSuccess) {
-						popToast("SUCCESS", this.orgDesc + " " + orgCode.value + " is created.", this.$store);
+						popToast("SUCCESS", this.orgDesc + " " + code.value + " is created.", this.$store);
 						this.isPending = true;
 						setTimeout(() => this.$router.go(-1), 2000);
 					}
