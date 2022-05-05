@@ -16,7 +16,7 @@
 
 <script>
 	import OrgLoading from "@/organizations/OrgLoading.vue";
-	import { getApi, log, getGames } from "../../common.js"
+	import { getApi, log } from "../common.js"
 
 	export default {
 		data() {
@@ -33,8 +33,6 @@
 		},
 		methods: {
 			getCorprations: async function () {
-
-				getGames(10);
 
 				// TODO: Remove dummyUser after make User app.
 				const url = getApi("organization") + "/corps/" + dummyUser.corpId;

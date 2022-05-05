@@ -33,6 +33,36 @@ export const confirmDeleteItem = (orgDesc) => {
 }
 
 export const dummyData = {
+	"overview": {
+		"orgs": [
+			{ code: "S000", desc: "Battery District" },
+			{ code: "S100", desc: "Material District" },
+		],
+		"channels": [
+			{ code: "20", desc: "Domestic" },
+			{ code: "40", desc: "Export" },
+		],
+		"divs": [
+			{ code: "51", desc: "Battery" },
+			{ code: "61", desc: "Material" },
+		],
+		"areas": [
+			{ code: "S000/20/51", desc: "Battery District, Domestic, Battery" },
+			{ code: "S000/40/51", desc: "Battery District, Export, Battery" },
+			{ code: "S100/20/51", desc: "Material District, Domestic, Material" },
+			{ code: "S100/40/61", desc: "Material District, Export, Material" },
+		],
+		"offices": [
+			{ code: "S100", desc: "SKO Battery Marketing" },
+			{ code: "S200", desc: "SKOH Marketing" },
+		],
+		"groups": [
+			{ code: "100", desc: "Asia" },
+			{ code: "200", desc: "Europe" },
+			{ code: "300", desc: "America" },
+			{ code: "900", desc: "Domestic" },
+		],
+	},
 	"orgs": [
 		{
 			salesOrg: "S000",

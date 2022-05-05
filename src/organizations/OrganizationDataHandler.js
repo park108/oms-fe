@@ -2,6 +2,43 @@ import { getApi, log, dummyData } from "@/common.js"
 
 export class OrganizationDataHandler {
 
+	static async getOverview(corpId) {
+
+		log("CALL OrganizationDataHandler.getOverview(" + corpId + ")");
+
+		const url = getApi("organization") + "/corps/" + corpId + "/overview/";
+		let result;
+
+		try {
+			const res = await fetch(url);
+
+			if(404 === res.status) {
+				log("Organization overview is not found");
+				result = null;
+			}
+			else {
+				const data = await res.json();
+				log("Organization overview fetched successfully.");
+				log(data);
+				result = data;
+			}
+		}
+		catch (err) {
+			console.error(err);	
+			result = null;
+		}
+		finally {
+
+			// TODO: Delete before deilvery backend
+			if(null == result) {
+				result = dummyData.overview;
+				log("Set organization overview from dummy data for test");
+			}
+			
+			return result;
+		}
+	}
+
 	static async getList(corpId, uri) {
 
 		log("CALL OrganizationDataHandler.getList(" + corpId + ", " + uri + ")");
