@@ -1,13 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Index from '@/Index.vue'
+import Dashboard from '@/organizations/Dashboard.vue'
 import SalesArea from '@/organizations/area/SalesAreaList.vue'
 import SalesAreaDetail from '@/organizations/area/SalesAreaDetail.vue'
 import OrgDetail from '@/organizations/OrgDetail.vue'
 import OrgList from '@/organizations/OrgList.vue'
 
-const routes = [
+const consoleRoutes = [
 	// Index
-	{ path: '/org/', name: 'Index', component: Index },
+	{ path: '/', name: 'Index', component: Index }
+]
+
+const orgRoutes = [
+	// Index
+	{ path: '/org/', name: 'orgDashboard', component: Dashboard },
 
 	// Sales Area
 	{ path: '/org/areas/', name: 'salesAreaList', component: SalesArea, props: {
@@ -78,7 +84,7 @@ const routes = [
 
 const router = createRouter({
 	history: createWebHistory(process.env.BASE_URL),
-	routes
+	routes: consoleRoutes.concat(orgRoutes),
 })
 
 export default router

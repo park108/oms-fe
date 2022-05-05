@@ -1,70 +1,48 @@
 <template>
-	<Header title="OMS" />
+	<Header title="Management Console" routeName="Index" />
 	<main class="main">
-		<section class="section section--split-one">
-			<Corporation @setCorpId="setCorpId" />
+		<section class="section section--dashboard-linktodetail section--split-one" @click="moveOrganizationManager">
+			<h1 class="h1">Organization Manager</h1>
 		</section>
-
+		<section class="section section--dashboard-linktodetail section--split-one">
+			<h1 class="h1">Customer Manager</h1>
+		</section>
 		<div class="div div--dashboard-box">
-			<DashboardItemLoading v-if="isLoading" :isSplitThree="true" />
-			<DashboardItem v-else :isSplitThree="true" orgDesc="Sales Orgs" orgName="salesOrg" :list="overview.orgs" />
-			<DashboardItemLoading v-if="isLoading" :isSplitThree="true" />
-			<DashboardItem v-else :isSplitThree="true" orgDesc="Distribution Channels" orgName="salesOrg" :list="overview.channels" />
-			<DashboardItemLoading v-if="isLoading" :isSplitThree="true" />
-			<DashboardItem v-else :isSplitThree="true" orgDesc="Divisions" orgName="division" :list="overview.divs" />
+			<section class="section section--dashboard-linktodetail section--split-two">
+				<h1 class="h1">Product Manager</h1>
+			</section>
+			<section class="section section--dashboard-linktodetail section--split-two">
+				<h1 class="h1">Pricing Manager</h1>
+			</section>
 		</div>
-
-		<DashboardItemLoading v-if="isLoading" />
-		<DashboardItem v-else orgDesc="Sales Areas" orgName="salesArea" :list="overview.areas" />
-
 		<div class="div div--dashboard-box">
-			<DashboardItemLoading v-if="isLoading" :isSplitTwo="true" />
-			<DashboardItem v-else :isSplitTwo="true" orgDesc="Sales Offices" orgName="salesOffice" :list="overview.offices" />
-			<DashboardItemLoading v-if="isLoading" :isSplitTwo="true" />
-			<DashboardItem v-else :isSplitTwo="true" orgDesc="Distribution Channels" orgName="salesOrg" :list="overview.groups" />
+			<section class="section section--dashboard-linktodetail section--split-two">
+				<h1 class="h1">Sales Order</h1>
+			</section>
+			<section class="section section--dashboard-linktodetail section--split-two">
+				<h1 class="h1">Confirmation</h1>
+			</section>
 		</div>
 	</main>
 	<Footer />
 </template>
 <script>
 	import Header from "@/Header.vue";
-	import Corporation from "./organizations/Corporation.vue";
-	import DashboardItemLoading from "@/organizations/DashboardItemLoading.vue";
-	import DashboardItem from "@/organizations/DashboardItem.vue";
 	import Footer from "@/Footer.vue";
-	import { isUuid } from "@/common.js"
-	import { OrganizationDataHandler } from "@/organizations/OrganizationDataHandler.js";
 
 	export default {
 		data() {
 			return {
-				isLoading: true,
-				corpId: String,
-				overview: null,
 			}
 		},
 		components: {
 			Header,
-			Corporation,
-			DashboardItemLoading,
-			DashboardItem,
 			Footer,
 		},
-		watch: {
-			corpId: async function () {
-				if(isUuid(this.corpId)) {
-					this.overview = await OrganizationDataHandler.getOverview(this.corp);
-					if(null === this.overview) {
-						popToast("WARNING", "Organization data not found.", this.$store);
-					}
-					this.isLoading = false;
-				}
-			},
-		},
 		methods: {
-			setCorpId(value) {
-				this.corpId = value;
-			}
-		},
+			moveOrganizationManager: function() {
+				this.$router.push({name: "orgDashboard"});
+			},
+		}
 	};
 </script>

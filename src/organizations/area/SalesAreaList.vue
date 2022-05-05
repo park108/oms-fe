@@ -1,5 +1,5 @@
 <template>
-	<Header />
+	<Header title="Orgnanization Manager" routeName="orgDashboard" />
 	<Navigation prevName="Home" />
 	<main class="main">
 		<div class="div div--org-title">

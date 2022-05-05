@@ -1,5 +1,5 @@
 <template>
-	<Header />
+	<Header title="Orgnanization Manager" routeName="orgDashboard" />
 	<Navigation
 		prevName="Sales Area List"
 		:enableDelete="!isCreate"
