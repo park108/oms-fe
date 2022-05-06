@@ -4,7 +4,7 @@
 	--header-text-hover: #427ab3;
 	--text-color-normal: #000000;
 	--text-color-link: #666666;
-	--text-color-temporary: #666666;
+	--text-color-temporary: #999999;
 	--box-color-skeleton: #cccccc;
 	--background-color-normal: #ffffff;
 	--background-color-ok: #ccffcc;
@@ -79,13 +79,6 @@
 .h1--main-title {
 	float: left;
 	font-size: 20px;
-	cursor: pointer;
-}
-
-.h1--main-title:hover {
-	color: var(--header-text-hover);
-	text-shadow: var(--header-text-hover) 0 0 4px;
-	transition: color var(--event-active-transition) ease;
 }
 
 .section {
@@ -94,6 +87,14 @@
 	background-color: var(--background-color-normal);
 	border: 1px solid var(--border-color-normal);
 	border-radius: 10px;
+}
+
+.section--index-menu {
+	min-height: 5em;
+}
+
+.section--index-notavailable {
+	color: var(--text-color-temporary);
 }
 
 .section--split-one {
@@ -283,6 +284,26 @@
 
 .span {
 	background-color: transparent;
+}
+
+.span--titlebutton-index {
+	cursor: pointer;
+}
+
+.span--titlebutton-index:hover {
+	color: var(--header-text-hover);
+	text-shadow: var(--header-text-hover) 0 0 4px;
+	transition: color var(--event-active-transition) ease;
+}
+
+.span--titlebutton-main {
+	cursor: pointer;
+}
+
+.span--titlebutton-main:hover {
+	color: var(--event-color-active);
+	text-shadow: var(--event-color-active) 0 0 4px;
+	transition: color var(--event-active-transition) ease;
 }
 
 .span--navbutton-back {

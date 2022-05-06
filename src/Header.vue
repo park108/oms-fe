@@ -1,15 +1,17 @@
 <template>
 	<header class="header header--top-bar">
 		<h1 class="h1 h1--main-title">
-			<span @click="moveHome">OMS</span>
+			<span class="span span--titlebutton-index" @click="moveIndex">OMS</span>
 			<span>&nbsp;</span>
-			<span @click="moveMain">{{ title }}</span>
+			<span class="span span--titlebutton-main" @click="moveMain">{{ title }}</span>
 		</h1>
 		<HeaderUserIcon />
 	</header>
 </template>
 <script>
-	import HeaderUserIcon from "./HeaderUserIcon.vue";
+	import HeaderUserIcon from "@/HeaderUserIcon.vue";
+	import { log } from "@/common.js"
+
 	export default {
 		props: {
 			title: String,
@@ -19,11 +21,13 @@
 			HeaderUserIcon,
 		},
 		methods: {
-			moveHome: function() {
+			moveIndex: function() {
 				this.$router.push({name: "Index"});
+				log("Move Index");
 			},
 			moveMain: function() {
 				this.$router.push({name: this.routeName});
+				log("Move Main: " + this.routeName);
 			}
 		}
 	}
