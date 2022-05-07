@@ -73,6 +73,42 @@ const dummyData = [
 		]
 	},
 	{
+		customerNo: "210029",
+		customerName: "Volkswagen America",
+		address: "2200 Woodland Pointe Avenue Herndon, VA 20171 United States",
+		salesAreaData: [
+			{
+				salesOrg: "S000",
+				distributionChannel: "40",
+				division: "51",
+			},
+		]
+	},
+	{
+		customerNo: "248361",
+		customerName: "Ford Motor Company",
+		address: "1 American Rd, Dearborn, MI 48126, United States",
+		salesAreaData: [
+			{
+				salesOrg: "S000",
+				distributionChannel: "40",
+				division: "51",
+			},
+		]
+	},
+	{
+		customerNo: "200163",
+		customerName: "Polestar",
+		address: "Assar Gabrielssons Väg 9. SE-405 31 Gothenburg. Sweden",
+		salesAreaData: [
+			{
+				salesOrg: "S000",
+				distributionChannel: "40",
+				division: "51",
+			},
+		]
+	},
+	{
 		customerNo: "1018116406",
 		customerName: "Hyundai Mobis",
 		address: "203, Teheran-ro Gangnam-gu Seoul, 06141, South Korea",

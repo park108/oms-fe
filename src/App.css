@@ -177,6 +177,10 @@
 	background-color: var(--toast-color-error);
 }
 
+.section--table-box {
+	overflow-x: auto;
+}
+
 .button {
 	color: white;
 	font-size: 1em;
@@ -213,13 +217,6 @@
 
 .button:active {
 	background-color: var(--event-color-active);
-}
-
-.button--filter-apply {
-	color: var(--text-color-normal);
-	font-size: 0.8em;
-	width: 100%;
-	margin: 5px 0 5px 0;
 }
 
 .div {
@@ -295,6 +292,10 @@
 	margin: 5px 0 5px 0;
 }
 
+.div--list-result {
+	margin: 10px;
+}
+
 .span {
 	background-color: transparent;
 }
@@ -351,6 +352,10 @@
 	color: var(--box-color-skeleton);
 	background-color: var(--box-color-skeleton);
 	width: 100%;
+}
+
+.span--list-result {
+	font-size: 0.9em;
 }
 
 .input {
@@ -410,14 +415,21 @@
 .label {
 	font-size: 0.9em;
 }
+
 .label--list-filter {
-	width: 150px;
+	min-width: 150px;
+}
+
+.label--filter-on {
+	font-weight: bold;
+	text-decoration: underline;
+	background-color: var(--event-color-active);
 }
 
 .table--main-list {
-	width: calc(100% - 20px);
+	width: 100%;
 	border-collapse: collapse;
-	margin: 10px;
+	/* margin: 10px; */
 }
 
 .table--main-list th {
@@ -437,4 +449,19 @@
 
 .tr--row-selectable:hover {
 	text-decoration: underline;
+}
+
+.td--customer-no {
+	white-space: nowrap;
+	padding-right: 10px;
+}
+
+.td--customer-name {
+	white-space: nowrap;
+	padding-right: 10px;
+}
+
+.td--customer-address {
+	white-space: nowrap;
+	padding-right: 10px;
 }
