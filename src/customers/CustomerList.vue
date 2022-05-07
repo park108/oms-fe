@@ -1,9 +1,9 @@
 <template>
 	<Header title="Customer Manager" routeName="customerList" />
 	<main class="main">
-		<section class="section section--split-one">
+		<!-- <section class="section section--split-one">
 			<Corporation @setCorpId="setCorpId" />
-		</section>
+		</section> -->
 		<section class="section section--list-filter">
 			<div class="div div--listfilter-item">
 				<label class="label label--list-filter" for="customerNo">Customer No.</label>
