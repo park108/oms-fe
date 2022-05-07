@@ -14,6 +14,10 @@
 				<input class="input input--list-filter" type="input" name="customerName"/>
 			</div>
 			<div class="div div--listfilter-item">
+				<label class="label label--list-filter" for="customerName">Address</label>
+				<input class="input input--list-filter" type="input" name="address"/>
+			</div>
+			<div class="div div--listfilter-item">
 				<label class="label label--list-filter" for="salesOrg">Sales Org.</label>
 				<select class="select select--list-filter" name="salesOrg">
 					<option value="">All</option>
@@ -43,23 +47,12 @@
 			<tr class="tr tr--row-header">
 				<th class="th">No.</th>
 				<th class="th">Name</th>
-				<th class="th">Org.</th>
-				<th class="th">Channel</th>
-				<th class="th">Division</th>
+				<th class="th">Address</th>
 			</tr>
-			<tr class="tr tr--row-selectable">
-				<td class="td">210987</td>
-				<td class="td">Daimler AG</td>
-				<td class="td">S000 Battery</td>
-				<td class="td">40 Export</td>
-				<td class="td">51 Battery</td>
-			</tr>
-			<tr class="tr tr--row-selectable">
-				<td class="td">6531074618</td>
-				<td class="td">Hyundai Mobis</td>
-				<td class="td">S000 Battery</td>
-				<td class="td">20 Domestic</td>
-				<td class="td">51 Battery</td>
+			<tr class="tr tr--row-selectable" v-for="item in customers" :key="item.customerNo">
+				<td class="td">{{item.customerNo}}</td>
+				<td class="td">{{item.customerName}}</td>
+				<td class="td">{{item.address}}</td>
 			</tr>
 		</table>
 	</main>
@@ -76,6 +69,55 @@
 			return {
 				isLoading: true,
 				corpId: String,
+				// TODO: Dummy data.
+				customers: [
+					{
+						customerNo: "210987",
+						customerName: "Daimler AG",
+						address: "Mercedesstrasse 120, Stuttgart, 70372, Germany",
+						salesAreaData: [
+							{
+								salesOrg: "S000",
+								distributionChannel: "20",
+								division: "51",
+							},
+							{
+								salesOrg: "S000",
+								distributionChannel: "40",
+								division: "51",
+							},
+						]
+					},
+					{
+						customerNo: "210028",
+						customerName: "Volkswagen AG",
+						address: "Berliner Ring 2, 38440 Wolfsburg, Germany",
+						salesAreaData: [
+							{
+								salesOrg: "S000",
+								distributionChannel: "40",
+								division: "51",
+							},
+						]
+					},
+					{
+						customerNo: "1018116406",
+						customerName: "Hyundai Mobis",
+						address: "203, Teheran-ro Gangnam-gu Seoul, 06141, South Korea",
+						salesAreaData: [
+							{
+								salesOrg: "S000",
+								distributionChannel: "20",
+								division: "51",
+							},
+							{
+								salesOrg: "S000",
+								distributionChannel: "40",
+								division: "51",
+							},
+						]
+					},
+				],
 			}
 		},
 		components: {

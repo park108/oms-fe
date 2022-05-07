@@ -432,6 +432,7 @@
 
 .tr--row-selectable {
 	cursor: pointer;
+	height: 3em;
 }
 
 .tr--row-selectable:hover {
