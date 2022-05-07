@@ -1,9 +1,9 @@
 <template>
 	<Header title="Customer Manager" routeName="customerList" />
 	<main class="main">
-		<!-- <section class="section section--split-one">
+		<section class="section section--split-one">
 			<Corporation @setCorpId="setCorpId" />
-		</section> -->
+		</section>
 		<section class="section section--list-filter">
 			<div class="div div--listfilter-item">
 				<label class="label label--list-filter" for="customerNo">Customer No.</label>
@@ -63,61 +63,14 @@
 	import Corporation from "@/Corporation.vue";
 	import Footer from "@/Footer.vue";
 	import { isUuid } from "@/common.js"
+	import { CustomerDataHandler } from "@/customers/CustomerDataHandler.js";
 
 	export default {
 		data() {
 			return {
 				isLoading: true,
 				corpId: String,
-				// TODO: Dummy data.
-				customers: [
-					{
-						customerNo: "210987",
-						customerName: "Daimler AG",
-						address: "Mercedesstrasse 120, Stuttgart, 70372, Germany",
-						salesAreaData: [
-							{
-								salesOrg: "S000",
-								distributionChannel: "20",
-								division: "51",
-							},
-							{
-								salesOrg: "S000",
-								distributionChannel: "40",
-								division: "51",
-							},
-						]
-					},
-					{
-						customerNo: "210028",
-						customerName: "Volkswagen AG",
-						address: "Berliner Ring 2, 38440 Wolfsburg, Germany",
-						salesAreaData: [
-							{
-								salesOrg: "S000",
-								distributionChannel: "40",
-								division: "51",
-							},
-						]
-					},
-					{
-						customerNo: "1018116406",
-						customerName: "Hyundai Mobis",
-						address: "203, Teheran-ro Gangnam-gu Seoul, 06141, South Korea",
-						salesAreaData: [
-							{
-								salesOrg: "S000",
-								distributionChannel: "20",
-								division: "51",
-							},
-							{
-								salesOrg: "S000",
-								distributionChannel: "40",
-								division: "51",
-							},
-						]
-					},
-				],
+				customers: [],
 			}
 		},
 		components: {
@@ -129,6 +82,10 @@
 			corpId: async function () {
 				if(isUuid(this.corpId)) {
 					// TODO: Get customer list initializing time
+					this.customers = await CustomerDataHandler.getList(this.corp);
+					if(null === this.customers) {
+						popToast("WARNING", "Customer data not found.", this.$store);
+					}
 					this.isLoading = false;
 				}
 			},
