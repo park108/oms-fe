@@ -5,11 +5,12 @@ import SalesArea from '@/organizations/area/SalesAreaList.vue'
 import SalesAreaDetail from '@/organizations/area/SalesAreaDetail.vue'
 import OrgDetail from '@/organizations/OrgDetail.vue'
 import OrgList from '@/organizations/OrgList.vue'
+import CustomerList from '@/customers/CustomerList.vue'
 
 const consoleRoutes = [
 	// Index
 	{ path: '/', name: 'Index', component: Index }
-]
+];
 
 const orgRoutes = [
 	// Index
@@ -80,11 +81,16 @@ const orgRoutes = [
 		orgDesc: "Sales Group",
 		orgName: "salesGroup",
 	}},
-]
+];
+
+const customerRoutes = [
+	// Index
+	{ path: '/customer/', name: 'customerList', component: CustomerList },
+];
 
 const router = createRouter({
 	history: createWebHistory(process.env.BASE_URL),
-	routes: consoleRoutes.concat(orgRoutes),
+	routes: consoleRoutes.concat(orgRoutes).concat(customerRoutes),
 })
 
 export default router

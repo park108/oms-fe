@@ -16,7 +16,7 @@
 
 <script>
 	import OrgLoading from "@/organizations/OrgLoading.vue";
-	import { getApi, log } from "../common.js"
+	import { getApi, log } from "./common.js"
 
 	export default {
 		data() {

@@ -28,7 +28,7 @@
 </template>
 <script>
 	import Header from "@/Header.vue";
-	import Corporation from "@/organizations/Corporation.vue";
+	import Corporation from "@/Corporation.vue";
 	import DashboardItemLoading from "@/organizations/DashboardItemLoading.vue";
 	import DashboardItem from "@/organizations/DashboardItem.vue";
 	import Footer from "@/Footer.vue";
