@@ -1,9 +1,10 @@
 <template>
     <div class="div div--dashboard-item">
-        <h1 class="h1">{{ corp.companyName }}</h1>
+		<h1 class="h1 h1--dashboard-skeleton" v-if="isLoading">&nbsp;</h1>
+        <h1 class="h1" v-else>{{ corp.companyName }}</h1>
         <hr class="hr" />
 		<OrgLoading v-if="isLoading" />
-		<div class="div" role="list">
+		<div class="div" role="list" v-else>
 			<div class="div div--org-listitem" role="listitem" >
 				<span class="span span--org-listitem">VAT Number: {{ corp.vatNumber }}</span>
 			</div>
@@ -16,7 +17,7 @@
 
 <script>
 	import OrgLoading from "@/organizations/OrgLoading.vue";
-	import { getApi, log } from "./common.js"
+	import { getApi, sleep, log } from "./common.js"
 
 	export default {
 		data() {
@@ -44,6 +45,7 @@
 
 					if(404 === res.status) {
 						log("corps is not found");
+						sleep(300); // TODO: Make testing latency
 						this.corp = dummyData; // TODO: Remove
 					}
 					else {

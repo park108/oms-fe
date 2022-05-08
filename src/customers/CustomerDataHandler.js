@@ -1,4 +1,4 @@
-import { getApi, log, } from "@/common.js"
+import { getApi, sleep, log, } from "@/common.js"
 
 export class CustomerDataHandler {
 
@@ -33,6 +33,7 @@ export class CustomerDataHandler {
 			// TODO: Delete before deilvery backend
 			if(null == result) {
 				result = dummyData;
+				sleep(300); // TODO: Make testing latency
 				log("Set customer list from dummy data for test");
 			}
 			

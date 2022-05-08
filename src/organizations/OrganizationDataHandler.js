@@ -1,4 +1,4 @@
-import { getApi, log } from "@/common.js"
+import { getApi, sleep, log } from "@/common.js"
 
 export class OrganizationDataHandler {
 
@@ -32,6 +32,7 @@ export class OrganizationDataHandler {
 			// TODO: Delete before deilvery backend
 			if(null == result) {
 				result = dummyData.overview;
+				sleep(100 + (100 * Math.random())); // TODO: Make testing latency
 				log("Set organization overview from dummy data for test");
 			}
 			
@@ -69,6 +70,7 @@ export class OrganizationDataHandler {
 			// TODO: Delete before deilvery backend
 			if(null == result) {
 				result = dummyData[uri];
+				sleep(100 + (100 * Math.random())); // TODO: Make testing latency
 				log("Set " + uri + " from dummy data for test");
 			}
 			
@@ -108,6 +110,7 @@ export class OrganizationDataHandler {
 				result = dummyData[uri].filter(item => {
 					return item[orgName] === orgCode;
 				})[0];
+				sleep(100 + (100 * Math.random())); // TODO: Make testing latency
 				log("Set " + orgName + " from dummy data for test");
 			}
 			
@@ -149,6 +152,7 @@ export class OrganizationDataHandler {
 						&& item.distributionChannel.distributionChannel === channel
 						&& item.division.division === div;
 				})[0];
+				sleep(300); // TODO: Make testing latency
 				log("Set Sales Area from dummy data for test");
 			}
 			

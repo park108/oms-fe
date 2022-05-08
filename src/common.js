@@ -23,6 +23,11 @@ export const isUuid = (id) => {
 	return regexExpForUuid.test(id);
 }
 
+export function sleep(ms) {
+	const wakeUpTime = Date.now() + ms;
+	while (Date.now() < wakeUpTime) {}
+}
+
 export const log = (str) => {
 	if("development" === process.env.NODE_ENV) {
 		console.log("[DEV] " + str);

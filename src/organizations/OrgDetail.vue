@@ -9,7 +9,7 @@
 		<div class="div div--org-title">
 			{{orgDesc}}: {{selectedOrgCode}}
 		</div>
-		<OrgLoading v-if="isLoading" />
+		<OrgLoading v-if="isLoading" :rows="3" />
 		<div class="div div--org-list" role="list" v-else>
 			<AttInput :name="orgName" :attribute-name="orgDesc" :value="orgData[orgName]" :editable="isCreate&&!isPending" />
 			<AttInput :name="orgName + 'Desc'" attribute-name="Description" :value="orgData[orgName + 'Desc']" :editable="!isPending" />
