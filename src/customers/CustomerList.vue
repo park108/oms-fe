@@ -50,7 +50,19 @@
 			<span class="span span--list-result" v-if="filterDescription.length > 0">, Filtered: {{filteredCustomers.length}} by {{filterDescription}}</span>
 		</div>
 		<section class="section section--table-box">
-			<table class="table table--main-list">
+			<table class="table table--main-list" v-if="isLoading">
+				<tr class="tr tr--row-header">
+					<th class="th">No.</th>
+					<th class="th">Name</th>
+					<th class="th">Address</th>
+				</tr>
+				<tr class="tr tr--row-selectable" v-for="index in 10" :key="index">
+					<td class="td td--customer-no"><span class="span span--org-skeletonbox">&nbsp;</span></td>
+					<td class="td td--customer-name td--list-loading"><span class="span span--org-skeletonbox">&nbsp;</span></td>
+					<td class="td td--customer-address td--list-loading"><span class="span span--org-skeletonbox">&nbsp;</span></td>
+				</tr>
+			</table>
+			<table class="table table--main-list" v-else>
 				<tr class="tr tr--row-header">
 					<th class="th">No.</th>
 					<th class="th">Name</th>

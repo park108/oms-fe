@@ -349,6 +349,7 @@
 }
 
 .span--org-skeletonbox {
+	display: inline-block;
 	color: var(--box-color-skeleton);
 	background-color: var(--box-color-skeleton);
 	width: 100%;
