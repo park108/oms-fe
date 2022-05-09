@@ -49,7 +49,7 @@
 			<span class="span span--list-result">Total: {{customers.length}} customers</span>
 			<span class="span span--list-result" v-if="filterDescription.length > 0">, Filtered: {{filteredCustomers.length}} by {{filterDescription}}</span>
 		</div>
-		<section class="section section--table-box">
+		<div class="div div--table-box">
 			<table class="table table--main-list" v-if="isLoading">
 				<tr class="tr tr--row-header">
 					<th class="th">No.</th>
@@ -74,7 +74,7 @@
 					<td class="td td--customer-address">{{item.address}}</td>
 				</tr>
 			</table>
-		</section>
+		</div>
 	</main>
 	<Footer />
 </template>

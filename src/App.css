@@ -177,7 +177,7 @@
 	background-color: var(--toast-color-error);
 }
 
-.section--table-box {
+.div--table-box {
 	overflow-x: auto;
 }
 
@@ -430,7 +430,8 @@
 .table--main-list {
 	width: 100%;
 	border-collapse: collapse;
-	/* margin: 10px; */
+	margin: 10px;
+	font-size: 0.9em;
 }
 
 .table--main-list th {
