@@ -23,9 +23,8 @@ export const isUuid = (id) => {
 	return regexExpForUuid.test(id);
 }
 
-export function sleep(ms) {
-	const wakeUpTime = Date.now() + ms;
-	while (Date.now() < wakeUpTime) {}
+export const sleep = (milliseconds) => {
+	return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
 export const log = (str) => {

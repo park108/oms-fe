@@ -177,10 +177,6 @@
 	background-color: var(--toast-color-error);
 }
 
-.div--table-box {
-	overflow-x: auto;
-}
-
 .button {
 	color: white;
 	font-size: 1em;
@@ -294,6 +290,11 @@
 
 .div--list-result {
 	margin: 10px;
+}
+
+.div--table-box {
+	margin: 10px;
+	overflow-x: auto;
 }
 
 .span {
@@ -430,7 +431,6 @@
 .table--main-list {
 	width: 100%;
 	border-collapse: collapse;
-	margin: 10px;
 	font-size: 0.9em;
 }
 

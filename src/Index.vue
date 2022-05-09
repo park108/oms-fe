@@ -37,6 +37,9 @@
 			Header,
 			Footer,
 		},
+		created() {
+			document.title = "Management Console - OMS";
+		},
 		methods: {
 			moveOrganizationManager: function() {
 				this.$router.push({name: "orgDashboard"});

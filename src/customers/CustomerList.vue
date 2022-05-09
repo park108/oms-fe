@@ -91,7 +91,7 @@
 				isLoading: true,
 				isFilterOpen: false,
 				filterDescription: "",
-				filterToggleButtonName: "Filter Open",
+				filterToggleButtonName: "Open",
 				customerNo: "",
 				customerName: "",
 				address: "",
@@ -105,14 +105,24 @@
 			Corporation,
 			Footer,
 		},
+		created() {
+			document.title = "Customer Manager - OMS";
+			this.customerNo = this.$store.state.filter.customerList.customerNo;
+			this.customerName = this.$store.state.filter.customerList.customerName;
+			this.address = this.$store.state.filter.customerList.address;
+		},
 		watch: {
 			corpId: async function () {
 				if(isUuid(this.corpId)) {
 					// TODO: Get customer list initializing time
 					this.customers = await CustomerDataHandler.getList(this.corp);
-					this.filteredCustomers = this.customers;
+					
 					if(null === this.customers) {
 						popToast("WARNING", "Customer data not found.", this.$store);
+					}
+					else {
+						this.updateFilter();
+						this.setFilterButton();
 					}
 					this.isLoading = false;
 				}
@@ -122,31 +132,36 @@
 			setCorpId(value) {
 				this.corpId = value;
 			},
+			isFiltered(filterName) {
+				return this[filterName].length > 0;
+			},
+			setFilterButton() {
+				this.filterToggleButtonName = this.isFilterOpen ? "Close"
+					: this.isFiltered("customerNo") || this.isFiltered("customerName") || this.isFiltered("address") ? "Filtered"
+					: "Open";
+			},
 			toggleFilter() {
 				this.isFilterOpen = !this.isFilterOpen;
-				this.filterToggleButtonName = this.isFilterOpen ? "Filter Close" : "Filter Open";
+				this.setFilterButton();
 			},
 			updateFilter(filterName) {
-				const hasCustomerNoFilter = this.customerNo.length > 0;
-				const hasCustomerNameFilter = this.customerName.length > 0;
-				const hasAddressFilter = this.address.length > 0;
-
 				this.filteredCustomers = this.customers;
 				this.filterDescription = "";
 				
-				if(hasCustomerNoFilter) {
+				if(this.isFiltered("customerNo")) {
 					this.filteredCustomers = this.filteredCustomers.filter(item => item.customerNo.toLowerCase().includes(this.customerNo.toLowerCase()));
 					this.filterDescription = "No.";
+					this.$store.state.filter.customerList.customerNo = this.customerNo;
 				}
-
-				if(hasCustomerNameFilter) {
+				if(this.isFiltered("customerName")) {
 					this.filteredCustomers = this.filteredCustomers.filter(item => item.customerName.toLowerCase().includes(this.customerName.toLowerCase()));
 					this.filterDescription += (this.filterDescription.length > 0 ? ", " : "") + "Name";
+					this.$store.state.filter.customerList.customerName = this.customerName;
 				}
-
-				if(hasAddressFilter) {
+				if(this.isFiltered("address")) {
 					this.filteredCustomers = this.filteredCustomers.filter(item => item.address.toLowerCase().includes(this.address.toLowerCase()));
 					this.filterDescription += (this.filterDescription.length > 0 ? ", " : "") + "Address";
+					this.$store.state.filter.customerList.address = this.address;
 				}
 			},
 		},

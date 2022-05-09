@@ -13,6 +13,13 @@ const store = createStore({
 				type: "INFO",
 				message: ""
 			},
+			filter: {
+				customerList: {
+					customerNo: "",
+					customerName: "",
+					address: "",
+				},
+			}
 		}
 	}
 });

@@ -45,7 +45,10 @@
 
 					if(404 === res.status) {
 						log("corps is not found");
-						sleep(300); // TODO: Make testing latency
+
+						// TODO: Make test latency
+						await sleep(100 + 100 * Math.random());
+
 						this.corp = dummyData; // TODO: Remove
 					}
 					else {

@@ -61,6 +61,9 @@
 				}
 			},
 		},
+		created() {
+			document.title = "Organization Manager - OMS";
+		},
 		methods: {
 			setCorpId(value) {
 				this.corpId = value;
