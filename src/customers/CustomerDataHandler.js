@@ -43,6 +43,14 @@ export class CustomerDataHandler {
 			return result;
 		}
 	}
+
+	static async getCustomer(corpId, customerNo) {
+
+		// TODO: Make test latency
+		await sleep(100 + 100 * Math.random());
+
+		return dummyData.filter(item => item.customerNo === customerNo)[0];
+	}
 }
 
 

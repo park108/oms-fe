@@ -18,6 +18,9 @@ const store = createStore({
 					customerNo: "",
 					customerName: "",
 					address: "",
+					salesOrg: "",
+					distributionChannel: "",
+					division: "",
 				},
 			}
 		}
