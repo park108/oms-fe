@@ -46,7 +46,12 @@
 			</div>
 		</section>
 		<div class="div div--list-result">
-			<span class="span span--list-result">Total: {{customers.length}} customers</span>
+			<span class="span span--list-result">
+				Total:
+				<span v-if="isLoading">...</span>
+				<span v-else>{{customers.length}}</span>
+				customers
+			</span>
 			<span class="span span--list-result" v-if="filterDescription.length > 0">, Filtered: {{filteredCustomers.length}} by {{filterDescription}}</span>
 		</div>
 		<div class="div div--table-box">
@@ -116,7 +121,7 @@
 				if(isUuid(this.corpId)) {
 					// TODO: Get customer list initializing time
 					this.customers = await CustomerDataHandler.getList(this.corp);
-					
+
 					if(null === this.customers) {
 						popToast("WARNING", "Customer data not found.", this.$store);
 					}
@@ -153,15 +158,26 @@
 					this.filterDescription = "No.";
 					this.$store.state.filter.customerList.customerNo = this.customerNo;
 				}
+				else {
+					this.$store.state.filter.customerList.customerNo = "";
+				}
+
 				if(this.isFiltered("customerName")) {
 					this.filteredCustomers = this.filteredCustomers.filter(item => item.customerName.toLowerCase().includes(this.customerName.toLowerCase()));
 					this.filterDescription += (this.filterDescription.length > 0 ? ", " : "") + "Name";
 					this.$store.state.filter.customerList.customerName = this.customerName;
 				}
+				else {
+					this.$store.state.filter.customerList.customerName = "";
+				}
+
 				if(this.isFiltered("address")) {
 					this.filteredCustomers = this.filteredCustomers.filter(item => item.address.toLowerCase().includes(this.address.toLowerCase()));
 					this.filterDescription += (this.filterDescription.length > 0 ? ", " : "") + "Address";
 					this.$store.state.filter.customerList.address = this.address;
+				}
+				else {
+					this.$store.state.filter.customerList.address = "";
 				}
 			},
 		},

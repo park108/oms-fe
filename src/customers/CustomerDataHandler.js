@@ -50,7 +50,7 @@ const dummyData = [
 	{
 		customerNo: "1000359",
 		customerName: "Mitsubishi Fuso Truck&Bus Corporation",
-		address: "10 Okura-Cho, Nakahara-Kukawasaki, 2118522, Japan",
+		address: "10 Ohkura-cho, Nakahara-ku, Kawasaki-shi, Kanagawa, 211-8522, Japan",
 		salesAreaData: [
 			{
 				salesOrg: "S000",
