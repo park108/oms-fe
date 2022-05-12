@@ -18,97 +18,35 @@
 		<div class="div div--org-title">
 			Sales Area Data
 		</div>
-		<div class="div">
-			<div v-if="isLoading" class="div">
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Sales Area</span>
-					<span class="span span--org-skeletonbox">&nbsp;</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Sales Office</span>
-					<span class="span span--org-skeletonbox">&nbsp;</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Sales Group</span>
-					<span class="span span--org-skeletonbox">&nbsp;</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Currency</span>
-					<span class="span span--org-skeletonbox">&nbsp;</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Customer Pricing Procedure</span>
-					<span class="span span--org-skeletonbox">&nbsp;</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Delivering Plant</span>
-					<span class="span span--org-skeletonbox">&nbsp;</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Shipping Condition</span>
-					<span class="span span--org-skeletonbox">&nbsp;</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Incoterms</span>
-					<span class="span span--org-skeletonbox">&nbsp;</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Payment Terms</span>
-					<span class="span span--org-skeletonbox">&nbsp;</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Credit Control Area</span>
-					<span class="span span--org-skeletonbox">&nbsp;</span>
-				</div>
+		<section v-if="isLoading" class="section">
+			<CustomerDetailInput :isLoading="true" attributeName="Sales Area" />
+			<CustomerDetailInput :isLoading="true" attributeName="Sales Office" />
+			<CustomerDetailInput :isLoading="true" attributeName="Sales Group" />
+			<CustomerDetailInput :isLoading="true" attributeName="Currency" />
+			<CustomerDetailInput :isLoading="true" attributeName="Customer Pricing Procedure" />
+			<CustomerDetailInput :isLoading="true" attributeName="Delivering Plant" />
+			<CustomerDetailInput :isLoading="true" attributeName="Shipping Condition" />
+			<CustomerDetailInput :isLoading="true" attributeName="Incoterms" />
+			<CustomerDetailInput :isLoading="true" attributeName="Payment Terms" />
+			<CustomerDetailInput :isLoading="true" attributeName="Credit Control Area" />
+		</section>
+		<section class="section" v-else-if="undefined !== customerData.salesAreaData" v-for="(area, index) in customerData.salesAreaData" :key="index">
+			<CustomerDetailInput attributeName="Sales Area" name="salesArea" :value="area.salesOrg + '/' + area.distributionChannel + '/' + area.division" />
+			<CustomerDetailInput attributeName="Sales Office" name="salesOffice" :value="area.salesOffice" />
+			<CustomerDetailInput attributeName="Sales Group" name="salesGroup" :value="area.salesGroup" />
+			<CustomerDetailInput attributeName="Currency" name="salesOcurrencyffice" :value="area.currency" />
+			<CustomerDetailInput attributeName="Customer Pricing Procedure" name="customerPricingProcedure" :value="area.customerPricingProcedure" />
+			<CustomerDetailInput attributeName="Delivering Plant" name="deliveringPlant" :value="area.deliveringPlant" />
+			<CustomerDetailInput attributeName="Shipping Condition" name="shippingCondition" :value="area.shippingCondition" />
+			<CustomerDetailInput attributeName="Incoterms" name="incoterms" :value="area.incoterms" />
+			<CustomerDetailInput attributeName="Payment Terms" name="paymentTerms" :value="area.paymentTerms" />
+			<CustomerDetailInput attributeName="Credit Control Area" name="creditControlArea" :value="area.creditControlArea" />
+		</section>
+		<section class="section" v-else>
+			<div class="div div--customer-listitem">
+				None
 			</div>
-			<div class="div" v-else-if="undefined !== customerData.salesAreaData" v-for="(area, index) in customerData.salesAreaData" :key="index">
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Sales Area</span>
-					<span class="span">{{ area.salesOrg }}/{{ area.distributionChannel }}/{{ area.division }}</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Sales Office</span>
-					<span class="span">{{ area.salesOffice }}</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Sales Group</span>
-					<span class="span">{{ area.salesGroup }}</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Currency</span>
-					<span class="span">{{ area.currency }}</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Customer Pricing Procedure</span>
-					<span class="span">{{ area.customerPricingProcedure }}</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Delivering Plant</span>
-					<span class="span">{{ area.deliveringPlant }}</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Shipping Condition</span>
-					<span class="span">{{ area.shippingCondition }}</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Incoterms</span>
-					<span class="span">{{ area.incoterms }}</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Payment Terms</span>
-					<span class="span">{{ area.paymentTerms }}</span>
-				</div>
-				<div class="div div--customer-listitem">
-					<span class="span span--detail-attributename">Credit Control Area</span>
-					<span class="span">{{ area.creditControlArea }}</span>
-				</div>
-			</div>
-			<div class="div" v-else>
-				<div class="div div--customer-listitem">
-					None
-				</div>
-			</div>
-		</div>
+		</section>
 		<Toaster />
 	</main>
 	<EventButtons
@@ -124,15 +62,16 @@
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
+	import CustomerDetailInput from "./CustomerDetailInput.vue";
 	import { popToast } from "@/Toaster.vue";
 	import { CustomerDataHandler } from './CustomerDataHandler';
-	import { log, confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
+	import { isUuid, log, confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
 
 	export default {
 		data() {
 			return {
 				isLoading: true,
-				corp: null,
+				corpId: "",
 				isPending: false,
 				isCreate: false,
 				customerNo: '',
@@ -145,9 +84,14 @@
 			Footer,
 			EventButtons,
 			Toaster,
+			CustomerDetailInput
 		},
 		created() {
-			this.corp = this.$store.state.corp;
+			this.corpId = sessionStorage.getItem("corpId");
+			if(undefined === this.corpId || !isUuid(this.corpId)) {
+				this.$router.push({name: "Index"});
+			}
+
 			this.customerNo = this.$route.params.customerNo;
 			if("NEW" === this.selectedOrgCode) {
 				this.isCreate = true;
@@ -156,7 +100,7 @@
 		},
 		async mounted() {
 			if(!this.isCreate) {
-				this.customerData = await CustomerDataHandler.getCustomer(this.$store.state.corp.id, this.customerNo);
+				this.customerData = await CustomerDataHandler.getCustomer(this.corpId, this.customerNo);
 				if(null === this.customerData) {
 					popToast("WARNING", this.customerNo + " not found.", this.$store);
 				}

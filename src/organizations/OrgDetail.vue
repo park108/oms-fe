@@ -34,7 +34,7 @@
 	import Toaster from "@/Toaster.vue";
 	import { popToast } from "@/Toaster.vue";
 	import { OrganizationDataHandler } from './OrganizationDataHandler';
-	import { confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
+	import { isUuid, confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
 
 	export default {
 		data() {
@@ -42,6 +42,7 @@
 				isLoading: true,
 				isPending: false,
 				isCreate: false,
+				corpId: String,
 				selectedOrgCode: '',
 				orgData: null,
 			}
@@ -61,6 +62,11 @@
 			Toaster,
 		},
 		created() {
+			this.corpId = sessionStorage.getItem("corpId");
+			if(undefined === this.corpId || !isUuid(this.corpId)) {
+				this.$router.push({name: "Index"});
+			}
+
 			this.selectedOrgCode = this.$route.params.orgCode;
 			if("NEW" === this.selectedOrgCode) {
 				this.isCreate = true;
@@ -74,7 +80,7 @@
 		},
 		async mounted() {
 			if(!this.isCreate) {
-				this.orgData = await OrganizationDataHandler.getOrg(this.$store.state.corp.id, this.orgUri, this.orgName, this.selectedOrgCode);
+				this.orgData = await OrganizationDataHandler.getOrg(this.corpId, this.orgUri, this.orgName, this.selectedOrgCode);
 				if(null === this.orgData) {
 					popToast("WARNING", this.orgDesc + " not found.", this.$store);
 				}
@@ -105,7 +111,7 @@
 
 				if(this.isCreate) {
 					if(!confirmCreateItem(this.orgDesc)) return;
-					const res = await OrganizationDataHandler.postOrg(this.$store.state.corp.id, this.orgUri, {
+					const res = await OrganizationDataHandler.postOrg(this.corpId, this.orgUri, {
 						[this.orgName]: code.value,
 						[this.orgName + "Desc"]: desc.value,
 					});
@@ -125,7 +131,7 @@
 					}
 
 					if(!confirmUpdateItem(this.orgDesc)) return;
-					const res = await OrganizationDataHandler.putOrg(this.$store.state.corp.id, this.orgUri, code.value, {
+					const res = await OrganizationDataHandler.putOrg(this.corpId, this.orgUri, code.value, {
 						[this.orgName]: code.value,
 						[this.orgName + "Desc"]: desc.value,
 						id: id,
@@ -150,7 +156,7 @@
 
 				if(!confirmDeleteItem(this.orgDesc)) return;
 
-				const res = await OrganizationDataHandler.deleteOrg(this.$store.state.corp.id, this.orgUri, code.value, {
+				const res = await OrganizationDataHandler.deleteOrg(this.corpId, this.orgUri, code.value, {
 					[this.orgName]: code.value,
 				});
 

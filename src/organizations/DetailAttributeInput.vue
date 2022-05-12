@@ -1,6 +1,6 @@
 <template>
 	<div class="div div--org-listitem" role="listitem" v-show="!this.hidden">
-		<span class="span span--detail-attributename">{{ this.attributeName }}</span>
+		<label :for="this.name" class="label label--detail-attributename">{{ this.attributeName }}</label>
 		<input class="input input--detail-attribute"
 			:id="this.name"
 			:value="this.value"

@@ -8,7 +8,6 @@ const store = createStore({
 	state() {
 		return {
 			user: null,
-			corp: null,
 			toast: {
 				type: "INFO",
 				message: ""

@@ -39,7 +39,7 @@
 	import Toaster from "@/Toaster.vue";
 	import { popToast } from "@/Toaster.vue";
 	import { OrganizationDataHandler } from '../OrganizationDataHandler';
-	import { confirmCreateItem, confirmDeleteItem } from "@/common.js";
+	import { isUuid, confirmCreateItem, confirmDeleteItem } from "@/common.js";
 
 	export default {
 		data() {
@@ -47,6 +47,7 @@
 				isLoading: true,
 				isPending: false,
 				isCreate: false,
+				corpId: String,
 				area: null,
 				org: '',
 				channel: '',
@@ -67,6 +68,11 @@
 			Toaster,
 		},
 		created() {
+			this.corpId = sessionStorage.getItem("corpId");
+			if(undefined === this.corpId || !isUuid(this.corpId)) {
+				this.$router.push({name: "Index"});
+			}
+
 			this.org = this.$route.params.org;
 			this.channel = this.$route.params.channel;
 			this.div = this.$route.params.div;
@@ -87,23 +93,23 @@
 			}
 		},
 		async mounted() {
-			this.orgList = await OrganizationDataHandler.getList(this.$store.state.corp.id, "orgs");
+			this.orgList = await OrganizationDataHandler.getList(this.corpId, "orgs");
 			if(null === this.orgList) {
 				popToast("WARNING", "Sales Org. not found.", this.$store);
 			}
 
-			this.channelList = await OrganizationDataHandler.getList(this.$store.state.corp.id, "channels");
+			this.channelList = await OrganizationDataHandler.getList(this.corpId, "channels");
 			if(null === this.channelList) {
 				popToast("WARNING", "Channel not found.", this.$store);
 			}
 
-			this.divList = await OrganizationDataHandler.getList(this.$store.state.corp.id, "divs");
+			this.divList = await OrganizationDataHandler.getList(this.corpId, "divs");
 			if(null === this.divList) {
 				popToast("WARNING", "Division not found.", this.$store);
 			}
 
 			if(!this.isCreate) {
-				this.area = await OrganizationDataHandler.getSalesArea(this.$store.state.corp.id, this.org, this.channel, this.div);
+				this.area = await OrganizationDataHandler.getSalesArea(this.corpId, this.org, this.channel, this.div);
 				if(null === this.area) {
 					popToast("WARNING", "Sales Area not found.", this.$store);
 				}
@@ -136,7 +142,7 @@
 
 				if(this.isCreate) {
 					if(!confirmCreateItem("Sales Area")) return;
-					const res = await OrganizationDataHandler.postOrg(this.$store.state.corp.id, "areas", {
+					const res = await OrganizationDataHandler.postOrg(this.corpId, "areas", {
 						salesOrg: salesOrg.value,
 						distributionChannel: distributionChannel.value,
 						division: division.value,

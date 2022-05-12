@@ -348,13 +348,13 @@
 	text-decoration: underline;
 }
 
-.span--org-listitem {
-	color: var(--text-color-normal);	
+.span--detail-attributename {
+	width: 150px;
+	display: block;
 }
 
-.span--detail-attributename {
-	width: 120px;
-	display: block;
+.span--org-listitem {
+	color: var(--text-color-normal);	
 }
 
 .span--org-skeletonbox {
@@ -365,7 +365,7 @@
 }
 
 .span--list-result {
-	font-size: 0.9em;
+	font-size: 1em;
 }
 
 .input {
@@ -423,7 +423,12 @@
 }
 
 .label {
-	font-size: 0.9em;
+	font-size: 1em;
+}
+
+.label--detail-attributename {
+	width: 150px;
+	display: block;
 }
 
 .label--list-filter {
@@ -439,7 +444,6 @@
 .table--main-list {
 	width: 100%;
 	border-collapse: collapse;
-	font-size: 0.9em;
 }
 
 .table--main-list th {

@@ -1,15 +1,11 @@
 <template>
 	<Header title="Orgnanization Manager" routeName="orgDashboard" />
 	<main class="main">
-		<section class="section section--split-one">
-			<Corporation @setCorpId="setCorpId" />
-		</section>
-
 		<div class="div div--dashboard-box">
 			<DashboardItemLoading v-if="isLoading" :isSplitThree="true" />
 			<DashboardItem v-else :isSplitThree="true" orgDesc="Sales Orgs" orgName="salesOrg" :list="overview.orgs" />
 			<DashboardItemLoading v-if="isLoading" :isSplitThree="true" />
-			<DashboardItem v-else :isSplitThree="true" orgDesc="Distribution Channels" orgName="salesOrg" :list="overview.channels" />
+			<DashboardItem v-else :isSplitThree="true" orgDesc="Distribution Channels" orgName="distributionChannel" :list="overview.channels" />
 			<DashboardItemLoading v-if="isLoading" :isSplitThree="true" />
 			<DashboardItem v-else :isSplitThree="true" orgDesc="Divisions" orgName="division" :list="overview.divs" />
 		</div>
@@ -21,7 +17,7 @@
 			<DashboardItemLoading v-if="isLoading" :isSplitTwo="true" />
 			<DashboardItem v-else :isSplitTwo="true" orgDesc="Sales Offices" orgName="salesOffice" :list="overview.offices" />
 			<DashboardItemLoading v-if="isLoading" :isSplitTwo="true" />
-			<DashboardItem v-else :isSplitTwo="true" orgDesc="Distribution Channels" orgName="salesOrg" :list="overview.groups" />
+			<DashboardItem v-else :isSplitTwo="true" orgDesc="Sales Groups" orgName="salesGroup" :list="overview.groups" />
 		</div>
 	</main>
 	<Footer />
@@ -50,24 +46,20 @@
 			DashboardItem,
 			Footer,
 		},
-		watch: {
-			corpId: async function () {
-				if(isUuid(this.corpId)) {
-					this.overview = await OrganizationDataHandler.getOverview(this.corp);
-					if(null === this.overview) {
-						popToast("WARNING", "Organization data not found.", this.$store);
-					}
-					this.isLoading = false;
-				}
-			},
-		},
 		created() {
+			this.corpId = sessionStorage.getItem("corpId");
+			if(undefined === this.corpId || !isUuid(this.corpId)) {
+				this.$router.push({name: "Index"});
+			}
+
 			document.title = "Organization Manager - OMS";
 		},
-		methods: {
-			setCorpId(value) {
-				this.corpId = value;
+		async mounted() {
+			this.overview = await OrganizationDataHandler.getOverview(this.corp);
+			if(null === this.overview) {
+				popToast("WARNING", "Organization data not found.", this.$store);
 			}
+			this.isLoading = false;
 		},
 	};
 </script>

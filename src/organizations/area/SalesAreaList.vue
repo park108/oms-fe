@@ -28,6 +28,7 @@
 	import OrgLoading from "@/organizations/OrgLoading.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
+	import { isUuid } from "@/common.js"
 	import { OrganizationDataHandler } from "../OrganizationDataHandler.js";
 	
 	export default {
@@ -51,11 +52,13 @@
 			OrganizationDataHandler,
 		},
 		created() {
-			this.corp = this.$store.state.corp;
-			this.companyName = this.corp.companyName;
+			this.corpId = sessionStorage.getItem("corpId");
+			if(undefined === this.corpId || !isUuid(this.corpId)) {
+				this.$router.push({name: "Index"});
+			}
 		},
 		async mounted() {
-			this.list = await OrganizationDataHandler.getList(this.corp.id, this.orgUri);
+			this.list = await OrganizationDataHandler.getList(this.corpId, this.orgUri);
 			if(null === this.list) {
 				popToast("WARNING", "Sales Area not found.", this.$store);
 			}

@@ -61,8 +61,7 @@
 					this.corp = dummyData; // TODO: Remove
 				}
 				finally {
-					this.$emit("setCorpId", this.corp.id);
-					this.$store.state.corp = this.corp;
+					sessionStorage.setItem("corpId", this.corp.id);
 					this.isLoading = false;
 				}
 			},

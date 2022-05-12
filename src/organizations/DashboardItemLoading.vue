@@ -7,7 +7,7 @@
 		}"
 	>
 		<div class="div div--dashboard-item">
-			<h1 class="h1 h1--dashboard-skeleton">LOADING</h1>
+			<h1 class="h1 h1--dashboard-skeleton">&nbsp;</h1>
 			<hr class="hr" />
 			<OrgLoading />
 		</div>

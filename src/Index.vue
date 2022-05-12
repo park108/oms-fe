@@ -1,6 +1,9 @@
 <template>
 	<Header title="Management Console" routeName="Index" />
 	<main class="main">
+		<section class="section section--split-one">
+			<Corporation />
+		</section>
 		<div class="div div--dashboard-box">
 			<section class="section section--index-menu section--dashboard-linktodetail section--split-two" @click="moveOrganizationManager">
 				<h1 class="h1">Organization</h1>
@@ -26,6 +29,7 @@
 </template>
 <script>
 	import Header from "@/Header.vue";
+	import Corporation from "@/Corporation.vue";
 	import Footer from "@/Footer.vue";
 
 	export default {
@@ -35,6 +39,7 @@
 		},
 		components: {
 			Header,
+			Corporation,
 			Footer,
 		},
 		created() {

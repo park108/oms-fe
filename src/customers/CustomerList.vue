@@ -1,9 +1,6 @@
 <template>
 	<Header title="Customer Manager" routeName="customerList" />
 	<main class="main">
-		<section class="section section--split-one" v-show="false">
-			<Corporation @setCorpId="setCorpId" />
-		</section>
 		<section class="section section--list-filter">
 			<button @click="toggleFilter">{{filterToggleButtonName}}</button>
 			<div v-show="isFilterOpen">
@@ -116,6 +113,11 @@
 			Footer,
 		},
 		created() {
+			this.corpId = sessionStorage.getItem("corpId");
+			if(undefined === this.corpId || !isUuid(this.corpId)) {
+				this.$router.push({name: "Index"});
+			}
+
 			document.title = "Customer Manager - OMS";
 			this.filter.customerNo = this.$store.state.filter.customerList.customerNo;
 			this.filter.customerName = this.$store.state.filter.customerList.customerName;
@@ -124,27 +126,19 @@
 			this.filter.distributionChannel = this.$store.state.filter.customerList.distributionChannel;
 			this.filter.division = this.$store.state.filter.customerList.division;
 		},
-		watch: {
-			corpId: async function () {
-				if(isUuid(this.corpId)) {
-					// TODO: Get customer list initializing time
-					this.customers = await CustomerDataHandler.getList(this.corp);
+		async mounted() {
+			this.customers = await CustomerDataHandler.getList(this.corp);
 
-					if(null === this.customers) {
-						popToast("WARNING", "Customer data not found.", this.$store);
-					}
-					else {
-						this.updateFilter();
-						this.setFilterButton();
-					}
-					this.isLoading = false;
-				}
-			},
+			if(null === this.customers) {
+				popToast("WARNING", "Customer data not found.", this.$store);
+			}
+			else {
+				this.updateFilter();
+				this.setFilterButton();
+			}
+			this.isLoading = false;
 		},
 		methods: {
-			setCorpId(value) {
-				this.corpId = value;
-			},
 			isFiltered(filterName) {
 				return this.filter[filterName].length > 0;
 			},

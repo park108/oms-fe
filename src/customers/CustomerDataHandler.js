@@ -207,7 +207,7 @@ const dummyData = [
 			},
 			{
 				salesOrg: "S000",
-				distributionChannel: "20",
+				distributionChannel: "40",
 				division: "51",
 				salesOffice: "S100",
 				salesGroup: "100",
