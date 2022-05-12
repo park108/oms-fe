@@ -6,30 +6,106 @@
 		:deleteEventFunc="deleteItem"
 	/>
 	<main class="main">
-		<div class="div div--org-title">			
+		<div class="div div--org-title">{{ customerNo }}</div>
+		<div class="div div--org-title">		
 			<span v-if="isLoading" class="span span--org-skeletonbox">&nbsp;</span>
-			<span v-else>{{ customerNo }} {{ customerData.customerName }}</span>
+			<span v-else>{{ customerData.customerName }}</span>
+		</div>
+		<div class="div div--customer-listitem">
+			<span v-if="isLoading" class="span span--org-skeletonbox">&nbsp;</span>
+			<span v-else>{{ customerData.address }}</span>
+		</div>
+		<div class="div div--org-title">
+			Sales Area Data
 		</div>
 		<div class="div">
-			<span v-if="isLoading" class="span span--org-skeletonbox">&nbsp;</span>
-			<span v-else>Address: {{ customerData.address }}</span>
-		</div>
-		<div class="div">
-			<h2 class="h2"><span v-if="isLoading" class="span span--org-skeletonbox">&nbsp;</span></h2>
-			<span v-if="isLoading" class="span span--org-skeletonbox">&nbsp;</span>
-			<div class="div" v-else-if="undefined !== customerData.salesAreaData">
-				<h2 class="h2">Sales Area Data</h2>
-				<div class="div" v-for="(area, index) in customerData.salesAreaData" :key="index">
-					<div class="div">Sales Area: {{ area.salesOrg }}/{{ area.distributionChannel }}/{{ area.division }}</div>
-					<div class="div">Sales Office: {{ area.salesOffice }}</div>
-					<div class="div">Sales Group: {{ area.salesGroup }}</div>
-					<div class="div">Currency: {{ area.currency }}</div>
-					<div class="div">Customer Pricing Procedure: {{ area.customerPricingProcedure }}</div>
-					<div class="div">Delivering Plant: {{ area.deliveringPlant }}</div>
-					<div class="div">Shipping Condition: {{ area.shippingCondition }}</div>
-					<div class="div">Incoterms: {{ area.incoterms }}</div>
-					<div class="div">Payment Terms: {{ area.paymentTerms }}</div>
-					<div class="div">Credit Control Area: {{ area.creditControlArea }}</div>
+			<div v-if="isLoading" class="div">
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Sales Area</span>
+					<span class="span span--org-skeletonbox">&nbsp;</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Sales Office</span>
+					<span class="span span--org-skeletonbox">&nbsp;</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Sales Group</span>
+					<span class="span span--org-skeletonbox">&nbsp;</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Currency</span>
+					<span class="span span--org-skeletonbox">&nbsp;</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Customer Pricing Procedure</span>
+					<span class="span span--org-skeletonbox">&nbsp;</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Delivering Plant</span>
+					<span class="span span--org-skeletonbox">&nbsp;</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Shipping Condition</span>
+					<span class="span span--org-skeletonbox">&nbsp;</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Incoterms</span>
+					<span class="span span--org-skeletonbox">&nbsp;</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Payment Terms</span>
+					<span class="span span--org-skeletonbox">&nbsp;</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Credit Control Area</span>
+					<span class="span span--org-skeletonbox">&nbsp;</span>
+				</div>
+			</div>
+			<div class="div" v-else-if="undefined !== customerData.salesAreaData" v-for="(area, index) in customerData.salesAreaData" :key="index">
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Sales Area</span>
+					<span class="span">{{ area.salesOrg }}/{{ area.distributionChannel }}/{{ area.division }}</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Sales Office</span>
+					<span class="span">{{ area.salesOffice }}</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Sales Group</span>
+					<span class="span">{{ area.salesGroup }}</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Currency</span>
+					<span class="span">{{ area.currency }}</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Customer Pricing Procedure</span>
+					<span class="span">{{ area.customerPricingProcedure }}</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Delivering Plant</span>
+					<span class="span">{{ area.deliveringPlant }}</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Shipping Condition</span>
+					<span class="span">{{ area.shippingCondition }}</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Incoterms</span>
+					<span class="span">{{ area.incoterms }}</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Payment Terms</span>
+					<span class="span">{{ area.paymentTerms }}</span>
+				</div>
+				<div class="div div--customer-listitem">
+					<span class="span span--detail-attributename">Credit Control Area</span>
+					<span class="span">{{ area.creditControlArea }}</span>
+				</div>
+			</div>
+			<div class="div" v-else>
+				<div class="div div--customer-listitem">
+					None
 				</div>
 			</div>
 		</div>

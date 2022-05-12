@@ -298,6 +298,13 @@
 	overflow-x: auto;
 }
 
+.div--customer-listitem {
+	margin: 1em;
+	padding: 0.5em;
+	min-height: 1.5em;
+	display: flex;
+}
+
 .span {
 	background-color: transparent;
 }
