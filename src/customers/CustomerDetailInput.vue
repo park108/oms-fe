@@ -1,7 +1,7 @@
 <template>
 	<div v-if="isLoading" class="div div--customer-listitem">
 		<label class="label label--detail-attributename">{{ attributeName }}</label>
-		<span class="span span--org-skeletonbox">&nbsp;</span>
+		<span class="span span--input-skeleton">&nbsp;</span>
 	</div>
 	<div v-else class="div div--customer-listitem">
 		<label :for="this.name" class="label label--detail-attributename">{{ attributeName }}</label>

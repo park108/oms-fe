@@ -59,9 +59,9 @@
 					<th class="th">Address</th>
 				</tr>
 				<tr class="tr tr--row-selectable" v-for="index in 10" :key="index">
-					<td class="td td--customer-no"><span class="span span--org-skeletonbox">&nbsp;</span></td>
-					<td class="td td--customer-name td--list-loading"><span class="span span--org-skeletonbox">&nbsp;</span></td>
-					<td class="td td--customer-address td--list-loading"><span class="span span--org-skeletonbox">&nbsp;</span></td>
+					<td class="td td--customer-no"><span class="span span--detail-skeleton">&nbsp;</span></td>
+					<td class="td td--customer-name td--list-loading"><span class="span span--detail-skeleton">&nbsp;</span></td>
+					<td class="td td--customer-address td--list-loading"><span class="span span--detail-skeleton">&nbsp;</span></td>
 				</tr>
 			</table>
 			<table class="table table--main-list" v-else>
@@ -151,66 +151,36 @@
 				this.isFilterOpen = !this.isFilterOpen;
 				this.setFilterButton();
 			},
+			updateInputFilter(filterName, filterDescription) {
+				if(this.isFiltered(filterName)) {
+					this.filteredCustomers = this.filteredCustomers.filter(item => item[filterName].toLowerCase().includes(this.filter[filterName].toLowerCase()));
+					this.filterDescription += (this.filterDescription.length > 0 ? ", " : "") + filterDescription;
+					this.$store.state.filter.customerList[filterName]= this.filter[filterName];
+				}
+				else {
+					this.$store.state.filter.customerList[filterName] = "";
+				}
+			},
+			updateSelectFilter(filterName, filterDescription, listName) {
+				if(this.isFiltered(filterName)) {
+					this.filteredCustomers = this.filteredCustomers.filter(item => undefined !== item[listName]);
+					this.filteredCustomers = this.filteredCustomers.filter(item => item[listName].some(c => c.division.toLowerCase().includes(this.filter.division.toLowerCase())));
+					this.filterDescription += (this.filterDescription.length > 0 ? ", " : "") + filterDescription;
+					this.$store.state.filter.customerList[filterName]= this.filter[filterName];
+				}
+				else {
+					this.$store.state.filter.customerList[filterName] = "";
+				}
+			},
 			updateFilter(filterName) {
 				this.filteredCustomers = this.customers;
 				this.filterDescription = "";
-				
-				if(this.isFiltered("customerNo")) {
-					this.filteredCustomers = this.filteredCustomers.filter(item => item.customerNo.toLowerCase().includes(this.filter.customerNo.toLowerCase()));
-					this.filterDescription = "No.";
-					this.$store.state.filter.customerList.customerNo = this.filter.customerNo;
-				}
-				else {
-					this.$store.state.filter.customerList.customerNo = "";
-				}
-
-				if(this.isFiltered("customerName")) {
-					this.filteredCustomers = this.filteredCustomers.filter(item => item.customerName.toLowerCase().includes(this.filter.customerName.toLowerCase()));
-					this.filterDescription += (this.filterDescription.length > 0 ? ", " : "") + "Name";
-					this.$store.state.filter.customerList.customerName = this.filter.customerName;
-				}
-				else {
-					this.$store.state.filter.customerList.customerName = "";
-				}
-
-				if(this.isFiltered("address")) {
-					this.filteredCustomers = this.filteredCustomers.filter(item => item.address.toLowerCase().includes(this.filter.address.toLowerCase()));
-					this.filterDescription += (this.filterDescription.length > 0 ? ", " : "") + "Address";
-					this.$store.state.filter.customerList.address = this.filter.address;
-				}
-				else {
-					this.$store.state.filter.customerList.address = "";
-				}
-
-				if(this.isFiltered("salesOrg")) {
-					this.filteredCustomers = this.filteredCustomers.filter(item => undefined !== item.salesAreaData);
-					this.filteredCustomers = this.filteredCustomers.filter(item => item.salesAreaData.some(area => area.salesOrg.toLowerCase().includes(this.filter.salesOrg.toLowerCase())));
-					this.filterDescription += (this.filterDescription.length > 0 ? ", " : "") + "Sales Org.";
-					this.$store.state.filter.customerList.salesOrg = this.filter.salesOrg;
-				}
-				else {
-					this.$store.state.filter.customerList.salesOrg = "";
-				}
-
-				if(this.isFiltered("distributionChannel")) {
-					this.filteredCustomers = this.filteredCustomers.filter(item => undefined !== item.salesAreaData);
-					this.filteredCustomers = this.filteredCustomers.filter(item => item.salesAreaData.some(area => area.distributionChannel.toLowerCase().includes(this.filter.distributionChannel.toLowerCase())));
-					this.filterDescription += (this.filterDescription.length > 0 ? ", " : "") + "Channel";
-					this.$store.state.filter.customerList.distributionChannel = this.filter.distributionChannel;
-				}
-				else {
-					this.$store.state.filter.customerList.distributionChannel = "";
-				}
-
-				if(this.isFiltered("division")) {
-					this.filteredCustomers = this.filteredCustomers.filter(item => undefined !== item.salesAreaData);
-					this.filteredCustomers = this.filteredCustomers.filter(item => item.salesAreaData.some(area => area.division.toLowerCase().includes(this.filter.division.toLowerCase())));
-					this.filterDescription += (this.filterDescription.length > 0 ? ", " : "") + "Division";
-					this.$store.state.filter.customerList.division = this.filter.division;
-				}
-				else {
-					this.$store.state.filter.customerList.division = "";
-				}
+				this.updateInputFilter("customerNo", "No.");
+				this.updateInputFilter("customerName", "Name");
+				this.updateInputFilter("address", "Address");
+				this.updateSelectFilter("salesOrg", "Sales Org.", "salesAreaData");
+				this.updateSelectFilter("distributionChannel", "Channel", "salesAreaData");
+				this.updateSelectFilter("division", "Name", "salesAreaData");
 			},
 			moveDetail(customerNo) {
 				this.$router.push({

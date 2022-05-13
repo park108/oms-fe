@@ -8,11 +8,11 @@
 	<main class="main">
 		<div class="div div--org-title">{{ customerNo }}</div>
 		<div class="div div--org-title">		
-			<span v-if="isLoading" class="span span--org-skeletonbox">&nbsp;</span>
+			<span v-if="isLoading" class="span span--detail-skeleton">&nbsp;</span>
 			<span v-else>{{ customerData.customerName }}</span>
 		</div>
 		<div class="div div--customer-listitem">
-			<span v-if="isLoading" class="span span--org-skeletonbox">&nbsp;</span>
+			<span v-if="isLoading" class="span span--detail-skeleton">&nbsp;</span>
 			<span v-else>{{ customerData.address }}</span>
 		</div>
 		<div class="div div--org-title">
