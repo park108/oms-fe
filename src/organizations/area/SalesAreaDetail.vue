@@ -14,9 +14,18 @@
 		</div>
 		<OrgLoading v-if="isLoading" />
 		<div class="div div--org-list" role="list" v-else>
-			<AttSelect name="salesOrg" attribute-name="Sales Organization" :option-list="this.orgList" :editable="isCreate&&!isPending" :selectedValue="this.area.salesOrg.salesOrg" />
-			<AttSelect name="distributionChannel" attribute-name="Distiribution Channel" :option-list="this.channelList" :editable="isCreate&&!isPending" :selectedValue="this.area.distributionChannel.distributionChannel" />
-			<AttSelect name="division" attribute-name="Division" :option-list="this.divList" :editable="isCreate&&!isPending" :selectedValue="this.area.division.division" />
+			<div class="div div--org-listitem">
+				<span class="span span--detail-attributename">Sales Org.</span>
+				<SalesOrgSelector name="salesOrg" :corpId="corpId" :selectedValue="area.salesOrg.salesOrg" :disabled="!isCreate&&!isPending" />
+			</div>
+			<div class="div div--org-listitem">
+				<span class="span span--detail-attributename">Distribution Channel</span>
+				<DistributionChannelSelector name="distributionChannel" :corpId="corpId" :selectedValue="area.distributionChannel.distributionChannel" :disabled="!isCreate&&!isPending" />
+			</div>
+			<div class="div div--org-listitem">
+				<span class="span span--detail-attributename">Division</span>
+				<DivisionSelector name="division" :corpId="corpId" :selectedValue="area.division.division" :disabled="!isCreate&&!isPending" />
+			</div>
 			<AttInput name="id" attribute-name="id" :value="this.area.id" :hidden="isCreate" />
 		</div>
 		<Toaster />
@@ -33,7 +42,9 @@
 	import Navigation from "@/Navigation.vue";
 	import OrgLoading from "@/organizations/OrgLoading.vue";
 	import AttInput from "../DetailAttributeInput.vue";
-	import AttSelect from "../DetailAttributeSelect.vue";
+	import SalesOrgSelector from "@/organizations/SalesOrgSelector.vue";
+	import DistributionChannelSelector from "@/organizations/DistributionChannelSelector.vue";
+	import DivisionSelector from "@/organizations/DivisionSelector.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
@@ -62,7 +73,9 @@
 			Navigation,
 			OrgLoading,
 			AttInput,
-			AttSelect,
+			SalesOrgSelector,
+			DistributionChannelSelector,
+			DivisionSelector,
 			Footer,
 			EventButtons,
 			Toaster,
@@ -93,21 +106,6 @@
 			}
 		},
 		async mounted() {
-			this.orgList = await OrganizationDataHandler.getList(this.corpId, "orgs");
-			if(null === this.orgList) {
-				popToast("WARNING", "Sales Org. not found.", this.$store);
-			}
-
-			this.channelList = await OrganizationDataHandler.getList(this.corpId, "channels");
-			if(null === this.channelList) {
-				popToast("WARNING", "Channel not found.", this.$store);
-			}
-
-			this.divList = await OrganizationDataHandler.getList(this.corpId, "divs");
-			if(null === this.divList) {
-				popToast("WARNING", "Division not found.", this.$store);
-			}
-
 			if(!this.isCreate) {
 				this.area = await OrganizationDataHandler.getSalesArea(this.corpId, this.org, this.channel, this.div);
 				if(null === this.area) {

@@ -19,7 +19,9 @@
 			Sales Area Data
 		</div>
 		<section v-if="isLoading" class="section">
-			<CustomerDetailInput :isLoading="true" attributeName="Sales Area" />
+			<CustomerDetailInput :isLoading="true" attributeName="Sales Org." />
+			<CustomerDetailInput :isLoading="true" attributeName="Distribution Channel" />
+			<CustomerDetailInput :isLoading="true" attributeName="Division" />
 			<CustomerDetailInput :isLoading="true" attributeName="Sales Office" />
 			<CustomerDetailInput :isLoading="true" attributeName="Sales Group" />
 			<CustomerDetailInput :isLoading="true" attributeName="Currency" />
@@ -31,7 +33,18 @@
 			<CustomerDetailInput :isLoading="true" attributeName="Credit Control Area" />
 		</section>
 		<section class="section" v-else-if="undefined !== customerData.salesAreaData" v-for="(area, index) in customerData.salesAreaData" :key="index">
-			<CustomerDetailInput attributeName="Sales Area" name="salesArea" :value="area.salesOrg + '/' + area.distributionChannel + '/' + area.division" />
+			<div class="div div--customer-listitem">
+				<label for="salesOrg" class="label label--detail-attributename">Sales Org.</label>
+				<SalesOrgSelector name="salesOrg" :corpId="corpId" :selectedValue="area.salesOrg" />
+			</div>
+			<div class="div div--customer-listitem">
+				<label for="distributionChannel" class="label label--detail-attributename">Distribution Channel</label>
+				<DistributionChannelSelector name="distributionChannel" :corpId="corpId" :selectedValue="area.distributionChannel" />
+			</div>
+			<div class="div div--customer-listitem">
+				<label for="division" class="label label--detail-attributename">Division</label>
+				<DivisionSelector name="division" :corpId="corpId" :selectedValue="area.division" />
+			</div>
 			<CustomerDetailInput attributeName="Sales Office" name="salesOffice" :value="area.salesOffice" />
 			<CustomerDetailInput attributeName="Sales Group" name="salesGroup" :value="area.salesGroup" />
 			<CustomerDetailInput attributeName="Currency" name="salesOcurrencyffice" :value="area.currency" />
@@ -63,6 +76,9 @@
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
 	import CustomerDetailInput from "./CustomerDetailInput.vue";
+	import SalesOrgSelector from "@/organizations/SalesOrgSelector.vue";
+	import DistributionChannelSelector from "@/organizations/DistributionChannelSelector.vue";
+	import DivisionSelector from "@/organizations/DivisionSelector.vue";
 	import { popToast } from "@/Toaster.vue";
 	import { CustomerDataHandler } from './CustomerDataHandler';
 	import { isUuid, log, confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
@@ -84,7 +100,10 @@
 			Footer,
 			EventButtons,
 			Toaster,
-			CustomerDetailInput
+			CustomerDetailInput,
+			SalesOrgSelector,
+			DistributionChannelSelector,
+			DivisionSelector,
 		},
 		created() {
 			this.corpId = sessionStorage.getItem("corpId");
