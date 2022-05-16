@@ -21,6 +21,12 @@ const store = createStore({
 					distributionChannel: "",
 					division: "",
 				},
+				productList: {
+					productNo: "",
+					productName: "",
+					division: "",
+					baseUnit: "",
+				},
 			}
 		}
 	}

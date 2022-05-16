@@ -479,6 +479,10 @@
 	text-decoration: underline;
 }
 
+.th {
+	white-space: nowrap;
+}
+
 .td--col-customer {
 	white-space: nowrap;
 	padding-right: 10px;

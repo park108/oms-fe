@@ -44,12 +44,11 @@
 		</section>
 		<div class="div div--list-result">
 			<span class="span span--list-result">
-				Total:
-				<span v-if="isLoading">...</span>
-				<span v-else>{{customers.length}}</span>
-				customers
+				Total: <span v-if="isLoading">...</span><span v-else>{{customers.length}}</span> customers
 			</span>
-			<span class="span span--list-result" v-if="filterDescription.length > 0">, Filtered: {{filteredCustomers.length}} by {{filterDescription}}</span>
+			<span class="span span--list-result" v-if="filterDescription.length > 0">
+				, Filtered: {{filteredCustomers.length}} by {{filterDescription}}
+			</span>
 		</div>
 		<div class="div div--table-box">
 			<table class="table table--main-list" v-if="isLoading">
@@ -164,7 +163,7 @@
 			updateSelectFilter(filterName, filterDescription, listName) {
 				if(this.isFiltered(filterName)) {
 					this.filteredCustomers = this.filteredCustomers.filter(item => undefined !== item[listName]);
-					this.filteredCustomers = this.filteredCustomers.filter(item => item[listName].some(c => c.division.toLowerCase().includes(this.filter.division.toLowerCase())));
+					this.filteredCustomers = this.filteredCustomers.filter(item => item[listName].some(c => c[filterName].toLowerCase().includes(this.filter[filterName].toLowerCase())));
 					this.filterDescription += (this.filterDescription.length > 0 ? ", " : "") + filterDescription;
 					this.$store.state.filter.customerList[filterName]= this.filter[filterName];
 				}
@@ -180,7 +179,7 @@
 				this.updateInputFilter("address", "Address");
 				this.updateSelectFilter("salesOrg", "Sales Org.", "salesAreaData");
 				this.updateSelectFilter("distributionChannel", "Channel", "salesAreaData");
-				this.updateSelectFilter("division", "Name", "salesAreaData");
+				this.updateSelectFilter("division", "Division", "salesAreaData");
 			},
 			moveDetail(customerNo) {
 				this.$router.push({
