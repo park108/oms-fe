@@ -161,6 +161,27 @@ const dummyData = [
 		]
 	},
 	{
+		customerNo: "1000395",
+		customerName: "Ferrari S.P.A",
+		address: "Via Emilia Est 1163, Modena (MO), 41122, Italy",
+		salesAreaData: [
+			{
+				salesOrg: "S000",
+				distributionChannel: "40",
+				division: "51",
+				salesOffice: "S100",
+				salesGroup: "100",
+				currency: "USD",
+				customerPricingProcedure: "1",
+				deliveringPlant: "",
+				shippingCondition: "01",
+				incoterms: "FOB",
+				paymentTerms: "C145",
+				creditControlArea: "S110"
+			},
+		]
+	},
+	{
 		customerNo: "1000396",
 		customerName: "Ford Motor Company",
 		address: "1 American Rd, Dearborn, MI 48126, United States",

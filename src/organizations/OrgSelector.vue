@@ -1,5 +1,7 @@
 <template>
+	<span v-if="isLoading" class="span span--input-skeleton">&nbsp;</span>
 	<select
+		v-else
 		class="select select--detail-attribute"
 		:name="this.name"
 		:id="this.name"
@@ -21,6 +23,7 @@
 	export default {
 		data() {
 			return {
+				isLoading: true,
 				list: [],
 			}
 		},
@@ -42,6 +45,7 @@
 			if(null === this.list) {
 				popToast("WARNING", "Sales Org. not found.", this.$store);
 			}
+			this.isLoading = false;
 		},
 	}
 </script>

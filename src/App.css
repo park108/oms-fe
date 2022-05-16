@@ -298,7 +298,7 @@
 	overflow-x: auto;
 }
 
-.div--customer-listitem {
+.div--detail-listitem {
 	margin: 1em;
 	padding: 0.5em;
 	min-height: 1.5em;
@@ -479,17 +479,12 @@
 	text-decoration: underline;
 }
 
-.td--customer-no {
+.td--col-customer {
 	white-space: nowrap;
 	padding-right: 10px;
 }
 
-.td--customer-name {
-	white-space: nowrap;
-	padding-right: 10px;
-}
-
-.td--customer-address {
+.td--col-product {
 	white-space: nowrap;
 	padding-right: 10px;
 }

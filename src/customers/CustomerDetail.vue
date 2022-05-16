@@ -11,7 +11,7 @@
 			<span v-if="isLoading" class="span span--detail-skeleton">&nbsp;</span>
 			<span v-else>{{ customerData.customerName }}</span>
 		</div>
-		<div class="div div--customer-listitem">
+		<div class="div div--detail-listitem">
 			<span v-if="isLoading" class="span span--detail-skeleton">&nbsp;</span>
 			<span v-else>{{ customerData.address }}</span>
 		</div>
@@ -33,23 +33,23 @@
 			<CustomerDetailInput :isLoading="true" attributeName="Credit Control Area" />
 		</section>
 		<section class="section" v-else-if="undefined !== customerData.salesAreaData" v-for="(area, index) in customerData.salesAreaData" :key="index">
-			<div class="div div--customer-listitem">
+			<div class="div div--detail-listitem">
 				<label for="salesOrg" class="label label--detail-attributename">Sales Org.</label>
 				<OrgSelector name="salesOrg" apiUri="orgs" :selectedValue="area.salesOrg" :corpId="this.corpId" />
 			</div>
-			<div class="div div--customer-listitem">
+			<div class="div div--detail-listitem">
 				<label for="distributionChannel" class="label label--detail-attributename">Distribution Channel</label>
 				<OrgSelector name="distributionChannel" apiUri="channels" :selectedValue="area.distributionChannel" :corpId="this.corpId" />
 			</div>
-			<div class="div div--customer-listitem">
+			<div class="div div--detail-listitem">
 				<label for="division" class="label label--detail-attributename">Division</label>
 				<OrgSelector name="division" apiUri="divs" :selectedValue="area.division" :corpId="this.corpId" />
 			</div>
-			<div class="div div--customer-listitem">
+			<div class="div div--detail-listitem">
 				<label for="salesOffice" class="label label--detail-attributename">Sales Office</label>
 				<OrgSelector name="salesOffice" apiUri="offices" :selectedValue="area.salesOffice" :corpId="this.corpId" />
 			</div>
-			<div class="div div--customer-listitem">
+			<div class="div div--detail-listitem">
 				<label for="salesGroup" class="label label--detail-attributename">Sales Group</label>
 				<OrgSelector name="salesGroup" apiUri="groups" :selectedValue="area.salesGroup" :corpId="this.corpId" />
 			</div>
@@ -62,7 +62,7 @@
 			<CustomerDetailInput attributeName="Credit Control Area" name="creditControlArea" :value="area.creditControlArea" />
 		</section>
 		<section class="section" v-else>
-			<div class="div div--customer-listitem">
+			<div class="div div--detail-listitem">
 				None
 			</div>
 		</section>
