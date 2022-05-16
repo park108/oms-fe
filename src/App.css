@@ -5,7 +5,7 @@
 	--text-color-normal: #000000;
 	--text-color-link: #666666;
 	--text-color-temporary: #999999;
-	--box-color-skeleton: #cccccc;
+	--box-color-skeleton: #eeeeee;
 	--background-color-normal: #ffffff;
 	--background-color-ok: #ccffcc;
 	--background-color-error: #ffcccc;
@@ -350,6 +350,7 @@
 
 .span--detail-attributename {
 	width: 150px;
+	min-width: 150px;
 	display: block;
 }
 
@@ -362,6 +363,7 @@
 	color: var(--box-color-skeleton);
 	background-color: var(--box-color-skeleton);
 	width: 100%;
+	border-radius: 100px;
 }
 
 .span--input-skeleton {
@@ -372,7 +374,8 @@
 	padding: 1px;
 	border-width: 0 0 1px 0;
 	border-style: solid;
-	border-color: var(--border-color-normal);
+	border-color: var(--box-color-skeleton);
+	border-radius: 100px;
 }
 
 .span--list-result {
@@ -401,7 +404,6 @@
 .select--detail-attribute {
 	width: 100%;
 	font-size: 1em;
-	padding: 1px;
 	border-width: 0 0 1px 0;
 	border-color: var(--border-color-normal);
 }

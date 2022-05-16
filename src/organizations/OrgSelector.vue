@@ -6,12 +6,12 @@
 		:disabled="this.disabled"
 	>
 		<option
-			v-for="item in orgList"
+			v-for="item in list"
 			:key="item.id"
-			:value="item.salesOrg"
-			:selected="item.salesOrg === selectedValue"
+			:value="item[name]"
+			:selected="item[name] === selectedValue"
 		>
-			{{ item.salesOrg }} - {{ item.salesOrgDesc }}
+			{{ item[name] }} - {{ item[name + "Desc"] }}
 		</option>
 	</select>
 </template>
@@ -21,11 +21,12 @@
 	export default {
 		data() {
 			return {
-				orgList: [],
+				list: [],
 			}
 		},
 		props: {
 			name: String,
+			apiUri: String,
 			corpId: String,
 			disabled: {
 				type: Boolean,
@@ -37,8 +38,8 @@
 			}
 		},
 		async mounted() {
-			this.orgList = await OrganizationDataHandler.getList(this.corpId, "orgs");
-			if(null === this.orgList) {
+			this.list = await OrganizationDataHandler.getList(this.corpId, this.apiUri);
+			if(null === this.list) {
 				popToast("WARNING", "Sales Org. not found.", this.$store);
 			}
 		},

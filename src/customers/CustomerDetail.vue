@@ -35,18 +35,24 @@
 		<section class="section" v-else-if="undefined !== customerData.salesAreaData" v-for="(area, index) in customerData.salesAreaData" :key="index">
 			<div class="div div--customer-listitem">
 				<label for="salesOrg" class="label label--detail-attributename">Sales Org.</label>
-				<SalesOrgSelector name="salesOrg" :corpId="corpId" :selectedValue="area.salesOrg" />
+				<OrgSelector name="salesOrg" apiUri="orgs" :selectedValue="area.salesOrg" :corpId="this.corpId" />
 			</div>
 			<div class="div div--customer-listitem">
 				<label for="distributionChannel" class="label label--detail-attributename">Distribution Channel</label>
-				<DistributionChannelSelector name="distributionChannel" :corpId="corpId" :selectedValue="area.distributionChannel" />
+				<OrgSelector name="distributionChannel" apiUri="channels" :selectedValue="area.distributionChannel" :corpId="this.corpId" />
 			</div>
 			<div class="div div--customer-listitem">
 				<label for="division" class="label label--detail-attributename">Division</label>
-				<DivisionSelector name="division" :corpId="corpId" :selectedValue="area.division" />
+				<OrgSelector name="division" apiUri="divs" :selectedValue="area.division" :corpId="this.corpId" />
 			</div>
-			<CustomerDetailInput attributeName="Sales Office" name="salesOffice" :value="area.salesOffice" />
-			<CustomerDetailInput attributeName="Sales Group" name="salesGroup" :value="area.salesGroup" />
+			<div class="div div--customer-listitem">
+				<label for="salesOffice" class="label label--detail-attributename">Sales Office</label>
+				<OrgSelector name="salesOffice" apiUri="offices" :selectedValue="area.salesOffice" :corpId="this.corpId" />
+			</div>
+			<div class="div div--customer-listitem">
+				<label for="salesGroup" class="label label--detail-attributename">Sales Group</label>
+				<OrgSelector name="salesGroup" apiUri="groups" :selectedValue="area.salesGroup" :corpId="this.corpId" />
+			</div>
 			<CustomerDetailInput attributeName="Currency" name="salesOcurrencyffice" :value="area.currency" />
 			<CustomerDetailInput attributeName="Customer Pricing Procedure" name="customerPricingProcedure" :value="area.customerPricingProcedure" />
 			<CustomerDetailInput attributeName="Delivering Plant" name="deliveringPlant" :value="area.deliveringPlant" />
@@ -76,9 +82,7 @@
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
 	import CustomerDetailInput from "./CustomerDetailInput.vue";
-	import SalesOrgSelector from "@/organizations/SalesOrgSelector.vue";
-	import DistributionChannelSelector from "@/organizations/DistributionChannelSelector.vue";
-	import DivisionSelector from "@/organizations/DivisionSelector.vue";
+	import OrgSelector from "@/organizations/OrgSelector.vue";
 	import { popToast } from "@/Toaster.vue";
 	import { CustomerDataHandler } from './CustomerDataHandler';
 	import { isUuid, log, confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
@@ -101,9 +105,7 @@
 			EventButtons,
 			Toaster,
 			CustomerDetailInput,
-			SalesOrgSelector,
-			DistributionChannelSelector,
-			DivisionSelector,
+			OrgSelector,
 		},
 		created() {
 			this.corpId = sessionStorage.getItem("corpId");
@@ -129,8 +131,12 @@
 		},
 		methods: {
 			saveItem: async function() {
+				if(!confirmUpdateItem("Customer")) return;
+				log("save customer");
 			},
 			deleteItem: async function() {
+				if(!confirmDeleteItem("Customer")) return;
+				log("delete customer");
 			},
 		}
 	}

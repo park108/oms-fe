@@ -16,15 +16,15 @@
 		<div class="div div--org-list" role="list" v-else>
 			<div class="div div--org-listitem">
 				<span class="span span--detail-attributename">Sales Org.</span>
-				<SalesOrgSelector name="salesOrg" :corpId="corpId" :selectedValue="area.salesOrg.salesOrg" :disabled="!isCreate&&!isPending" />
+				<OrgSelector name="salesOrg" apiUri="orgs" :corpId="this.corpId" :selectedValue="area.salesOrg.salesOrg" :disabled="!isCreate&&!isPending" />
 			</div>
 			<div class="div div--org-listitem">
 				<span class="span span--detail-attributename">Distribution Channel</span>
-				<DistributionChannelSelector name="distributionChannel" :corpId="corpId" :selectedValue="area.distributionChannel.distributionChannel" :disabled="!isCreate&&!isPending" />
+				<OrgSelector name="distributionChannel" apiUri="channels" :corpId="this.corpId" :selectedValue="area.distributionChannel.distributionChannel" :disabled="!isCreate&&!isPending" />
 			</div>
 			<div class="div div--org-listitem">
 				<span class="span span--detail-attributename">Division</span>
-				<DivisionSelector name="division" :corpId="corpId" :selectedValue="area.division.division" :disabled="!isCreate&&!isPending" />
+				<OrgSelector name="division" apiUri="divs" :corpId="this.corpId" :selectedValue="area.division.division" :disabled="!isCreate&&!isPending" />
 			</div>
 			<AttInput name="id" attribute-name="id" :value="this.area.id" :hidden="isCreate" />
 		</div>
@@ -42,9 +42,7 @@
 	import Navigation from "@/Navigation.vue";
 	import OrgLoading from "@/organizations/OrgLoading.vue";
 	import AttInput from "../DetailAttributeInput.vue";
-	import SalesOrgSelector from "@/organizations/SalesOrgSelector.vue";
-	import DistributionChannelSelector from "@/organizations/DistributionChannelSelector.vue";
-	import DivisionSelector from "@/organizations/DivisionSelector.vue";
+	import OrgSelector from "@/organizations/OrgSelector.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
@@ -63,9 +61,6 @@
 				org: '',
 				channel: '',
 				div: '',
-				orgList: [],
-				channelList: [],
-				divList: [],
 			}
 		},
 		components: {
@@ -73,9 +68,7 @@
 			Navigation,
 			OrgLoading,
 			AttInput,
-			SalesOrgSelector,
-			DistributionChannelSelector,
-			DivisionSelector,
+			OrgSelector,
 			Footer,
 			EventButtons,
 			Toaster,
