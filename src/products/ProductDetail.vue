@@ -78,7 +78,6 @@
 				if(null === this.productData) {
 					popToast("WARNING", this.productNo + " not found.", this.$store);
 				}
-				console.log(this.productData);
 				this.isLoading = false;	
 			}
 		},

@@ -125,7 +125,6 @@
 				if(null === this.customerData) {
 					popToast("WARNING", this.customerNo + " not found.", this.$store);
 				}
-				console.log(this.customerData);
 				this.isLoading = false;	
 			}
 		},
