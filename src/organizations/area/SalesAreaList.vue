@@ -2,12 +2,12 @@
 	<Header title="Orgnanization Manager" routeName="orgDashboard" />
 	<Navigation prevName="Home" />
 	<main class="main">
-		<div class="div div--org-title">
+		<div class="div div--main-title">
 			Sales Area List
 		</div>
 		<OrgLoading v-if="isLoading" />
-		<div class="div div--org-list" role="list" v-else>
-			<div class="div div--org-listitem div--org-button" v-for="(area, index) in this.list" @click="moveDetail" :index="index" :key="area.id">
+		<div class="div div--detail-list" role="list" v-else>
+			<div class="div div--detail-listitem div--org-button" v-for="(area, index) in this.list" @click="moveDetail" :index="index" :key="area.id">
 				<span class="span span--detail-attributename" :index="index">
 					{{ area.salesOrg.salesOrg }}/{{ area.distributionChannel.distributionChannel }}/{{ area.division.division }}
 				</span>
@@ -68,7 +68,7 @@
 			moveDetail: function(e) {
 				const index = e.target.getAttribute("index") * 1;
 				const org = this.list[index];
-				const routeTo = "/org/areas/"
+				const routeTo = "/orgs/areas/"
 					+ org.salesOrg.salesOrg + "/"
 					+ org.distributionChannel.distributionChannel + "/"
 					+ org.division.division + "/"

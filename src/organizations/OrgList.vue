@@ -2,12 +2,12 @@
 	<Header title="Orgnanization Manager" routeName="orgDashboard" />
 	<Navigation prevName="Home" />
 	<main class="main">
-		<div class="div div--org-title">
+		<div class="div div--main-title">
 			{{orgDesc}} List
 		</div>
 		<OrgLoading v-if="isLoading" />
-		<div class="div div--org-list" role="list" v-else>
-			<div class="div div--org-listitem div--org-button" role="listitem" v-for="(orgItem, index) in list" @click="moveDetail" :index="index" :key="orgItem.id">
+		<div class="div div--detail-list" role="list" v-else>
+			<div class="div div--detail-listitem div--org-button" role="listitem" v-for="(orgItem, index) in list" @click="moveDetail" :index="index" :key="orgItem.id">
 				<span class="span span--detail-attributename" :index="index">{{ orgItem[orgName] }}</span>
 				<span class="span" :index="index">{{ orgItem[orgName + 'Desc'] }}</span>
 			</div>

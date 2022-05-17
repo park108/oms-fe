@@ -6,11 +6,11 @@
 		:deleteEventFunc="deleteItem"
 	/>
 	<main class="main">
-		<div class="div div--org-title">
+		<div class="div div--main-title">
 			{{orgDesc}}: {{selectedOrgCode}}
 		</div>
 		<OrgLoading v-if="isLoading" :rows="3" />
-		<div class="div div--org-list" role="list" v-else>
+		<div class="div div--detail-list" role="list" v-else>
 			<AttInput :name="orgName" :attribute-name="orgDesc" :value="orgData[orgName]" :editable="isCreate&&!isPending" />
 			<AttInput :name="orgName + 'Desc'" attribute-name="Description" :value="orgData[orgName + 'Desc']" :editable="!isPending" />
 			<AttInput name="id" attribute-name="id" :value="orgData.id" :hidden="isCreate" />
@@ -28,7 +28,7 @@
 	import Header from "@/Header.vue";
 	import Navigation from "@/Navigation.vue";
 	import OrgLoading from "@/organizations/OrgLoading.vue";
-	import AttInput from "./DetailAttributeInput.vue";
+	import AttInput from "@/DetailAttributeInput.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";

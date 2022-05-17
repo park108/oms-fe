@@ -1,5 +1,5 @@
 <template>
-	<div class="div div--org-listitem" role="listitem" v-show="!this.hidden">
+	<div class="div div--detail-listitem" role="listitem" v-show="!this.hidden">
 		<span class="span span--detail-attributename">{{ this.attributeName }}</span>
 		<select
 			class="select select--detail-attribute"

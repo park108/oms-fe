@@ -6,33 +6,35 @@
 		:deleteEventFunc="deleteItem"
 	/>
 	<main class="main">
-		<div class="div div--org-title">{{ productNo }}</div>
-		<div class="div div--org-title">		
+		<div class="div div--main-title">{{ productNo }}</div>
+		<div class="div div--main-title">		
 			<span v-if="isLoading" class="span span--detail-skeleton">&nbsp;</span>
-			<span v-else>{{ productData.productName }}</span>
+			<span v-else class="span">{{ productData.productName }}</span>
 		</div>
-		<div class="div div--detail-listitem">
+		<AttInput name="productNo" attribute-name="Product No." :value="productNo" :editable="isCreate&&!isPending" />
+		<AttLoading v-if="isLoading" attribute-name="Product Name" />
+		<AttInput v-else name="productName" attribute-name="Product Name" :value="productData.productName" :editable="!isPending" />
+		<AttLoading v-if="isLoading" attribute-name="Division" />
+		<div v-else  class="div div--detail-listitem">
 			<label for="division" class="label label--detail-attributename">Division</label>
-			<span v-if="isLoading" class="span span--detail-skeleton">&nbsp;</span>
-			<OrgSelector v-else name="division" apiUri="divs" :selectedValue="productData.division" :corpId="this.corpId" />
+			<OrgSelector name="division" apiUri="divs" :selectedValue="productData.division" :corpId="this.corpId" />
 		</div>
-		<div class="div div--detail-listitem">
-			<label for="baseUnit" class="label label--detail-attributename">Base Unit</label>
-			<span v-if="isLoading" class="span span--detail-skeleton">&nbsp;</span>
-			<span v-else>{{ productData.baseUnit }}</span>
-		</div>
+		<AttLoading v-if="isLoading" attribute-name="Base Unit" />
+		<AttInput v-else name="baseUnit" attribute-name="Base Unit" :value="productData.baseUnit" :editable="!isPending" />
 		<Toaster />
 	</main>
 	<EventButtons
 		:enableSave="true"
 		:saveEventFunc="saveItem"
-		:saveButtonText="isCreate ? 'Create Customer' : 'Update Customer'"
+		:saveButtonText="isCreate ? 'Create Product' : 'Update Product'"
 	/>
 	<Footer />
 </template>
 <script>
 	import Header from "@/Header.vue";
 	import Navigation from "@/Navigation.vue";
+	import AttLoading from "@/DetailAttributeLoading.vue";
+	import AttInput from "@/DetailAttributeInput.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
@@ -55,10 +57,12 @@
 		components: {
 			Header,
 			Navigation,
+			AttLoading,
+			AttInput,
+			OrgSelector,
 			Footer,
 			EventButtons,
 			Toaster,
-			OrgSelector,
 		},
 		created() {
 			this.corpId = sessionStorage.getItem("corpId");
@@ -83,12 +87,24 @@
 		},
 		methods: {
 			saveItem: async function() {
-				if(!confirmUpdateItem("Product")) return;
+				if(!confirmUpdateItem("product " + this.productNo)) return;
 				log("save product");
 			},
 			deleteItem: async function() {
-				if(!confirmDeleteItem("Product")) return;
-				log("delete product");
+				if(!confirmDeleteItem("product " + this.productNo)) return;
+
+				const res = await ProductDataHandler.deleteProduct(this.corpId, {
+					productNo: this.productNo,
+				});
+
+				if(true === res.isSuccess) {
+					popToast("SUCCESS",  "A product " + this.productNo + " is deleted.", this.$store);
+					this.isPending = true;
+					setTimeout(() => this.$router.go(-1), 2000);
+				}
+				else {
+					popToast("ERROR", "Server Error. Please contact administrator.", this.$store);
+				}
 			},
 		}
 	}

@@ -5,10 +5,10 @@
         <hr class="hr" />
 		<OrgLoading v-if="isLoading" />
 		<div class="div" role="list" v-else>
-			<div class="div div--org-listitem" role="listitem" >
+			<div class="div div--detail-listitem" role="listitem" >
 				<span class="span span--org-listitem">VAT Number: {{ corp.vatNumber }}</span>
 			</div>
-			<div class="div div--org-listitem" role="listitem" >
+			<div class="div div--detail-listitem" role="listitem" >
 				<span class="span span--org-listitem">Country: {{ corp.countryCode }}</span>
 			</div>
 		</div>

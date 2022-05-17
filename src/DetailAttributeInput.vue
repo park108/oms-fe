@@ -1,5 +1,5 @@
 <template>
-	<div class="div div--org-listitem" role="listitem" v-show="!this.hidden">
+	<div class="div div--detail-listitem" role="listitem" v-show="!this.hidden">
 		<label :for="this.name" class="label label--detail-attributename">{{ this.attributeName }}</label>
 		<input class="input input--detail-attribute"
 			:id="this.name"

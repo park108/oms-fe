@@ -6,23 +6,23 @@
 		:deleteEventFunc="deleteItem"
 	/>
 	<main class="main">
-		<div class="div div--org-title" v-if="!isCreate">
+		<div class="div div--main-title" v-if="!isCreate">
 			Sales Area: {{org}}/{{channel}}/{{div}}
 		</div>
-		<div class="div div--org-title" v-else>
+		<div class="div div--main-title" v-else>
 			Sales Area: NEW
 		</div>
 		<OrgLoading v-if="isLoading" />
-		<div class="div div--org-list" role="list" v-else>
-			<div class="div div--org-listitem">
+		<div class="div div--detail-list" role="list" v-else>
+			<div class="div div--detail-listitem">
 				<span class="span span--detail-attributename">Sales Org.</span>
 				<OrgSelector name="salesOrg" apiUri="orgs" :corpId="this.corpId" :selectedValue="area.salesOrg.salesOrg" :disabled="!isCreate&&!isPending" />
 			</div>
-			<div class="div div--org-listitem">
+			<div class="div div--detail-listitem">
 				<span class="span span--detail-attributename">Distribution Channel</span>
 				<OrgSelector name="distributionChannel" apiUri="channels" :corpId="this.corpId" :selectedValue="area.distributionChannel.distributionChannel" :disabled="!isCreate&&!isPending" />
 			</div>
-			<div class="div div--org-listitem">
+			<div class="div div--detail-listitem">
 				<span class="span span--detail-attributename">Division</span>
 				<OrgSelector name="division" apiUri="divs" :corpId="this.corpId" :selectedValue="area.division.division" :disabled="!isCreate&&!isPending" />
 			</div>
@@ -41,7 +41,7 @@
 	import Header from "@/Header.vue";
 	import Navigation from "@/Navigation.vue";
 	import OrgLoading from "@/organizations/OrgLoading.vue";
-	import AttInput from "../DetailAttributeInput.vue";
+	import AttInput from "@/DetailAttributeInput.vue";
 	import OrgSelector from "@/organizations/OrgSelector.vue";
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";

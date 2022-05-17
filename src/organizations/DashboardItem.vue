@@ -11,7 +11,7 @@
 			<h1 class="h1">{{ orgDesc }}</h1>
 			<hr class="hr" />
 			<OrgLoading v-if="isLoading" />
-			<div class="div div--org-listitem" v-else v-for="item in list" :key="item.code">
+			<div class="div div--detail-listitem" v-else v-for="item in list" :key="item.code">
 				<span class="span">{{ item.code }}</span>
 				<span class="span"> - </span>
 				<span class="span">{{ item.desc }}</span>

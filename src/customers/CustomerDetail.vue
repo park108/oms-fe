@@ -6,8 +6,8 @@
 		:deleteEventFunc="deleteItem"
 	/>
 	<main class="main">
-		<div class="div div--org-title">{{ customerNo }}</div>
-		<div class="div div--org-title">		
+		<div class="div div--main-title">{{ customerNo }}</div>
+		<div class="div div--main-title">		
 			<span v-if="isLoading" class="span span--detail-skeleton">&nbsp;</span>
 			<span v-else>{{ customerData.customerName }}</span>
 		</div>
@@ -15,7 +15,7 @@
 			<span v-if="isLoading" class="span span--detail-skeleton">&nbsp;</span>
 			<span v-else>{{ customerData.address }}</span>
 		</div>
-		<div class="div div--org-title">
+		<div class="div div--main-title">
 			Sales Area Data
 		</div>
 		<section v-if="isLoading" class="section">

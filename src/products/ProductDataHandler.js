@@ -3,7 +3,6 @@ import { getApi, sleep, log } from "@/common.js"
 export class ProductDataHandler {
 
 	static async getList(corpId) {
-
 		log("CALL ProductDataHandler.getList(" + corpId + ")");
 
 		// TODO: Make query string for conditions
@@ -50,6 +49,123 @@ export class ProductDataHandler {
 		await sleep(100 + 100 * Math.random());
 
 		return dummyData.filter(item => item.productNo === productNo)[0];
+	}
+
+	static async postProduct(corpId, body) {
+		log("CALL ProductDataHandler.postProduct(" + corpId + ")");
+		const url = getApi("product") + "/corps/" + corpId + "/products/";
+		let result;
+
+		try {
+			const res = await fetch(url,{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(body)
+			});
+
+			if(200 === res.status || 201 === res.status) {
+				log("Product is posted successfully.");
+				result = res;
+				result.isSuccess = true;
+				result.message = "Success";
+
+				log(result);
+			}
+			else {
+				result = res;
+				result.isSuccess = false;
+				result.message = "Server Error";
+
+				console.error(result);
+			}
+		}
+		catch(err) {
+			console.error(err);
+			result = { isSuccess: false, message: "Client Error" };
+		}
+		finally {
+			return result;
+		}
+	}
+
+	static async putProduct(corpId, productNo, body) {
+		log("CALL ProductDataHandler.putProduct(" + corpId + ", " + productNo + ")");
+		const url = getApi("product") + "/corps/" + corpId + "/products/" + productNo;
+		let result;
+
+		try {
+			const res = await fetch(url,{
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(body)
+			});
+
+			if(200 === res.status || 201 === res.status) {
+				log("Product is putted successfully.");
+				result = res;
+				result.isSuccess = true;
+				result.message = "Success";
+
+				log(result);
+			}
+			else {
+				result = res;
+				result.isSuccess = false;
+				result.message = "Server Error";
+
+				console.error(result);
+			}
+		}
+		catch(err) {
+			console.error(err);
+			result = { isSuccess: false, message: "Client Error" };
+		}
+		finally {
+			return result;
+		}
+	}
+
+	static async deleteProduct(corpId, productNo, body) {
+		log("CALL ProductDataHandler.deleteProduct(" + corpId + ", " + productNo + ")");
+		const url = getApi("product") + "/corps/" + corpId + "/products/" + productNo;
+		let result;
+
+		try {
+			const res = await fetch(url,{
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(body)
+			});
+
+			if(200 === res.status) {
+				log("Product is deleted successfully.");
+				result = res;
+				result.isSuccess = true;
+				result.message = "Success";
+
+				log(result);
+			}
+			else {
+				result = res;
+				result.isSuccess = false;
+				result.message = "Server Error";
+
+				console.error(result);
+			}
+		}
+		catch(err) {
+			console.error(err);
+			result = { message: "Client Error" }
+		}
+		finally {
+			return result;
+		}
 	}
 }
 

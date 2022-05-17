@@ -74,6 +74,7 @@
 .h1--dashboard-skeleton {
 	color: var(--box-color-skeleton);
 	background-color: var(--box-color-skeleton);
+	border-radius: 100px;
 }
 
 .h1--main-title {
@@ -258,17 +259,10 @@
 	width: 100%;
 }
 
-.div--org-title {
+.div--main-title {
 	margin: 0 1em;
 	font-size: 1.5em;
 	font-weight: bold;
-}
-
-.div--org-listitem {
-	margin: 1em;
-	padding: 0.5em;
-	min-height: 1.5em;
-	display: flex;
 }
 
 .div--org-button {
