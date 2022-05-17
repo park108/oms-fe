@@ -44,6 +44,11 @@ export class OrganizationDataHandler {
 	static async getList(corpId, uri) {
 
 		log("CALL OrganizationDataHandler.getList(" + corpId + ", " + uri + ")");
+		const savedList = sessionStorage.getItem(uri + "_List");
+		if(undefined !== savedList && null !== savedList) {
+			log("Return from session");
+			return JSON.parse(savedList);
+		}
 
 		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/";
 		let result;
@@ -75,6 +80,8 @@ export class OrganizationDataHandler {
 				await sleep(100 + 100 * Math.random());
 				log("Set " + uri + " from dummy data for test");
 			}
+
+			sessionStorage.setItem(uri + "_List", JSON.stringify(result));
 			
 			return result;
 		}

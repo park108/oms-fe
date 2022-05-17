@@ -43,7 +43,7 @@
 		async mounted() {
 			this.list = await OrganizationDataHandler.getList(this.corpId, this.apiUri);
 			if(null === this.list) {
-				popToast("WARNING", "Sales Org. not found.", this.$store);
+				popToast("WARNING", "Org. not found.", this.$store);
 			}
 			this.isLoading = false;
 		},

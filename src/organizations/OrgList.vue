@@ -28,6 +28,7 @@
 	import Footer from "@/Footer.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import Toaster from "@/Toaster.vue";
+	import { popToast } from "@/Toaster.vue";
 	import { isUuid } from "@/common.js"
 	import { OrganizationDataHandler } from "./OrganizationDataHandler.js";
 	
