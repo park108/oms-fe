@@ -9,6 +9,9 @@ import CustomerList from '@/customers/CustomerList.vue'
 import CustomerDetail from '@/customers/CustomerDetail.vue'
 import ProductList from '@/products/ProductList.vue'
 import ProductDetail from '@/products/ProductDetail.vue'
+import Login from '@/users/Login.vue'
+import Profile from '@/users/Profile.vue'
+import Settings from '@/users/Settings.vue'
 
 const consoleRoutes = [
 	{ name: 'Index', path: '/', component: Index, }
@@ -40,9 +43,20 @@ const productRoutes = [
 	{ name: 'productDetail', path: '/products/:productNo', component: ProductDetail },
 ];
 
+const userRoutes = [
+	{ name: 'login', path: '/login/', component: Login },
+	{ name: 'profile', path: '/user/profile/', component: Profile },
+	{ name: 'settings', path: '/user/settings/', component: Settings },
+];
+
 const router = createRouter({
 	history: createWebHistory(process.env.BASE_URL),
-	routes: consoleRoutes.concat(orgRoutes).concat(customerRoutes).concat(productRoutes),
+	routes: consoleRoutes
+		.concat(orgRoutes)
+		.concat(customerRoutes)
+		.concat(productRoutes)
+		.concat(userRoutes)
+		,
 })
 
 export default router

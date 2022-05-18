@@ -23,11 +23,9 @@
 		methods: {
 			moveIndex: function() {
 				this.$router.push({name: "Index"});
-				log("Move Index");
 			},
 			moveMain: function() {
 				this.$router.push({name: this.routeName});
-				log("Move Main: " + this.routeName);
 			}
 		}
 	}
