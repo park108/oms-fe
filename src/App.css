@@ -90,6 +90,18 @@
 	border-radius: 10px;
 }
 
+.section--login-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	min-width: 300px;
+	max-width: 500px;
+	margin: auto;
+	padding: 30px;
+	box-shadow: 0px 0px 4px 1px var(--shadow-color-normal);
+}
+
 .section--index-menu {
 	min-height: 5em;
 }
@@ -188,6 +200,11 @@
 	cursor: pointer;
 }
 
+.button--login-submit {
+	background-color: var(--event-color-save);
+	width: 100%;
+}
+
 .button--data-save {
 	background-color: var(--event-color-save);
 }
@@ -219,6 +236,12 @@
 .div {
 	margin: 0;
 	padding: 0;
+}
+
+.div--login-input {
+	display: block;
+	width: 100%;
+	margin: 1em;
 }
 
 .div--user-status {
@@ -389,6 +412,15 @@
 	border-color: var(--border-color-normal);
 }
 
+.input--login-attribute {
+	width: 100%;
+	font-size: 1em;
+	margin: 0;
+	padding: 1px;
+	border-width: 0 0 1px 0;
+	border-color: var(--border-color-normal);
+}
+
 .input--list-filter {
 	width: 100%;
 	border-width: 0 0 1px 0;
@@ -437,6 +469,12 @@
 	min-width: 150px;
 	width: 150px;
 	display: block;
+}
+
+.label--login-attributename {
+	min-width: 150px;
+	width: 150px;
+	font-weight: bold;
 }
 
 .label--list-filter {

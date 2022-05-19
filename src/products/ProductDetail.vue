@@ -70,6 +70,8 @@
 				this.$router.push({name: "Index"});
 			}
 
+			document.title = "Product Manager - OMS";
+
 			this.productNo = this.$route.params.productNo;
 			if("NEW" === this.selectedOrgCode) {
 				this.isCreate = true;
