@@ -24,10 +24,11 @@
 			}
 		},
 		created() {
-			const userInfo = sessionStorage.getItem("user");
-			if(null !== userInfo && "undefined" !== userInfo) {
+			const user = sessionStorage.getItem("user");
+			if(null !== user && "undefined" !== user) {
 				this.isLoggedIn = true;
-				this.userInitial = userInfo.substring(0, 2);
+				const userInfo = JSON.parse(user);
+				this.userInitial = userInfo.initial;
 			}
 			else {
 				this.isLoggedIn = false;
