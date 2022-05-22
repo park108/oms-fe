@@ -1,24 +1,29 @@
 import { getApi, sleep, log } from "@/common.js"
 
-export class ProductDataHandler {
+export class UserDataHandler {
+
+	static async login(id, password) {
+		log("CALL UserDataHandler.login(" + id + ")");
+		// TODO: Make login logic
+		// TODO: Make test latency
+		await sleep(100 + 100 * Math.random());
+		return dummyData.filter(user => user.id === id)[0];
+	}
 
 	static async getList(corpId) {
-		log("CALL ProductDataHandler.getList(" + corpId + ")");
-
+		log("CALL UserDataHandler.getList(" + corpId + ")");
 		// TODO: Make query string for conditions
-		const url = getApi("product") + "/corps/" + corpId;
+		const url = getApi("user") + "/corps/" + corpId;
 		let result;
-
 		try {
 			const res = await fetch(url);
-
 			if(404 === res.status) {
-				log("Products are not found");
+				log("Users are not found");
 				result = null;
 			}
 			else {
 				const data = await res.json();
-				log("Product list fetched successfully.");
+				log("User list fetched successfully.");
 				log(data);
 				result = data;
 			}
@@ -28,56 +33,46 @@ export class ProductDataHandler {
 			result = null;
 		}
 		finally {
-
 			// TODO: Delete before deilvery backend
 			if(null == result) {
 				result = dummyData;
-
 				// TODO: Make test latency
 				await sleep(100 + 100 * Math.random());
-
-				log("Set product list from dummy data for test");
+				log("Set user list from dummy data for test");
 			}
-
 			return result;
 		}
 	}
 
-	static async getProduct(corpId, productNo) {
-
+	static async getUser(corpId, id) {
 		// TODO: Make test latency
 		await sleep(100 + 100 * Math.random());
-
-		return dummyData.filter(item => item.productNo === productNo)[0];
+		return dummyData.filter(user => user.id === id)[0];
 	}
 
-	static async postProduct(corpId, body) {
-		log("CALL ProductDataHandler.postProduct(" + corpId + ")");
-		const url = getApi("product") + "/corps/" + corpId + "/products/";
+	static async postUser(corpId, body) {
+		log("CALL UserDataHandler.postUser(" + corpId + ")");
+		const url = getApi("user") + "/corps/" + corpId + "/users/";
 		let result;
-
 		try {
-			const res = await fetch(url,{
+			const res = await fetch(url, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
 				},
 				body: JSON.stringify(body)
 			});
-
 			if(200 === res.status || 201 === res.status) {
-				log("Product is posted successfully.");
+				log("User is posted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
-
 				log(result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
-
 				console.error(result);
 			}
 		}
@@ -90,13 +85,13 @@ export class ProductDataHandler {
 		}
 	}
 
-	static async putProduct(corpId, productNo, body) {
-		log("CALL ProductDataHandler.putProduct(" + corpId + ", " + productNo + ")");
-		const url = getApi("product") + "/corps/" + corpId + "/products/" + productNo;
+	static async putUser(corpId, id, body) {
+		log("CALL UserDataHandler.putUser(" + corpId + ", " + id + ")");
+		const url = getApi("product") + "/corps/" + corpId + "/users/" + id;
 		let result;
 
 		try {
-			const res = await fetch(url,{
+			const res = await fetch(url, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json"
@@ -105,18 +100,16 @@ export class ProductDataHandler {
 			});
 
 			if(200 === res.status || 201 === res.status) {
-				log("Product is putted successfully.");
+				log("User is putted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
-
 				log(result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
-
 				console.error(result);
 			}
 		}
@@ -129,11 +122,10 @@ export class ProductDataHandler {
 		}
 	}
 
-	static async deleteProduct(corpId, productNo, body) {
-		log("CALL ProductDataHandler.deleteProduct(" + corpId + ", " + productNo + ")");
-		const url = getApi("product") + "/corps/" + corpId + "/products/" + productNo;
+	static async deleteUser(corpId, id, body) {
+		log("CALL UserDataHandler.deleteUser(" + corpId + ", " + id + ")");
+		const url = getApi("user") + "/corps/" + corpId + "/users/" + id;
 		let result;
-
 		try {
 			const res = await fetch(url,{
 				method: "DELETE",
@@ -144,7 +136,7 @@ export class ProductDataHandler {
 			});
 
 			if(200 === res.status) {
-				log("Product is deleted successfully.");
+				log("User is deleted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
@@ -155,7 +147,6 @@ export class ProductDataHandler {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
-
 				console.error(result);
 			}
 		}
@@ -169,16 +160,16 @@ export class ProductDataHandler {
 	}
 }
 
-
 const dummyData = [
-	{ productNo: "CE0305S001A", productName: "E03051A_C33", division: "51", baseUnit: "EA", },
-	{ productNo: "CE0370S001C", productName: "E370C_M14 NCM523", division: "51", baseUnit: "EA", },
-	{ productNo: "CE0600C002A", productName: "E06002B_OS EU", division: "51", baseUnit: "EA", },
-	{ productNo: "CP0260C002A", productName: "P02602A_F171", division: "51", baseUnit: "EA", },
-	{ productNo: "CP0318C001A", productName: "P03181A_SG2", division: "51", baseUnit: "EA", },
-	{ productNo: "CP0430S001C", productName: "P04301C_M31_NCM523", division: "51", baseUnit: "EA", },
-	{ productNo: "ME01090001A", productName: "BATTERY MODULE ASSY-SHORT", division: "51", baseUnit: "EA", },
-	{ productNo: "ME011400001", productName: "BATTERY MODULE 6M A-02", division: "51", baseUnit: "EA", },
-	{ productNo: "ME01770001A", productName: "BATTERY MODULE ASSY-LONG", division: "51", baseUnit: "EA", },
-	{ productNo: "PP0089KA401", productName: "CD_PHEV_BATTERY_PACK_ASSY", division: "51", baseUnit: "EA", },
+	{
+		id: "park108@gmail.com",
+		name: {
+			en: "Jongkil Park",
+			ko: "박종길",
+		},
+		language: "ko",
+		initial: "박",
+		corpId: "1eb2035d-bb9a-4933-a0ec-438baf8cff0a",
+		sessionId: "0d3643fd-4b6e-4244-94f4-1286468036a7",
+	},
 ];

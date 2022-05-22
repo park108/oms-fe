@@ -55,9 +55,11 @@
 				<tr class="tr tr--row-header">
 					<th class="th">No.</th>
 					<th class="th">Name</th>
+					<th class="th">Country</th>
 					<th class="th">Address</th>
 				</tr>
 				<tr class="tr tr--row-selectable" v-for="index in 10" :key="index">
+					<td class="td td--col-customer td--list-loading"><span class="span span--detail-skeleton">&nbsp;</span></td>
 					<td class="td td--col-customer td--list-loading"><span class="span span--detail-skeleton">&nbsp;</span></td>
 					<td class="td td--col-customer td--list-loading"><span class="span span--detail-skeleton">&nbsp;</span></td>
 					<td class="td td--col-customer td--list-loading"><span class="span span--detail-skeleton">&nbsp;</span></td>
@@ -67,11 +69,13 @@
 				<tr class="tr tr--row-header">
 					<th class="th">No.</th>
 					<th class="th">Name</th>
+					<th class="th">Country</th>
 					<th class="th">Address</th>
 				</tr>
 				<tr class="tr tr--row-selectable" v-for="item in filteredCustomers" :key="item.customerNo" @click="moveDetail(item.customerNo)">
 					<td class="td td--col-customer">{{item.customerNo}}</td>
 					<td class="td td--col-customer">{{item.customerName}}</td>
+					<td class="td td--col-customer">{{item.country}}</td>
 					<td class="td td--col-customer">{{item.address}}</td>
 				</tr>
 			</table>

@@ -3,11 +3,11 @@
 	<section class="section section--login-box">
 		<div class="div div--login-input">
 			<label for="user-id" class="label label--login-attributename">ID</label>
-			<input class="input input--login-attribute" id="user-id" v-model="userId" type="input" />
+			<input class="input input--login-attribute" id="user-id" v-model="userId" type="input" @keyup.enter="login" />
 		</div>
 		<div class="div div--login-input">
 			<label for="password" class="label label--login-attributename">Password</label>
-			<input class="input input--login-attribute" id="password" v-model="password" type="password" />
+			<input class="input input--login-attribute" id="password" v-model="password" type="password" @keyup.enter="login" />
 		</div>
 		<div class="div div--login-input">
 			<button class="button button--login-submit" @click="login">Login</button>
@@ -21,6 +21,7 @@
 	import Footer from "@/Footer.vue";
 	import Toaster from "@/Toaster.vue";
 	import { popToast } from "@/Toaster.vue";
+	import { UserDataHandler } from "@/users/UserDataHandler.js";
 
 	export default {
 		data() {
@@ -38,7 +39,7 @@
 			document.title = "Login - OMS";			
 		},
 		methods: {
-			login() {
+			async login() {
 				const id = document.getElementById("user-id");
 				const password = document.getElementById("password");
 				if("" === id.value) {
@@ -51,14 +52,14 @@
 					password.focus();
 					return;
 				}
-				//TODO: Make login logic
-				const userInfo = {
-					id: this.userId,
-					name: "Jongkil Park",
-					initial: "JP",
-					userToken: "0dd158e8-d909-11ec-9d64-0242ac120002"
+				
+				const loginResult = await UserDataHandler.login(id.value, password.value);
+				if(undefined === loginResult || null === loginResult) {
+					popToast("ERROR", "ID or Password is wrong.", this.$store);
+					return;
 				}
-				sessionStorage.setItem("user", JSON.stringify(userInfo));
+				sessionStorage.setItem("user", JSON.stringify(loginResult));
+				sessionStorage.setItem("corpId", loginResult.corpId);
 				this.$router.push({name: "Index"});
 			}
 		}

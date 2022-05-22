@@ -59,6 +59,7 @@ const dummyData = [
 		customerNo: "1000359",
 		customerName: "Mitsubishi Fuso Truck&Bus Corporation",
 		address: "10 Ohkura-cho, Nakahara-ku, Kawasaki-shi, Kanagawa, 211-8522, Japan",
+		country: "JP",
 		salesAreaData: [
 			{
 				salesOrg: "S000",
@@ -80,6 +81,7 @@ const dummyData = [
 		customerNo: "1000376",
 		customerName: "Solarwatt Gmbh",
 		address: "Maria-Reiche-Str, 2AD-01109, Dresden, 01109, Germany",
+		country: "DE",
 		salesAreaData: [
 			{
 				salesOrg: "S000",
@@ -101,6 +103,7 @@ const dummyData = [
 		customerNo: "1000383",
 		customerName: "Daimler AG",
 		address: "Mercedesstrasse 120, Stuttgart, 70372, Germany",
+		country: "DE",
 		salesAreaData: [
 			{
 				salesOrg: "S000",
@@ -122,6 +125,7 @@ const dummyData = [
 		customerNo: "1001983",
 		customerName: "Volkswagen Aktiengesellschaft",
 		address: "Berliner Ring 2, 38440 Wolfsburg, Germany",
+		country: "DE",
 		salesAreaData: [
 			{
 				salesOrg: "S000",
@@ -143,6 +147,7 @@ const dummyData = [
 		customerNo: "1002148",
 		customerName: "Valmet Automotive Inc",
 		address: "23501 Uusikaupunki, 23501, Finland",
+		country: "FI",
 		salesAreaData: [
 			{
 				salesOrg: "S000",
@@ -164,6 +169,7 @@ const dummyData = [
 		customerNo: "1000395",
 		customerName: "Ferrari S.P.A",
 		address: "Via Emilia Est 1163, Modena (MO), 41122, Italy",
+		country: "IT",
 		salesAreaData: [
 			{
 				salesOrg: "S000",
@@ -185,6 +191,7 @@ const dummyData = [
 		customerNo: "1000396",
 		customerName: "Ford Motor Company",
 		address: "1 American Rd, Dearborn, MI 48126, United States",
+		country: "US",
 		salesAreaData: [
 			{
 				salesOrg: "S000",
@@ -206,11 +213,13 @@ const dummyData = [
 		customerNo: "1073324",
 		customerName: "Polestar",
 		address: "Assar Gabrielssons Väg 9. SE-405 31 Gothenburg. Sweden",
+		country: "SE",
 	},
 	{
 		customerNo: "1018116406",
 		customerName: "Hyundai Mobis Co.,Ltd.",
 		address: "203, Teheran-ro Gangnam-gu Seoul, 06141, South Korea",
+		country: "KR",
 		salesAreaData: [
 			{
 				salesOrg: "S000",
@@ -246,6 +255,7 @@ const dummyData = [
 		customerNo: "3128179335",
 		customerName: "SK Mobile Enegy Co.,Ltd.",
 		address: "207, Seongyeon-ro, Seongyeon-myeon, 31930, South Korea",
+		country: "KR",
 		salesAreaData: [
 			{
 				salesOrg: "S000",

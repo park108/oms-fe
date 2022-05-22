@@ -9,11 +9,17 @@
 		<div class="div div--main-title">{{ customerNo }}</div>
 		<div class="div div--main-title">		
 			<span v-if="isLoading" class="span span--detail-skeleton">&nbsp;</span>
-			<span v-else>{{ customerData.customerName }}</span>
+			<span class="span" v-else>{{ customerData.customerName }}</span>
 		</div>
 		<div class="div div--detail-listitem">
 			<span v-if="isLoading" class="span span--detail-skeleton">&nbsp;</span>
-			<span v-else>{{ customerData.address }}</span>
+			<label v-if="!isLoading" for="country" class="label label--detail-attributename">Country</label>
+			<CodeSelector v-if="!isLoading" name="country" apiUri="countries" :corpId="corpId" :selectedValue="customerData.country" />
+		</div>
+		<div class="div div--detail-listitem">
+			<span v-if="isLoading" class="span span--detail-skeleton">&nbsp;</span>
+			<label v-if="!isLoading" for="country" class="label label--detail-attributename">Address</label>
+			<span class="span" v-if="!isLoading">{{ customerData.address }}</span>
 		</div>
 		<div class="div div--main-title">
 			Sales Area Data
@@ -53,7 +59,10 @@
 				<label for="salesGroup" class="label label--detail-attributename">Sales Group</label>
 				<OrgSelector name="salesGroup" apiUri="groups" :selectedValue="area.salesGroup" :corpId="this.corpId" />
 			</div>
-			<CustomerDetailInput attributeName="Currency" name="salesOcurrencyffice" :value="area.currency" />
+			<div class="div div--detail-listitem">
+				<label for="currency" class="label label--detail-attributename">Currency</label>
+				<CodeSelector name="currency" apiUri="currencies" :corpId="corpId" :selectedValue="area.currency" />
+			</div>
 			<CustomerDetailInput attributeName="Customer Pricing Procedure" name="customerPricingProcedure" :value="area.customerPricingProcedure" />
 			<CustomerDetailInput attributeName="Delivering Plant" name="deliveringPlant" :value="area.deliveringPlant" />
 			<CustomerDetailInput attributeName="Shipping Condition" name="shippingCondition" :value="area.shippingCondition" />
@@ -83,6 +92,7 @@
 	import Toaster from "@/Toaster.vue";
 	import CustomerDetailInput from "./CustomerDetailInput.vue";
 	import OrgSelector from "@/organizations/OrgSelector.vue";
+	import CodeSelector from "@/common/CodeSelector.vue";
 	import { popToast } from "@/Toaster.vue";
 	import { CustomerDataHandler } from './CustomerDataHandler';
 	import { isUuid, log, confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
@@ -106,6 +116,7 @@
 			Toaster,
 			CustomerDetailInput,
 			OrgSelector,
+			CodeSelector,
 		},
 		created() {
 			this.corpId = sessionStorage.getItem("corpId");

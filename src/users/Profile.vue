@@ -5,13 +5,18 @@
 	/>
 	<main class="main">
 		<div class="div div--main-title">
-			{{ userInfo.name }}
+			{{ userInfo.name.default }}
 		</div>
 		<div class="div div--detail-list" role="list">
+			<AttInput name="company" attribute-name="Company" :value="corpInfo.companyName" />
 			<AttInput name="id" attribute-name="ID" :value="userInfo.id" />
-			<AttInput name="name" attribute-name="Name" :value="userInfo.name" :editable="true" />
+			<div class="div div--detail-listitem">
+				<label for="language" class="label label--detail-attributename">Language</label>
+				<CodeSelector name="language" apiUri="languages" :corpId="corpInfo.id" :selectedValue="userInfo.language" :disabled="false"/>
+			</div>
+			<AttInput name="name" attribute-name="Name" :value="userInfo.name[userInfo.language]" :editable="true" />
 			<AttInput name="initial" attribute-name="Initial" :value="userInfo.initial" :editable="true" />
-			<AttInput name="userToken" attribute-name="Temporary Token" :value="userInfo.userToken" />
+			<AttInput name="sessionId" attribute-name="Session ID" :value="userInfo.sessionId" />
 		</div>
 		<Toaster />
 	</main>
@@ -26,22 +31,27 @@
 	import Header from "@/Header.vue";
 	import Navigation from "@/Navigation.vue";
 	import AttInput from "@/DetailAttributeInput.vue";
+	import CodeSelector from "@/common/CodeSelector.vue";
 	import EventButtons from "@/EventButtons.vue";
 	import Footer from "@/Footer.vue";
 	import Toaster from "@/Toaster.vue";
 	import { popToast } from "@/Toaster.vue";
 	import { confirmUpdateItem } from "@/common.js";
+	import { UserDataHandler } from "@/users/UserDataHandler.js";
+	import { CommonCodes } from "@/common/CommonCodes.js";
 
 	export default {
 		data() {
 			return {
 				userInfo: null,
+				corpInfo: null,
 			}
 		},
 		components: {
 			Header,
 			Navigation,
 			AttInput,
+			CodeSelector,
 			EventButtons,
 			Footer,
 			Toaster,
@@ -52,12 +62,23 @@
 				this.$router.push({name: "Index"});
 			}
 			this.userInfo = JSON.parse(user);
+
+			const corp = sessionStorage.getItem("corp");
+			if(undefined === corp || null === corp) {
+				this.$router.push({name: "Index"});
+			}
+			this.corpInfo = JSON.parse(corp);
+
 			document.title = "User Profile - OMS";
+
+			const languages = CommonCodes.getCodeList(this.corpInfo.id, "languages");
+			console.log(languages);
 		},
 		methods: {
 			saveItem: async function() {
 				const id = document.getElementById("id").value;
 				const name = document.getElementById("name");
+				const language = document.getElementById("language");
 				const initial = document.getElementById("initial");
 
 				if("" === id) {
@@ -69,6 +90,11 @@
 					name.focus();
 					return;
 				}
+				if("" === language.value) {
+					popToast("WARNING", "Language is empty", this.$store);
+					language.focus();
+					return;
+				}
 				if("" === initial.value) {
 					popToast("WARNING", "Initial is empty", this.$store);
 					initial.focus();
@@ -78,19 +104,20 @@
 				if(!confirmUpdateItem("Profile")) return;
 
 				// TODO: Make user profile data handler and link that
-				// const res = await OrganizationDataHandler.putOrg(this.corpId, this.orgUri, code.value, {
-				// 	[this.orgName]: code.value,
-				// 	[this.orgName + "Desc"]: desc.value,
-				// 	id: id,
-				// });
-				// if(true === res.isSuccess) {
-				// 	popToast("SUCCESS", this.orgDesc + " " + code.value + " is updated.", this.$store);
-				// 	this.isPending = true;
-				// 	setTimeout(() => this.$router.go(-1), 2000);
-				// }
-				// else {
-				// 	popToast("ERROR", "Server Error. Please contact administrator.", this.$store);
-				// }
+				let body = this.userInfo;
+				body.name[language.value] = name.value;
+				body.language = language.value;
+				body.initial =  initial.value;
+				sessionStorage.setItem("user", JSON.stringify(body)); // TODO: Delete after make backend
+				const res = await UserDataHandler.putUser(this.corpId, this.id, body);
+				if(true === res.isSuccess) {
+					popToast("SUCCESS", this.orgDesc + " " + code.value + " is updated.", this.$store);
+					this.isPending = true;
+					setTimeout(() => this.$router.go(-1), 2000);
+				}
+				else {
+					popToast("ERROR", "Server Error. Please contact administrator.", this.$store);
+				}
 			},
 		}
 	}

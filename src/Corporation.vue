@@ -34,21 +34,19 @@
 		},
 		methods: {
 			getCorprations: async function () {
-
-				// TODO: Remove dummyUser after make User app.
-				const url = getApi("organization") + "/corps/" + dummyUser.corpId;
-
+				const user = sessionStorage.getItem("user");
+				if(undefined === user || null === user) {
+					this.$router.push({name: "Index"});
+				}
+				const userInfo = JSON.parse(user);
+				const url = getApi("organization") + "/corps/" + userInfo.corpId;
 				try {
 					this.isLoading = true;
-
 					const res = await fetch(url);
-
 					if(404 === res.status) {
 						log("corps is not found");
-
 						// TODO: Make test latency
 						await sleep(100 + 100 * Math.random());
-
 						this.corp = dummyData; // TODO: Remove
 					}
 					else {
@@ -61,7 +59,7 @@
 					this.corp = dummyData; // TODO: Remove
 				}
 				finally {
-					sessionStorage.setItem("corpId", this.corp.id);
+					sessionStorage.setItem("corp", JSON.stringify(this.corp));
 					this.isLoading = false;
 				}
 			},
@@ -75,11 +73,5 @@
 		countryCode: "KR",
 		vatNumber: "2428702258",
 		id: "1eb2035d-bb9a-4933-a0ec-438baf8cff0a",
-	}
-
-	const dummyUser = {
-		name: "Jongkil Park",
-		corpId: "1eb2035d-bb9a-4933-a0ec-438baf8cff0a",
-		id: "9fh39gg1-bb9a-4933-a0ec-438baf8cff0a"
 	}
 </script>
