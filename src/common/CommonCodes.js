@@ -1,4 +1,4 @@
-import { getApi, sleep, log } from "@/common.js"
+import { getApi, sleep, log } from "@/common/common.js"
 
 export class CommonCodes {
 

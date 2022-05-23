@@ -25,16 +25,16 @@
 	<Footer />
 </template>
 <script>
-	import Header from "@/Header.vue";
-	import Navigation from "@/Navigation.vue";
+	import Header from "@/common/Header.vue";
+	import Navigation from "@/common/Navigation.vue";
 	import OrgLoading from "@/organizations/OrgLoading.vue";
-	import AttInput from "@/DetailAttributeInput.vue";
-	import Footer from "@/Footer.vue";
-	import EventButtons from "@/EventButtons.vue";
-	import Toaster from "@/Toaster.vue";
-	import { popToast } from "@/Toaster.vue";
+	import AttInput from "@/common/DetailAttributeInput.vue";
+	import Footer from "@/common/Footer.vue";
+	import EventButtons from "@/common/EventButtons.vue";
+	import Toaster from "@/common/Toaster.vue";
+	import { popToast } from "@/common/Toaster.vue";
 	import { OrganizationDataHandler } from './OrganizationDataHandler';
-	import { isUuid, confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
+	import { isUuid, confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common/common.js";
 
 	export default {
 		data() {

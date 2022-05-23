@@ -2,7 +2,7 @@
 	<Header title="User Settings" routeName="settings" />
 </template>
 <script>
-	import Header from "@/Header.vue";
+	import Header from "@/common/Header.vue";
 
 	export default {
 		components: {

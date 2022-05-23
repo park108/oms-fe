@@ -6,10 +6,10 @@
 		<OrgLoading v-if="isLoading" />
 		<div class="div" role="list" v-else>
 			<div class="div div--detail-listitem" role="listitem" >
-				<span class="span span--org-listitem">VAT Number: {{ corp.vatNumber }}</span>
+				<span class="span span--org-listitem">{{ corp.address }}</span>
 			</div>
 			<div class="div div--detail-listitem" role="listitem" >
-				<span class="span span--org-listitem">Country: {{ corp.countryCode }}</span>
+				<span class="span span--org-listitem">{{ corp.vatNumber }}</span>
 			</div>
 		</div>
     </div>
@@ -17,7 +17,7 @@
 
 <script>
 	import OrgLoading from "@/organizations/OrgLoading.vue";
-	import { getApi, sleep, log } from "./common.js"
+	import { getApi, sleep, log } from "../common/common.js"
 
 	export default {
 		data() {
@@ -70,8 +70,9 @@
 		companyName: "SK On Co., Ltd.",
 		companyCode: "S000",
 		companyCodeDesc: "SK on",
-		countryCode: "KR",
 		vatNumber: "2428702258",
+		country: "KR",
+		address: "26, Jong-ro, Jongno-gu, Seoul, Korea",
 		id: "1eb2035d-bb9a-4933-a0ec-438baf8cff0a",
 	}
 </script>

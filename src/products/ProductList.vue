@@ -68,10 +68,10 @@
 	<Footer />
 </template>
 <script>
-	import Header from "@/Header.vue";
-	import Corporation from "@/Corporation.vue";
-	import Footer from "@/Footer.vue";
-	import { log, isUuid } from "@/common.js"
+	import Header from "@/common/Header.vue";
+	import Corporation from "@/organizations/Corporation.vue";
+	import Footer from "@/common/Footer.vue";
+	import { log, isUuid } from "@/common/common.js"
 	import { ProductDataHandler } from "@/products/ProductDataHandler.js";
 
 	export default {

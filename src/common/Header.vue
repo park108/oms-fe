@@ -9,8 +9,8 @@
 	</header>
 </template>
 <script>
-	import HeaderUserIcon from "@/HeaderUserIcon.vue";
-	import { log } from "@/common.js"
+	import HeaderUserIcon from "@/common/HeaderUserIcon.vue";
+	import { log } from "@/common/common.js"
 
 	export default {
 		props: {

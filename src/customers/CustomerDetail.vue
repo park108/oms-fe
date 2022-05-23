@@ -14,13 +14,12 @@
 		<div class="div div--detail-listitem">
 			<span v-if="isLoading" class="span span--detail-skeleton">&nbsp;</span>
 			<label v-if="!isLoading" for="country" class="label label--detail-attributename">Country</label>
-			<CodeSelector v-if="!isLoading" name="country" apiUri="countries" :corpId="corpId" :selectedValue="customerData.country" />
+			<CodeSelector v-if="!isLoading" name="country" apiUri="countries" :corpId="corpId" :selectedValue="customerData.country" :disabled="false" />
 		</div>
-		<div class="div div--detail-listitem">
-			<span v-if="isLoading" class="span span--detail-skeleton">&nbsp;</span>
-			<label v-if="!isLoading" for="country" class="label label--detail-attributename">Address</label>
-			<span class="span" v-if="!isLoading">{{ customerData.address }}</span>
+		<div v-if="isLoading" class="div div--detail-listitem">
+			<span class="span span--detail-skeleton">&nbsp;</span>
 		</div>
+		<CustomerDetailInput v-if="!isLoading" attributeName="Address" name="address" :value="customerData.address" :editable="true" />
 		<div class="div div--main-title">
 			Sales Area Data
 		</div>
@@ -53,22 +52,22 @@
 			</div>
 			<div class="div div--detail-listitem">
 				<label for="salesOffice" class="label label--detail-attributename">Sales Office</label>
-				<OrgSelector name="salesOffice" apiUri="offices" :selectedValue="area.salesOffice" :corpId="this.corpId" />
+				<OrgSelector name="salesOffice" apiUri="offices" :selectedValue="area.salesOffice" :corpId="this.corpId" :disabled="false" />
 			</div>
 			<div class="div div--detail-listitem">
 				<label for="salesGroup" class="label label--detail-attributename">Sales Group</label>
-				<OrgSelector name="salesGroup" apiUri="groups" :selectedValue="area.salesGroup" :corpId="this.corpId" />
+				<OrgSelector name="salesGroup" apiUri="groups" :selectedValue="area.salesGroup" :corpId="this.corpId" :disabled="false" />
 			</div>
 			<div class="div div--detail-listitem">
 				<label for="currency" class="label label--detail-attributename">Currency</label>
-				<CodeSelector name="currency" apiUri="currencies" :corpId="corpId" :selectedValue="area.currency" />
+				<CodeSelector name="currency" apiUri="currencies" :corpId="corpId" :selectedValue="area.currency" :disabled="false" />
 			</div>
-			<CustomerDetailInput attributeName="Customer Pricing Procedure" name="customerPricingProcedure" :value="area.customerPricingProcedure" />
-			<CustomerDetailInput attributeName="Delivering Plant" name="deliveringPlant" :value="area.deliveringPlant" />
-			<CustomerDetailInput attributeName="Shipping Condition" name="shippingCondition" :value="area.shippingCondition" />
-			<CustomerDetailInput attributeName="Incoterms" name="incoterms" :value="area.incoterms" />
-			<CustomerDetailInput attributeName="Payment Terms" name="paymentTerms" :value="area.paymentTerms" />
-			<CustomerDetailInput attributeName="Credit Control Area" name="creditControlArea" :value="area.creditControlArea" />
+			<CustomerDetailInput attributeName="Customer Pricing Procedure" name="customerPricingProcedure" :value="area.customerPricingProcedure" :editable="true" />
+			<CustomerDetailInput attributeName="Delivering Plant" name="deliveringPlant" :value="area.deliveringPlant" :editable="true" />
+			<CustomerDetailInput attributeName="Shipping Condition" name="shippingCondition" :value="area.shippingCondition" :editable="true" />
+			<CustomerDetailInput attributeName="Incoterms" name="incoterms" :value="area.incoterms" :editable="true" />
+			<CustomerDetailInput attributeName="Payment Terms" name="paymentTerms" :value="area.paymentTerms" :editable="true" />
+			<CustomerDetailInput attributeName="Credit Control Area" name="creditControlArea" :value="area.creditControlArea" :editable="true" />
 		</section>
 		<section class="section" v-else>
 			<div class="div div--detail-listitem">
@@ -85,17 +84,17 @@
 	<Footer />
 </template>
 <script>
-	import Header from "@/Header.vue";
-	import Navigation from "@/Navigation.vue";
-	import Footer from "@/Footer.vue";
-	import EventButtons from "@/EventButtons.vue";
-	import Toaster from "@/Toaster.vue";
+	import Header from "@/common/Header.vue";
+	import Navigation from "@/common/Navigation.vue";
+	import Footer from "@/common/Footer.vue";
+	import EventButtons from "@/common/EventButtons.vue";
+	import Toaster from "@/common/Toaster.vue";
 	import CustomerDetailInput from "./CustomerDetailInput.vue";
 	import OrgSelector from "@/organizations/OrgSelector.vue";
 	import CodeSelector from "@/common/CodeSelector.vue";
-	import { popToast } from "@/Toaster.vue";
+	import { popToast } from "@/common/Toaster.vue";
 	import { CustomerDataHandler } from './CustomerDataHandler';
-	import { isUuid, log, confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common.js";
+	import { isUuid, log, confirmUpdateItem, confirmDeleteItem, confirmCreateItem } from "@/common/common.js";
 
 	export default {
 		data() {

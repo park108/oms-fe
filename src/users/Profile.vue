@@ -28,15 +28,15 @@
 	<Footer />
 </template>
 <script>
-	import Header from "@/Header.vue";
-	import Navigation from "@/Navigation.vue";
-	import AttInput from "@/DetailAttributeInput.vue";
+	import Header from "@/common/Header.vue";
+	import Navigation from "@/common/Navigation.vue";
+	import AttInput from "@/common/DetailAttributeInput.vue";
 	import CodeSelector from "@/common/CodeSelector.vue";
-	import EventButtons from "@/EventButtons.vue";
-	import Footer from "@/Footer.vue";
-	import Toaster from "@/Toaster.vue";
-	import { popToast } from "@/Toaster.vue";
-	import { confirmUpdateItem } from "@/common.js";
+	import EventButtons from "@/common/EventButtons.vue";
+	import Footer from "@/common/Footer.vue";
+	import Toaster from "@/common/Toaster.vue";
+	import { popToast } from "@/common/Toaster.vue";
+	import { confirmUpdateItem } from "@/common/common.js";
 	import { UserDataHandler } from "@/users/UserDataHandler.js";
 	import { CommonCodes } from "@/common/CommonCodes.js";
 
