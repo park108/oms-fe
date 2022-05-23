@@ -57,11 +57,11 @@
 			Toaster,
 		},
 		created() {
-			const user = sessionStorage.getItem("user");
-			if(undefined === user || null === user) {
-				this.$router.push({name: "Index"});
+			this.userInfo = UserDataHandler.getUserInfo();
+			if(null === this.userInfo) {
+				this.$router.push({name: "login"});
+				return;
 			}
-			this.userInfo = JSON.parse(user);
 
 			const corp = sessionStorage.getItem("corp");
 			if(undefined === corp || null === corp) {

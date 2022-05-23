@@ -10,6 +10,16 @@ export class UserDataHandler {
 		return dummyData.filter(user => user.id === id)[0];
 	}
 
+	static getUserInfo = () => {
+		const user = sessionStorage.getItem("user");
+		if(null === user || undefined === user || "undefined" === user) {
+			return null;
+		}
+		else {
+			return JSON.parse(user);
+		}
+	}
+
 	static async getList(corpId) {
 		log("CALL UserDataHandler.getList(" + corpId + ")");
 		// TODO: Make query string for conditions

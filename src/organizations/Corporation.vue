@@ -17,29 +17,33 @@
 
 <script>
 	import OrgLoading from "@/organizations/OrgLoading.vue";
+	import { UserDataHandler } from '@/users/UserDataHandler.js';
 	import { getApi, sleep, log } from "../common/common.js"
 
 	export default {
 		data() {
 			return {
 				isLoading: true,
+				userInfo: null,
 				corp: {}
 			}
 		},
 		components: {
 			OrgLoading,
 		},
+		created() {
+			this.userInfo = UserDataHandler.getUserInfo();
+			if(null === this.userInfo) {
+				this.$router.push({name: "login"});
+				return;
+			}
+		},
 		mounted() {
 			this.getCorprations();
 		},
 		methods: {
 			getCorprations: async function () {
-				const user = sessionStorage.getItem("user");
-				if(undefined === user || null === user) {
-					this.$router.push({name: "Index"});
-				}
-				const userInfo = JSON.parse(user);
-				const url = getApi("organization") + "/corps/" + userInfo.corpId;
+				const url = getApi("organization") + "/corps/" + this.userInfo.corpId;
 				try {
 					this.isLoading = true;
 					const res = await fetch(url);

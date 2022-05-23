@@ -15,6 +15,7 @@
 	</div>
 </template>
 <script>
+	import { UserDataHandler } from '@/users/UserDataHandler';
 	export default {
 		data() {
 			return {
@@ -24,16 +25,14 @@
 			}
 		},
 		created() {
-			const user = sessionStorage.getItem("user");
-			if(null !== user && "undefined" !== user) {
-				this.isLoggedIn = true;
-				const userInfo = JSON.parse(user);
-				this.userInitial = userInfo.initial;
-			}
-			else {
-				this.isLoggedIn = false;
+			const userInfo = UserDataHandler.getUserInfo();
+			if(null === userInfo) {
 				this.logout();
 			}
+			else {
+				this.isLoggedIn = true;
+				this.userInitial = userInfo.initial;
+			}			
 		},
 		methods: {
 			openMenu: function(e) {
@@ -48,8 +47,6 @@
 				this.$router.push({name: "settings"});
 			},
 			logout: function() {
-				this.isMenuOpen = false;
-				// TODO: Make logout logic
 				sessionStorage.clear();
 				this.$router.push({name: "login"});
 			},
