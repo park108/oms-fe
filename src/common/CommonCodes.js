@@ -5,7 +5,7 @@ export class CommonCodes {
 	static async getCodeList(corpId, uri) {
 		log("CALL CommonCodes.getCodeList(" + corpId + ")");
 		// TODO: Make query string for conditions
-		const url = getApi("codes") + "/corps/" + corpId + "/" + uri + "/";
+		const url = getApi("codes") + "/corps/" + corpId + "/codes/" + uri + "/";
 		const codeName = uriToCodeName.filter(item => item.uri === uri)[0].name;
 		let result;
 		try {
