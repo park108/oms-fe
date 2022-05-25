@@ -1,6 +1,9 @@
 <template>
 	<header class="header header--top-bar">
-		<h1 class="h1 h1--main-title">
+		<h1 v-if="'login' === routeName" class="h1 h1--main-title">
+			<span class="span">OMS Management Console</span>
+		</h1>
+		<h1 v-else class="h1 h1--main-title">
 			<span class="span span--titlebutton-index" @click="moveIndex">OMS</span>
 			<span>&nbsp;</span>
 			<span class="span span--titlebutton-main" @click="moveMain">{{ title }}</span>

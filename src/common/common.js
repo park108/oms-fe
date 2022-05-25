@@ -1,54 +1,40 @@
 export const getApi = (serviceName) => {
+
 	// TODO: Change URL
-	if("organization" === serviceName) {
-		if("development" === process.env.NODE_ENV) {
-			return "http://localhost:8080"
-		}
-		else if("production" == process.env.NODE_ENV) {
-			return "http://oms-27717587.ap-northeast-2.elb.amazonaws.com";
-		}
+	const apis = {
+		organization: {
+			development: "http://localhost:8080",
+			production: "http://oms-27717587.ap-northeast-2.elb.amazonaws.com",
+		},
+		customer: {
+			development: "http://localhost:8080",
+			production: "http://oms-27717587.ap-northeast-2.elb.amazonaws.com",
+		},
+		product: {
+			development: "http://localhost:8080",
+			production: "http://oms-27717587.ap-northeast-2.elb.amazonaws.com",
+		},
+		user: {
+			development: "http://localhost:8080",
+			production: "http://oms-27717587.ap-northeast-2.elb.amazonaws.com",
+		},
+		code: {
+			development: "http://localhost:8080",
+			production: "http://oms-27717587.ap-northeast-2.elb.amazonaws.com",
+		},
 	}
-	else if("customer" === serviceName) {
-		if("development" === process.env.NODE_ENV) {
-			return "http://localhost:8080"
-		}
-		else if("production" == process.env.NODE_ENV) {
-			return "http://oms-27717587.ap-northeast-2.elb.amazonaws.com";
-		}
-	}
-	else if("product" === serviceName) {
-		if("development" === process.env.NODE_ENV) {
-			return "http://localhost:8080"
-		}
-		else if("production" == process.env.NODE_ENV) {
-			return "http://oms-27717587.ap-northeast-2.elb.amazonaws.com";
-		}
-	}
-	else if("user" === serviceName) {
-		if("development" === process.env.NODE_ENV) {
-			return "http://localhost:8080"
-		}
-		else if("production" == process.env.NODE_ENV) {
-			return "http://oms-27717587.ap-northeast-2.elb.amazonaws.com";
-		}
-	}
-	else if("codes" === serviceName) {
-		if("development" === process.env.NODE_ENV) {
-			return "http://localhost:8080"
-		}
-		else if("production" == process.env.NODE_ENV) {
-			return "http://oms-27717587.ap-northeast-2.elb.amazonaws.com";
-		}
-	}
+
+	return apis[serviceName][process.env.NODE_ENV];
 }
 
 export const isUuid = (id) => {
+	// 8-4-4-4-12 (32 byte)
 	const regexExpForUuid = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
 	return regexExpForUuid.test(id);
 }
 
-export const sleep = (milliseconds) => {
-	return new Promise(resolve => setTimeout(resolve, milliseconds))
+export const sleep = (ms) => {
+	return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 export const log = (str) => {
