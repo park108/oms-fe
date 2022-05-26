@@ -190,6 +190,12 @@
 	background-color: var(--toast-color-error);
 }
 
+.section--salesarea-panel {
+	display: flex;
+	flex-direction: row;
+	overflow-x: hidden;
+}
+
 .button {
 	color: white;
 	font-size: 1em;
@@ -231,6 +237,23 @@
 
 .button:active {
 	background-color: var(--event-color-active);
+}
+
+.button--salesarea-button {
+	color: var(--text-color-normal);
+	font-weight: normal;
+	font-size: 0.9em;
+	background-color: transparent;
+	border: 0;
+	margin-bottom: -15px;
+}
+
+.button--salesarea-selected {
+	text-decoration: underline;
+	border-width: 1px 1px 1px 1px;
+	border-style: solid;
+	border-color: var(--border-color-normal) var(--border-color-normal) white var(--border-color-normal);
+	background-color: var(--background-color-normal);
 }
 
 .div {
@@ -320,6 +343,14 @@
 	padding: 0.5em;
 	min-height: 1.5em;
 	display: flex;
+}
+
+.div--salesarea-panel {
+	min-width: 100%;
+}
+
+.div--salesarea-selector {
+	margin: 0 1em;
 }
 
 .span {

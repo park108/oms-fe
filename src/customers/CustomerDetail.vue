@@ -37,43 +37,33 @@
 			<CustomerDetailInput :isLoading="true" attributeName="Payment Terms" />
 			<CustomerDetailInput :isLoading="true" attributeName="Credit Control Area" />
 		</section>
-		<section class="section" v-else-if="undefined !== customerData.salesAreaData" v-for="(area, index) in customerData.salesAreaData" :key="index">
-			<div class="div div--detail-listitem">
-				<label for="salesOrg" class="label label--detail-attributename">Sales Org.</label>
-				<OrgSelector name="salesOrg" apiUri="orgs" :selectedValue="area.salesOrg" :corpId="this.corpId" />
-			</div>
-			<div class="div div--detail-listitem">
-				<label for="distributionChannel" class="label label--detail-attributename">Distribution Channel</label>
-				<OrgSelector name="distributionChannel" apiUri="channels" :selectedValue="area.distributionChannel" :corpId="this.corpId" />
-			</div>
-			<div class="div div--detail-listitem">
-				<label for="division" class="label label--detail-attributename">Division</label>
-				<OrgSelector name="division" apiUri="divs" :selectedValue="area.division" :corpId="this.corpId" />
-			</div>
-			<div class="div div--detail-listitem">
-				<label for="salesOffice" class="label label--detail-attributename">Sales Office</label>
-				<OrgSelector name="salesOffice" apiUri="offices" :selectedValue="area.salesOffice" :corpId="this.corpId" :disabled="false" />
-			</div>
-			<div class="div div--detail-listitem">
-				<label for="salesGroup" class="label label--detail-attributename">Sales Group</label>
-				<OrgSelector name="salesGroup" apiUri="groups" :selectedValue="area.salesGroup" :corpId="this.corpId" :disabled="false" />
-			</div>
-			<div class="div div--detail-listitem">
-				<label for="currency" class="label label--detail-attributename">Currency</label>
-				<CodeSelector name="currency" apiUri="currencies" :corpId="corpId" :selectedValue="area.currency" :disabled="false" />
-			</div>
-			<CustomerDetailInput attributeName="Customer Pricing Procedure" name="customerPricingProcedure" :value="area.customerPricingProcedure" :editable="true" />
-			<CustomerDetailInput attributeName="Delivering Plant" name="deliveringPlant" :value="area.deliveringPlant" :editable="true" />
-			<CustomerDetailInput attributeName="Shipping Condition" name="shippingCondition" :value="area.shippingCondition" :editable="true" />
-			<CustomerDetailInput attributeName="Incoterms" name="incoterms" :value="area.incoterms" :editable="true" />
-			<CustomerDetailInput attributeName="Payment Terms" name="paymentTerms" :value="area.paymentTerms" :editable="true" />
-			<CustomerDetailInput attributeName="Credit Control Area" name="creditControlArea" :value="area.creditControlArea" :editable="true" />
-		</section>
-		<section class="section" v-else>
+		<section v-else-if="undefined === customerData.salesAreaData" class="section">
 			<div class="div div--detail-listitem">
 				None
 			</div>
 		</section>
+		<div v-else class="div">
+			<div
+				class="div div--salesarea-selector"
+				v-if="1 < customerData.salesAreaData.length"
+			>
+				<button
+					:class="[
+						'button',
+						'button--salesarea-button',
+						index === selectedSalesAreaIndex ? 'button--salesarea-selected' : '',
+					]"
+					:id="'salesarea-button-' + index"
+					v-for="(area, index) in customerData.salesAreaData" :key="index"
+					@click="moveArea(index)"
+				>
+					{{ area.salesOrg + "/" + area.distributionChannel + "/" + area.division }}
+				</button>
+			</div>
+			<section id="salesarea-panel" class="section section--salesarea-panel">
+				<CustomerDetailSalesArea :salesAreaData="customerData.salesAreaData" />
+			</section>
+		</div>
 		<Toaster />
 	</main>
 	<EventButtons
@@ -86,6 +76,7 @@
 <script>
 	import Header from "@/common/Header.vue";
 	import Navigation from "@/common/Navigation.vue";
+	import CustomerDetailSalesArea from "./CustomerDetailSalesArea.vue";
 	import Footer from "@/common/Footer.vue";
 	import EventButtons from "@/common/EventButtons.vue";
 	import Toaster from "@/common/Toaster.vue";
@@ -103,6 +94,7 @@
 				corpId: "",
 				isPending: false,
 				isCreate: false,
+				selectedSalesAreaIndex: 0,
 				customerNo: '',
 				customerData: null,
 			}
@@ -110,6 +102,7 @@
 		components: {
 			Header,
 			Navigation,
+			CustomerDetailSalesArea,
 			Footer,
 			EventButtons,
 			Toaster,
@@ -147,6 +140,11 @@
 				if(!confirmDeleteItem("Customer")) return;
 				log("delete customer");
 			},
+			moveArea: function(index) {
+				const objectRect = document.getElementById("salesarea-index-" + index).getBoundingClientRect();
+				this.selectedSalesAreaIndex = index;
+				document.getElementById("salesarea-panel").scrollTo(objectRect.x - 21, objectRect.y);
+			}
 		}
 	}
 </script>
