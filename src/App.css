@@ -420,6 +420,7 @@
 	background-color: var(--box-color-skeleton);
 	width: 100%;
 	padding: 1px;
+	height: 21px;
 	border-width: 0 0 1px 0;
 	border-style: solid;
 	border-color: var(--box-color-skeleton);
@@ -439,6 +440,7 @@
 	font-size: 1em;
 	margin: 0;
 	padding: 1px;
+	height: 21px;
 	border-width: 0 0 1px 0;
 	border-color: var(--border-color-normal);
 }
@@ -461,6 +463,7 @@
 .select--detail-attribute {
 	width: 100%;
 	font-size: 1em;
+	height: 24px;
 	border-width: 0 0 1px 0;
 	border-color: var(--border-color-normal);
 }

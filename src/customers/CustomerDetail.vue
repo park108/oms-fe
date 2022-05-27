@@ -7,7 +7,7 @@
 	/>
 	<main class="main">
 		<div class="div div--main-title">{{ customerNo }}</div>
-		<div class="div div--main-title">		
+		<div class="div div--main-title">
 			<span v-if="isLoading" class="span span--detail-skeleton">&nbsp;</span>
 			<span class="span" v-else>{{ customerData.customerName }}</span>
 		</div>
@@ -43,18 +43,15 @@
 			</div>
 		</section>
 		<div v-else class="div">
-			<div
-				class="div div--salesarea-selector"
-				v-if="1 < customerData.salesAreaData.length"
-			>
+			<div v-if="1 < customerData.salesAreaData.length" class="div div--salesarea-selector">
 				<button
+					v-for="(area, index) in customerData.salesAreaData" :key="index"
+					:id="'salesarea-button-' + index"
 					:class="[
 						'button',
 						'button--salesarea-button',
 						index === selectedSalesAreaIndex ? 'button--salesarea-selected' : '',
 					]"
-					:id="'salesarea-button-' + index"
-					v-for="(area, index) in customerData.salesAreaData" :key="index"
 					@click="moveArea(index)"
 				>
 					{{ area.salesOrg + "/" + area.distributionChannel + "/" + area.division }}
