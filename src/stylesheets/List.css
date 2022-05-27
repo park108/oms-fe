@@ -1,0 +1,26 @@
+/*
+Style for
+	ol
+	ul
+	li
+*/
+.ul {
+	list-style: none;
+	margin: 0;
+	padding-inline-start: 0;
+}
+
+.li {
+	margin: 0;
+	padding: 0;
+}
+
+.li--menu-item {
+	cursor: pointer;
+	padding: 1em;
+}
+
+.li--menu-item:hover {
+	background-color: white;
+	color: black;
+}

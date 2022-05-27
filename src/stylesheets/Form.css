@@ -1,0 +1,135 @@
+/*
+Style for
+	label
+	input
+	button
+*/
+
+.label {
+	font-size: 1em;
+}
+
+.label--detail-attributename {
+	min-width: 150px;
+	width: 150px;
+	display: block;
+}
+
+.label--login-attributename {
+	min-width: 150px;
+	width: 150px;
+	font-weight: bold;
+}
+
+.label--list-filter {
+	min-width: 150px;
+}
+
+.label--filter-on {
+	font-weight: bold;
+	text-decoration: underline;
+	background-color: var(--event-color-active);
+}
+
+.input {
+	-webkit-appearance: none;
+}
+
+.input--detail-attribute {
+	width: 100%;
+	font-size: 1em;
+	margin: 0;
+	padding: 1px;
+	height: 21px;
+	border-width: 0 0 1px 0;
+	border-color: var(--border-color-normal);
+}
+
+.input--login-attribute {
+	width: 100%;
+	font-size: 1em;
+	margin: 0;
+	padding: 1px;
+	border-width: 0 0 1px 0;
+	border-color: var(--border-color-normal);
+}
+
+.input--list-filter {
+	width: 100%;
+	border-width: 0 0 1px 0;
+	border-color: var(--border-color-normal);
+}
+
+.select--detail-attribute {
+	width: 100%;
+	font-size: 1em;
+	height: 24px;
+	border-width: 0 0 1px 0;
+	border-color: var(--border-color-normal);
+}
+
+.select--list-filter {
+	width: 100%;
+	border-width: 0 0 1px 0;
+	border-color: var(--border-color-normal);
+}
+
+.button {
+	color: white;
+	font-size: 1em;
+	font-weight: bold;
+	height: 3em;
+	flex: 1;
+	border: 1px solid var(--border-color-normal);
+	cursor: pointer;
+}
+
+.button--login-submit {
+	background-color: var(--event-color-save);
+	width: 100%;
+}
+
+.button--data-save {
+	background-color: var(--event-color-save);
+}
+
+.button--data-save:hover {
+	color: var(--event-color-save);
+	background-color: white;
+	border-color: var(--event-color-save);
+}
+
+.button--data-delete {
+	background-color: var(--event-color-delete);;
+}
+
+.button--data-delete:hover {
+	color: var(--event-color-delete);;
+	background-color: white;
+	border-color: var(--event-color-delete);;
+}
+
+.button:hover {
+	transition: var(--event-active-transition) ease;
+}
+
+.button:active {
+	background-color: var(--event-color-active);
+}
+
+.button--salesarea-button {
+	color: var(--text-color-normal);
+	font-weight: normal;
+	font-size: 0.9em;
+	background-color: transparent;
+	border: 0;
+	margin-bottom: -15px;
+}
+
+.button--salesarea-selected {
+	text-decoration: underline;
+	border-width: 1px 1px 1px 1px;
+	border-style: solid;
+	border-color: var(--border-color-normal) var(--border-color-normal) white var(--border-color-normal);
+	background-color: var(--background-color-normal);
+}

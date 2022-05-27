@@ -1,0 +1,45 @@
+/*
+Style for
+	table
+	tr
+	th
+	td
+*/
+
+.table--main-list {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.tr--row-header {
+	border-color: #000000;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+}
+
+.tr--row-link {
+	cursor: pointer;
+	height: 3em;
+}
+
+.tr--row-link:hover {
+	text-decoration: underline;
+	background-color: var(--event-color-active);
+	transition: var(--event-active-transition) ease;
+	box-shadow: 0px 0px 4px 1px var(--shadow-color-hover);
+}
+
+.th {
+	white-space: nowrap;
+	text-align: left;
+}
+
+.td--col-customer {
+	white-space: nowrap;
+	padding-right: 10px;
+}
+
+.td--col-product {
+	white-space: nowrap;
+	padding-right: 10px;
+}

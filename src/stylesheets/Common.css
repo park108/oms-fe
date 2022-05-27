@@ -1,0 +1,37 @@
+:root {
+	--header-color: #000000;
+	--header-text-color: #ffffff;
+	--header-text-hover: #427ab3;
+	--text-color-normal: #000000;
+	--text-color-link: #666666;
+	--text-color-temporary: #999999;
+	--box-color-skeleton: #eeeeee;
+	--background-color-normal: #ffffff;
+	--background-color-ok: #ccffcc;
+	--background-color-error: #ffcccc;
+	--border-color-normal: #cccccc;
+	--border-color-hover: #ddddaa;
+	--shadow-color-normal: #eeeeee;
+	--shadow-color-hover: #eee4aa;
+	--event-color-delete: #cb4c48;
+	--event-color-save: #427ab3;
+	--event-color-active: #fff8bb;
+	--event-active-transition: 0.2s;
+	--toast-color-info: #eeeeee;
+	--toast-color-success: #66cc99;
+	--toast-color-warning: #ffe4aa;
+	--toast-color-error: #cb4c48;;
+}
+
+* {
+	font-family: Avenir, Helvetica, Arial, sans-serif;
+}
+
+#app {
+	display: flex;
+	flex-direction: column;
+}
+
+.hr {
+	margin: 5px 0;
+}

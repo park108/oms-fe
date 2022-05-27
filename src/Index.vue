@@ -28,9 +28,9 @@
 	<Footer />
 </template>
 <script>
-	import Header from "@/common/Header.vue";
-	import Corporation from "@/organizations/Corporation.vue";
-	import Footer from "@/common/Footer.vue";
+	import Header from "@/modules/common/Header.vue";
+	import Corporation from "@/modules/organizations/Corporation.vue";
+	import Footer from "@/modules/common/Footer.vue";
 
 	export default {
 		data() {

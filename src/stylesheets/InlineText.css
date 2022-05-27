@@ -1,0 +1,98 @@
+/*
+Style for
+	h1 ~ h6
+	span
+*/
+.h1 {
+	margin: 0;
+	padding: 0;
+}
+
+.h1--dashboard-skeleton {
+	color: var(--box-color-skeleton);
+	background-color: var(--box-color-skeleton);
+	border-radius: 100px;
+}
+
+.h1--main-title {
+	float: left;
+	font-size: 20px;
+}
+
+.span {
+	background-color: transparent;
+}
+
+.span--titlebutton-index {
+	cursor: pointer;
+}
+
+.span--titlebutton-index:hover {
+	color: var(--header-text-hover);
+	text-shadow: var(--header-text-hover) 0 0 4px;
+	transition: color var(--event-active-transition) ease;
+}
+
+.span--titlebutton-main {
+	cursor: pointer;
+}
+
+.span--titlebutton-main:hover {
+	color: var(--event-color-active);
+	text-shadow: var(--event-color-active) 0 0 4px;
+	transition: color var(--event-active-transition) ease;
+}
+
+.span--navbutton-back {
+	cursor: pointer;
+	color: var(--text-color-link);
+}
+
+.span--navbutton-back:hover {
+	text-decoration: underline;
+}
+
+.span--navbutton-delete {
+	cursor: pointer;
+	float: right;
+	color: var(--event-color-delete);
+}
+
+.span--navbutton-delete:hover {
+	text-decoration: underline;
+}
+
+.span--detail-attributename {
+	width: 150px;
+	min-width: 150px;
+	display: block;
+}
+
+.span--org-listitem {
+	color: var(--text-color-normal);	
+}
+
+.span--detail-skeleton {
+	display: inline-block;
+	color: var(--box-color-skeleton);
+	background-color: var(--box-color-skeleton);
+	width: 100%;
+	border-radius: 100px;
+}
+
+.span--input-skeleton {
+	display: inline-block;
+	color: var(--box-color-skeleton);
+	background-color: var(--box-color-skeleton);
+	width: 100%;
+	padding: 1px;
+	height: 21px;
+	border-width: 0 0 1px 0;
+	border-style: solid;
+	border-color: var(--box-color-skeleton);
+	border-radius: 100px;
+}
+
+.span--list-result {
+	font-size: 1em;
+}
