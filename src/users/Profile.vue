@@ -72,7 +72,6 @@
 			document.title = "User Profile - OMS";
 
 			const languages = CommonCodes.getCodeList(this.corpInfo.id, "languages");
-			console.log(languages);
 		},
 		methods: {
 			saveItem: async function() {

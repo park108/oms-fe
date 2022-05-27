@@ -97,6 +97,7 @@
 				selectedSalesAreaIndex: 0,
 				customerNo: '',
 				customerData: null,
+				salesAreaLeftPadding: 0,
 			}
 		},
 		components: {
@@ -141,9 +142,13 @@
 				log("delete customer");
 			},
 			moveArea: function(index) {
+				if(0 === this.salesAreaLeftPadding) {
+					const objectRect0 = document.getElementById("salesarea-index-0").getBoundingClientRect();
+					this.salesAreaLeftPadding = objectRect0.x;
+				}
 				const objectRect = document.getElementById("salesarea-index-" + index).getBoundingClientRect();
 				this.selectedSalesAreaIndex = index;
-				document.getElementById("salesarea-panel").scrollTo(objectRect.x - 21, objectRect.y);
+				document.getElementById("salesarea-panel").scrollTo(objectRect.x - this.salesAreaLeftPadding, objectRect.y);
 			}
 		}
 	}
