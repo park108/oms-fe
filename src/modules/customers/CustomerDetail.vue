@@ -37,11 +37,11 @@
 			<CustomerDetailInput :isLoading="true" attributeName="Payment Terms" />
 			<CustomerDetailInput :isLoading="true" attributeName="Credit Control Area" />
 		</section>
-		<section v-else-if="undefined === customerData.salesAreaData" class="section">
-			<div class="div div--detail-listitem">
+		<div v-else-if="undefined === customerData.salesAreaData">
+			<section class="section">
 				None
-			</div>
-		</section>
+			</section>
+		</div>
 		<div v-else class="div">
 			<div v-if="1 < customerData.salesAreaData.length" class="div div--salesarea-selector">
 				<button
@@ -146,7 +146,7 @@
 				const objectRect = document.getElementById("salesarea-index-" + index).getBoundingClientRect();
 				this.selectedSalesAreaIndex = index;
 				document.getElementById("salesarea-panel").scrollTo(objectRect.x - this.salesAreaLeftPadding, objectRect.y);
-			}
+			},
 		}
 	}
 </script>

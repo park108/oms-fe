@@ -21,6 +21,38 @@
 		</div>
 		<AttLoading v-if="isLoading" attribute-name="Base Unit" />
 		<AttInput v-else name="baseUnit" attribute-name="Base Unit" :value="productData.baseUnit" :editable="!isPending" />
+		<div v-if="!isLoading && undefined !== productData.salesData" class="div">
+			<div class="div div--main-title">
+				Sales Data
+			</div>
+			<div v-if="1 < productData.salesData.length" class="div div--salesarea-selector">
+				<button
+					v-for="(data, index) in productData.salesData" :key="index"
+					:id="'salesarea-button-' + index"
+					:class="[
+						'button',
+						'button--salesarea-button',
+						index === selectedSalesAreaIndex ? 'button--salesarea-selected' : '',
+					]"
+					@click="moveArea(index)"
+				>
+					{{ data.salesOrg + "/" + data.distributionChannel }}
+				</button>
+			</div>
+			<section id="salesarea-panel" class="section section--salesarea-panel">
+				<div class="div div--salesarea-panel" :id="'salesarea-index-' + index" v-for="(salesData, index) in productData.salesData" :key="index">
+					<div class="div div--detail-listitem">
+						<label for="salesOrg" class="label label--detail-attributename">Sales Org.</label>
+						<OrgSelector name="salesOrg" apiUri="orgs" :selectedValue="salesData.salesOrg" :corpId="this.corpId" />
+					</div>
+					<div class="div div--detail-listitem">
+						<label for="distributionChannel" class="label label--detail-attributename">Distribution Channel</label>
+						<OrgSelector name="distributionChannel" apiUri="channels" :selectedValue="salesData.distributionChannel" :corpId="this.corpId" />
+					</div>
+					<AttInput name="salesUnit" attribute-name="Sales Unit" :value="salesData.salesUnit" :editable="true" />
+				</div>
+			</section>
+		</div>
 		<Toaster />
 	</main>
 	<EventButtons
@@ -50,6 +82,8 @@
 				corpId: "",
 				isPending: false,
 				isCreate: false,
+				selectedSalesAreaIndex: 0,
+				salesAreaLeftPadding: 0,
 				productNo: '',
 				productData: null,
 			}
@@ -107,6 +141,15 @@
 				else {
 					popToast("ERROR", "Server Error. Please contact administrator.", this.$store);
 				}
+			},
+			moveArea: function(index) {
+				if(0 === this.salesAreaLeftPadding) {
+					const objectRect0 = document.getElementById("salesarea-index-0").getBoundingClientRect();
+					this.salesAreaLeftPadding = objectRect0.x;
+				}
+				const objectRect = document.getElementById("salesarea-index-" + index).getBoundingClientRect();
+				this.selectedSalesAreaIndex = index;
+				document.getElementById("salesarea-panel").scrollTo(objectRect.x - this.salesAreaLeftPadding, objectRect.y);
 			},
 		}
 	}

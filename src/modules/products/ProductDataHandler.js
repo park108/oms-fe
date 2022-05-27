@@ -4,11 +4,9 @@ export class ProductDataHandler {
 
 	static async getList(corpId) {
 		log("CALL ProductDataHandler.getList(" + corpId + ")");
-
 		// TODO: Make query string for conditions
 		const url = getApi("product") + "/corps/" + corpId;
 		let result;
-
 		try {
 			const res = await fetch(url);
 
@@ -28,26 +26,20 @@ export class ProductDataHandler {
 			result = null;
 		}
 		finally {
-
 			// TODO: Delete before deilvery backend
 			if(null == result) {
 				result = dummyData;
-
 				// TODO: Make test latency
 				await sleep(100 + 100 * Math.random());
-
 				log("Set product list from dummy data for test");
 			}
-
 			return result;
 		}
 	}
 
 	static async getProduct(corpId, productNo) {
-
 		// TODO: Make test latency
 		await sleep(100 + 100 * Math.random());
-
 		return dummyData.filter(item => item.productNo === productNo)[0];
 	}
 
@@ -55,7 +47,6 @@ export class ProductDataHandler {
 		log("CALL ProductDataHandler.postProduct(" + corpId + ")");
 		const url = getApi("product") + "/corps/" + corpId + "/products/";
 		let result;
-
 		try {
 			const res = await fetch(url,{
 				method: "POST",
@@ -64,20 +55,17 @@ export class ProductDataHandler {
 				},
 				body: JSON.stringify(body)
 			});
-
 			if(200 === res.status || 201 === res.status) {
 				log("Product is posted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
-
 				log(result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
-
 				console.error(result);
 			}
 		}
@@ -94,7 +82,6 @@ export class ProductDataHandler {
 		log("CALL ProductDataHandler.putProduct(" + corpId + ", " + productNo + ")");
 		const url = getApi("product") + "/corps/" + corpId + "/products/" + productNo;
 		let result;
-
 		try {
 			const res = await fetch(url,{
 				method: "PUT",
@@ -103,20 +90,17 @@ export class ProductDataHandler {
 				},
 				body: JSON.stringify(body)
 			});
-
 			if(200 === res.status || 201 === res.status) {
 				log("Product is putted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
-
 				log(result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
-
 				console.error(result);
 			}
 		}
@@ -133,7 +117,6 @@ export class ProductDataHandler {
 		log("CALL ProductDataHandler.deleteProduct(" + corpId + ", " + productNo + ")");
 		const url = getApi("product") + "/corps/" + corpId + "/products/" + productNo;
 		let result;
-
 		try {
 			const res = await fetch(url,{
 				method: "DELETE",
@@ -142,20 +125,17 @@ export class ProductDataHandler {
 				},
 				body: JSON.stringify(body)
 			});
-
 			if(200 === res.status) {
 				log("Product is deleted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
-
 				log(result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
-
 				console.error(result);
 			}
 		}
@@ -169,9 +149,11 @@ export class ProductDataHandler {
 	}
 }
 
-
 const dummyData = [
-	{ productNo: "CE0305S001A", productName: "E03051A_C33", division: "51", baseUnit: "EA", },
+	{ productNo: "CE0305S001A", productName: "E03051A_C33", division: "51", baseUnit: "EA", salesData: [
+		{ salesOrg: "S000", distributionChannel: "20", salesUnit: "EA", },
+		{ salesOrg: "S000", distributionChannel: "40", salesUnit: "PAL", },
+	]},
 	{ productNo: "CE0370S001C", productName: "E370C_M14 NCM523", division: "51", baseUnit: "EA", },
 	{ productNo: "CE0600C002A", productName: "E06002B_OS EU", division: "51", baseUnit: "EA", },
 	{ productNo: "CP0260C002A", productName: "P02602A_F171", division: "51", baseUnit: "EA", },
