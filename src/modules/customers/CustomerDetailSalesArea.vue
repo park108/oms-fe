@@ -36,6 +36,7 @@
 	import CustomerDetailInput from "./CustomerDetailInput.vue";
 	import OrgSelector from "@/modules/organizations/OrgSelector.vue";
 	import CodeSelector from "@/modules/common/CodeSelector.vue";
+	import { isUuid } from "@/modules/common/common.js";
 
 	export default {
 		data() {
@@ -57,6 +58,10 @@
 			CodeSelector,
 		},
 		created() {
+			this.corpId = sessionStorage.getItem("corpId");
+			if(undefined === this.corpId || !isUuid(this.corpId)) {
+				this.$router.push({name: "Index"});
+			}
 		},
 		mounted() {
 		},

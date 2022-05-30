@@ -4,23 +4,23 @@ export const getApi = (serviceName) => {
 	const apis = {
 		organization: {
 			development: "http://localhost:8080",
-			production: "http://oms-27717587.ap-northeast-2.elb.amazonaws.com",
+			production: "https://oms-27717587.ap-northeast-2.elb.amazonaws.com",
 		},
 		customer: {
 			development: "http://localhost:8081",
-			production: "http://oms-27717587.ap-northeast-2.elb.amazonaws.com",
+			production: "https://oms-27717587.ap-northeast-2.elb.amazonaws.com",
 		},
 		product: {
 			development: "http://localhost:8082",
-			production: "http://oms-27717587.ap-northeast-2.elb.amazonaws.com",
+			production: "https://oms-27717587.ap-northeast-2.elb.amazonaws.com",
 		},
 		user: {
 			development: "http://localhost:8083",
-			production: "http://oms-27717587.ap-northeast-2.elb.amazonaws.com",
+			production: "https://oms-27717587.ap-northeast-2.elb.amazonaws.com",
 		},
 		code: {
 			development: "http://localhost:8084",
-			production: "http://oms-27717587.ap-northeast-2.elb.amazonaws.com",
+			production: "https://oms-27717587.ap-northeast-2.elb.amazonaws.com",
 		},
 	}
 
