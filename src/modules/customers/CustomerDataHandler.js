@@ -4,7 +4,7 @@ export class CustomerDataHandler {
 
 	static async getList(corpId) {
 
-		log("CALL CustomerDataHandler.getList(" + corpId + ")");
+		log("INFO", "CALL CustomerDataHandler.getList(" + corpId + ")");
 
 		// TODO: Make query string for conditions
 		const url = getApi("customer") + "/corps/" + corpId;
@@ -14,18 +14,17 @@ export class CustomerDataHandler {
 			const res = await fetch(url);
 
 			if(404 === res.status) {
-				log("Customers are not found");
+				log("INFO", "Customers are not found");
 				result = null;
 			}
 			else {
 				const data = await res.json();
-				log("Customer list fetched successfully.");
-				log(data);
+				log("INFO", "Customer list fetched successfully.");
 				result = data;
 			}
 		}
 		catch (err) {
-			console.error(err);	
+			log("ERROR", err);	
 			result = null;
 		}
 		finally {
@@ -37,7 +36,7 @@ export class CustomerDataHandler {
 				// TODO: Make test latency
 				await sleep(100 + 100 * Math.random());
 
-				log("Set customer list from dummy data for test");
+				log("INFO", "Set customer list from dummy data for test");
 			}
 
 			return result;

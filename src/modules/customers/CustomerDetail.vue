@@ -132,11 +132,11 @@
 		methods: {
 			saveItem: async function() {
 				if(!confirmUpdateItem("Customer")) return;
-				log("save customer");
+				log("INFO", "save customer");
 			},
 			deleteItem: async function() {
 				if(!confirmDeleteItem("Customer")) return;
-				log("delete customer");
+				log("INFO", "delete customer");
 			},
 			moveArea: function(index) {
 				if(0 === this.salesAreaLeftPadding) {

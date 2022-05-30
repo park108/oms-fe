@@ -55,7 +55,7 @@
 			document.title = "Organization Manager - OMS";
 		},
 		async mounted() {
-			this.overview = await OrganizationDataHandler.getOverview(this.corp);
+			this.overview = await OrganizationDataHandler.getOverview(this.corpId);
 			if(null === this.overview) {
 				popToast("WARNING", "Organization data not found.", this.$store);
 			}

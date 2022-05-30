@@ -124,7 +124,7 @@
 		methods: {
 			saveItem: async function() {
 				if(!confirmUpdateItem("product " + this.productNo)) return;
-				log("save product");
+				log("INFO", "save product");
 			},
 			deleteItem: async function() {
 				if(!confirmDeleteItem("product " + this.productNo)) return;

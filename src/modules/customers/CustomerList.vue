@@ -130,7 +130,7 @@
 			this.filter.division = this.$store.state.filter.customerList.division;
 		},
 		async mounted() {
-			this.customers = await CustomerDataHandler.getList(this.corp);
+			this.customers = await CustomerDataHandler.getList(this.corpId);
 
 			if(null === this.customers) {
 				popToast("WARNING", "Customer data not found.", this.$store);

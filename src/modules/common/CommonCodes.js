@@ -47,25 +47,25 @@ export class CommonCodes {
 	};
 
 	static async getCodeList(corpId, uri) {
-		log("CALL CommonCodes.getCodeList(" + corpId + ")");
+		log("INFO", "CALL CommonCodes.getCodeList(" + corpId + ")");
 		const url = getApi("code") + "/corps/" + corpId + "/codes/" + uri + "/";
 		const codeName = this.uriToCodeName.filter(item => item.uri === uri)[0].name;
 		let result;
 		try {
 			const res = await fetch(url);
 			if(404 === res.status) {
-				log(codeName + " are not found");
+				log("INFO", codeName + " are not found");
 				result = null;
 			}
 			else {
 				const data = await res.json();
-				log(codeName + " list fetched successfully.");
-				log(data);
+				log("INFO", codeName + " list fetched successfully.");
+				log("INFO", data);
 				result = data;
 			}
 		}
 		catch (err) {
-			console.error(err);	
+			log("ERROR", err);	
 			result = null;
 		}
 		finally {
@@ -74,7 +74,7 @@ export class CommonCodes {
 				result = this.localTestCodes[uri];
 				// TODO: Make test latency
 				await sleep(100 + 100 * Math.random());
-				log("Set " + codeName + " from dummy data for test");
+				log("INFO", "Set " + codeName + " from dummy data for test");
 			}
 			return result;
 		}

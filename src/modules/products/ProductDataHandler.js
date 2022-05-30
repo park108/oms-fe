@@ -3,7 +3,7 @@ import { getApi, sleep, log } from "@/modules/common/common.js"
 export class ProductDataHandler {
 
 	static async getList(corpId) {
-		log("CALL ProductDataHandler.getList(" + corpId + ")");
+		log("INFO", "CALL ProductDataHandler.getList(" + corpId + ")");
 		// TODO: Make query string for conditions
 		const url = getApi("product") + "/corps/" + corpId;
 		let result;
@@ -11,18 +11,18 @@ export class ProductDataHandler {
 			const res = await fetch(url);
 
 			if(404 === res.status) {
-				log("Products are not found");
+				log("INFO", "Products are not found");
 				result = null;
 			}
 			else {
 				const data = await res.json();
-				log("Product list fetched successfully.");
-				log(data);
+				log("INFO", "Product list fetched successfully.");
+				log("INFO", data);
 				result = data;
 			}
 		}
 		catch (err) {
-			console.error(err);	
+			log("ERROR", err);	
 			result = null;
 		}
 		finally {
@@ -31,7 +31,7 @@ export class ProductDataHandler {
 				result = dummyData;
 				// TODO: Make test latency
 				await sleep(100 + 100 * Math.random());
-				log("Set product list from dummy data for test");
+				log("INFO", "Set product list from dummy data for test");
 			}
 			return result;
 		}
@@ -44,7 +44,7 @@ export class ProductDataHandler {
 	}
 
 	static async postProduct(corpId, body) {
-		log("CALL ProductDataHandler.postProduct(" + corpId + ")");
+		log("INFO", "CALL ProductDataHandler.postProduct(" + corpId + ")");
 		const url = getApi("product") + "/corps/" + corpId + "/products/";
 		let result;
 		try {
@@ -56,21 +56,21 @@ export class ProductDataHandler {
 				body: JSON.stringify(body)
 			});
 			if(200 === res.status || 201 === res.status) {
-				log("Product is posted successfully.");
+				log("INFO", "Product is posted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
-				log(result);
+				log("INFO", result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
-				console.error(result);
+				log("ERROR", result);
 			}
 		}
 		catch(err) {
-			console.error(err);
+			log("ERROR", err);
 			result = { isSuccess: false, message: "Client Error" };
 		}
 		finally {
@@ -79,7 +79,7 @@ export class ProductDataHandler {
 	}
 
 	static async putProduct(corpId, productNo, body) {
-		log("CALL ProductDataHandler.putProduct(" + corpId + ", " + productNo + ")");
+		log("INFO", "CALL ProductDataHandler.putProduct(" + corpId + ", " + productNo + ")");
 		const url = getApi("product") + "/corps/" + corpId + "/products/" + productNo;
 		let result;
 		try {
@@ -91,21 +91,21 @@ export class ProductDataHandler {
 				body: JSON.stringify(body)
 			});
 			if(200 === res.status || 201 === res.status) {
-				log("Product is putted successfully.");
+				log("INFO", "Product is putted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
-				log(result);
+				log("INFO", result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
-				console.error(result);
+				log("ERROR", result);
 			}
 		}
 		catch(err) {
-			console.error(err);
+			log("ERROR", err);
 			result = { isSuccess: false, message: "Client Error" };
 		}
 		finally {
@@ -114,7 +114,7 @@ export class ProductDataHandler {
 	}
 
 	static async deleteProduct(corpId, productNo, body) {
-		log("CALL ProductDataHandler.deleteProduct(" + corpId + ", " + productNo + ")");
+		log("INFO", "CALL ProductDataHandler.deleteProduct(" + corpId + ", " + productNo + ")");
 		const url = getApi("product") + "/corps/" + corpId + "/products/" + productNo;
 		let result;
 		try {
@@ -126,21 +126,21 @@ export class ProductDataHandler {
 				body: JSON.stringify(body)
 			});
 			if(200 === res.status) {
-				log("Product is deleted successfully.");
+				log("INFO", "Product is deleted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
-				log(result);
+				log("INFO", result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
-				console.error(result);
+				log("ERROR", result);
 			}
 		}
 		catch(err) {
-			console.error(err);
+			log("ERROR", err);
 			result = { message: "Client Error" }
 		}
 		finally {

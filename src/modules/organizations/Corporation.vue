@@ -48,7 +48,7 @@
 					this.isLoading = true;
 					const res = await fetch(url);
 					if(404 === res.status) {
-						log("corps is not found");
+						log("INFO", "corps is not found");
 						// TODO: Make test latency
 						await sleep(100 + 100 * Math.random());
 						this.corp = dummyData; // TODO: Remove
@@ -56,10 +56,11 @@
 					else {
 						const data = await res.json();
 						this.corp = data;
+						log("INFO", data);
 					}
 				}
 				catch (err) {
-					console.error(err);
+					log("ERROR", err);
 					this.corp = dummyData; // TODO: Remove
 				}
 				finally {
@@ -77,6 +78,6 @@
 		vatNumber: "2428702258",
 		country: "KR",
 		address: "26, Jong-ro, Jongno-gu, Seoul, Korea",
-		id: "1eb2035d-bb9a-4933-a0ec-438baf8cff0a",
+		"id": "4d5b98f3-caf0-4785-b60a-207b85d01c5d",
 	}
 </script>

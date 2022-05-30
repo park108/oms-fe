@@ -4,7 +4,7 @@ export class OrganizationDataHandler {
 
 	static async getOverview(corpId) {
 
-		log("CALL OrganizationDataHandler.getOverview(" + corpId + ")");
+		log("INFO", "CALL OrganizationDataHandler.getOverview(" + corpId + ")");
 
 		const url = getApi("organization") + "/corps/" + corpId + "/overview/";
 		let result;
@@ -13,18 +13,18 @@ export class OrganizationDataHandler {
 			const res = await fetch(url);
 
 			if(404 === res.status) {
-				log("Organization overview is not found");
+				log("INFO", "Organization overview is not found");
 				result = null;
 			}
 			else {
 				const data = await res.json();
-				log("Organization overview fetched successfully.");
-				log(data);
+				log("INFO", "Organization overview fetched successfully.");
+				log("INFO", data);
 				result = data;
 			}
 		}
 		catch (err) {
-			console.error(err);	
+			log("ERROR", err);	
 			result = null;
 		}
 		finally {
@@ -34,7 +34,7 @@ export class OrganizationDataHandler {
 				result = dummyData.overview;
 				// TODO: Make test latency
 				await sleep(100 + 100 * Math.random());
-				log("Set organization overview from dummy data for test");
+				log("INFO", "Set organization overview from dummy data for test");
 			}
 			
 			return result;
@@ -43,12 +43,12 @@ export class OrganizationDataHandler {
 
 	static async getList(corpId, uri) {
 
-		log("CALL OrganizationDataHandler.getList(" + corpId + ", " + uri + ")");
-		const savedList = sessionStorage.getItem(uri + "_List");
-		if(undefined !== savedList && null !== savedList) {
-			log("Return from session");
-			return JSON.parse(savedList);
-		}
+		log("INFO", "CALL OrganizationDataHandler.getList(" + corpId + ", " + uri + ")");
+		// const savedList = sessionStorage.getItem(uri + "_List");
+		// if(undefined !== savedList && null !== savedList) {
+		// 	log("INFO", "Return from session");
+		// 	return JSON.parse(savedList);
+		// }
 
 		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/";
 		let result;
@@ -57,18 +57,18 @@ export class OrganizationDataHandler {
 			const res = await fetch(url);
 
 			if(404 === res.status) {
-				log(uri + " is not found");
+				log("INFO", uri + " is not found");
 				result = null;
 			}
 			else {
 				const data = await res.json();
-				log(uri + " list fetched successfully.");
-				log(data);
+				log("INFO", uri + " list fetched successfully.");
+				log("INFO", data);
 				result = data;
 			}
 		}
 		catch (err) {
-			console.error(err);	
+			log("ERROR", err);
 			result = null;
 		}
 		finally {
@@ -78,7 +78,7 @@ export class OrganizationDataHandler {
 				result = dummyData[uri];
 				// TODO: Make test latency
 				await sleep(100 + 100 * Math.random());
-				log("Set " + uri + " from dummy data for test");
+				log("INFO", "Set " + uri + " from dummy data for test");
 			}
 
 			sessionStorage.setItem(uri + "_List", JSON.stringify(result));
@@ -89,7 +89,7 @@ export class OrganizationDataHandler {
 
 	static async getOrg(corpId, uri, orgName, orgCode) {
 
-		log("CALL OrganizationDataHandler.getOrg(" + corpId + ", " + uri + ", " + orgName + " = " + orgCode + ")");
+		log("INFO", "CALL OrganizationDataHandler.getOrg(" + corpId + ", " + uri + ", " + orgName + " = " + orgCode + ")");
 
 		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/" + orgCode + "/";
 		let result;
@@ -98,18 +98,18 @@ export class OrganizationDataHandler {
 			const res = await fetch(url);
 
 			if(404 == res.status) {
-				log(orgName + " is not found");
+				log("INFO", orgName + " is not found");
 				result = null;
 			}
 			else {
 				const data = await res.json();
-				log(orgName + " fetched successfully.");
-				log(data);
+				log("INFO", orgName + " fetched successfully.");
+				log("INFO", data);
 				result = data;
 			}
 		}
 		catch(err) {
-			console.error(err);
+			log("ERROR", err);
 			result = null;
 		}
 		finally {
@@ -121,7 +121,7 @@ export class OrganizationDataHandler {
 				})[0];
 				// TODO: Make test latency
 				await sleep(100 + 100 * Math.random());
-				log("Set " + orgName + " from dummy data for test");
+				log("INFO", "Set " + orgName + " from dummy data for test");
 			}
 			
 			return result;
@@ -130,7 +130,7 @@ export class OrganizationDataHandler {
 
 	static async getSalesArea(corpId, org, channel, div) {
 
-		log("CALL OrganizationDataHandler.getSalesArea(" + corpId + ", " + org + "/" + channel + "/" + div + ")");
+		log("INFO", "CALL OrganizationDataHandler.getSalesArea(" + corpId + ", " + org + "/" + channel + "/" + div + ")");
 
 		const url = getApi("organization") + "/corps/" + corpId + "/areas/" + org + "/" + channel + "/" + div + "/";
 		let result;
@@ -139,18 +139,18 @@ export class OrganizationDataHandler {
 			const res = await fetch(url);
 
 			if(404 == res.status) {
-				log("Sales Area is not found");
+				log("INFO", "Sales Area is not found");
 				result = null;
 			}
 			else {
 				const data = await res.json();
-				log("Sales Area fetched successfully.");
-				log(data);
+				log("INFO", "Sales Area fetched successfully.");
+				log("INFO", data);
 				result = data;
 			}
 		}
 		catch(err) {
-			console.error(err);
+			log("ERROR", err);
 			result = null;
 		}
 		finally {
@@ -164,7 +164,7 @@ export class OrganizationDataHandler {
 				})[0];
 				// TODO: Make test latency
 				await sleep(100 + 100 * Math.random());
-				log("Set Sales Area from dummy data for test");
+				log("INFO", "Set Sales Area from dummy data for test");
 			}
 			
 			return result;
@@ -173,7 +173,7 @@ export class OrganizationDataHandler {
 
 	static async postOrg(corpId, uri, body) {
 
-		log("CALL OrganizationDataHandler.postOrg(" + corpId + ", " + uri + ")");
+		log("INFO", "CALL OrganizationDataHandler.postOrg(" + corpId + ", " + uri + ")");
 
 		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/";
 		let result;
@@ -188,23 +188,23 @@ export class OrganizationDataHandler {
 			});
 
 			if(200 === res.status || 201 === res.status) {
-				log("Org is posted successfully.");
+				log("INFO", "Org is posted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
 
-				log(result);
+				log("INFO", result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
 
-				console.error(result);
+				log("ERROR", result);
 			}
 		}
 		catch(err) {
-			console.error(err);
+			log("ERROR", err);
 			result = { isSuccess: false, message: "Client Error" };
 		}
 		finally {
@@ -214,7 +214,7 @@ export class OrganizationDataHandler {
 
 	static async putOrg(corpId, uri, orgCode, body) {
 
-		log("CALL OrganizationDataHandler.putOrg(" + corpId + ", " + uri + ", " + orgCode + ")");
+		log("INFO", "CALL OrganizationDataHandler.putOrg(" + corpId + ", " + uri + ", " + orgCode + ")");
 
 		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/" + orgCode + "/";
 		let result;
@@ -229,23 +229,23 @@ export class OrganizationDataHandler {
 			});
 
 			if(200 === res.status || 201 === res.status) {
-				log("Org is putted successfully.");
+				log("INFO", "Org is putted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
 
-				log(result);
+				log("INFO", result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
 
-				console.error(result);
+				log("ERROR", result);
 			}
 		}
 		catch(err) {
-			console.error(err);
+			log("ERROR", err);
 			result = { isSuccess: false, message: "Client Error" };
 		}
 		finally {
@@ -255,7 +255,7 @@ export class OrganizationDataHandler {
 
 	static async deleteOrg(corpId, uri, orgCode, body) {
 
-		log("CALL OrganizationDataHandler.deleteOrg(" + corpId + ", " + uri + ", " + orgCode + ")");
+		log("INFO", "CALL OrganizationDataHandler.deleteOrg(" + corpId + ", " + uri + ", " + orgCode + ")");
 
 		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/" + orgCode + "/";
 		let result;
@@ -270,23 +270,23 @@ export class OrganizationDataHandler {
 			});
 
 			if(200 === res.status) {
-				log("Org is deleted successfully.");
+				log("INFO", "Org is deleted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
 
-				log(result);
+				log("INFO", result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
 
-				console.error(result);
+				log("ERROR", result);
 			}
 		}
 		catch(err) {
-			console.error(err);
+			log("ERROR", err);
 			result = { message: "Client Error" }
 		}
 		finally {

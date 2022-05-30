@@ -151,7 +151,7 @@
 			deleteItem: function() {
 				if(!confirmDeleteItem("Sales Area")) return;
 
-				log("Yes delete it!");
+				log("INFO", "Yes delete it!");
 
 				// TODO: make item delete logic
 

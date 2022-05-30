@@ -3,7 +3,7 @@ import { getApi, sleep, log } from "@/modules/common/common.js"
 export class UserDataHandler {
 
 	static async login(id, password) {
-		log("CALL UserDataHandler.login(" + id + ")");
+		log("INFO", "CALL UserDataHandler.login(" + id + ")");
 		// TODO: Make login logic
 		// TODO: Make test latency
 		await sleep(100 + 100 * Math.random());
@@ -21,25 +21,25 @@ export class UserDataHandler {
 	}
 
 	static async getList(corpId) {
-		log("CALL UserDataHandler.getList(" + corpId + ")");
+		log("INFO", "CALL UserDataHandler.getList(" + corpId + ")");
 		// TODO: Make query string for conditions
 		const url = getApi("user") + "/corps/" + corpId;
 		let result;
 		try {
 			const res = await fetch(url);
 			if(404 === res.status) {
-				log("Users are not found");
+				log("INFO", "Users are not found");
 				result = null;
 			}
 			else {
 				const data = await res.json();
-				log("User list fetched successfully.");
-				log(data);
+				log("INFO", "User list fetched successfully.");
+				log("INFO", data);
 				result = data;
 			}
 		}
 		catch (err) {
-			console.error(err);	
+			log("ERROR", err);	
 			result = null;
 		}
 		finally {
@@ -48,7 +48,7 @@ export class UserDataHandler {
 				result = dummyData;
 				// TODO: Make test latency
 				await sleep(100 + 100 * Math.random());
-				log("Set user list from dummy data for test");
+				log("INFO", "Set user list from dummy data for test");
 			}
 			return result;
 		}
@@ -61,7 +61,7 @@ export class UserDataHandler {
 	}
 
 	static async postUser(corpId, body) {
-		log("CALL UserDataHandler.postUser(" + corpId + ")");
+		log("INFO", "CALL UserDataHandler.postUser(" + corpId + ")");
 		const url = getApi("user") + "/corps/" + corpId + "/users/";
 		let result;
 		try {
@@ -73,21 +73,21 @@ export class UserDataHandler {
 				body: JSON.stringify(body)
 			});
 			if(200 === res.status || 201 === res.status) {
-				log("User is posted successfully.");
+				log("INFO", "User is posted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
-				log(result);
+				log("INFO", result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
-				console.error(result);
+				log("ERROR", result);
 			}
 		}
 		catch(err) {
-			console.error(err);
+			log("ERROR", err);
 			result = { isSuccess: false, message: "Client Error" };
 		}
 		finally {
@@ -96,7 +96,7 @@ export class UserDataHandler {
 	}
 
 	static async putUser(corpId, id, body) {
-		log("CALL UserDataHandler.putUser(" + corpId + ", " + id + ")");
+		log("INFO", "CALL UserDataHandler.putUser(" + corpId + ", " + id + ")");
 		const url = getApi("product") + "/corps/" + corpId + "/users/" + id;
 		let result;
 
@@ -110,21 +110,21 @@ export class UserDataHandler {
 			});
 
 			if(200 === res.status || 201 === res.status) {
-				log("User is putted successfully.");
+				log("INFO", "User is putted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
-				log(result);
+				log("INFO", result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
-				console.error(result);
+				log("ERROR", result);
 			}
 		}
 		catch(err) {
-			console.error(err);
+			log("ERROR", err);
 			result = { isSuccess: false, message: "Client Error" };
 		}
 		finally {
@@ -133,7 +133,7 @@ export class UserDataHandler {
 	}
 
 	static async deleteUser(corpId, id, body) {
-		log("CALL UserDataHandler.deleteUser(" + corpId + ", " + id + ")");
+		log("INFO", "CALL UserDataHandler.deleteUser(" + corpId + ", " + id + ")");
 		const url = getApi("user") + "/corps/" + corpId + "/users/" + id;
 		let result;
 		try {
@@ -146,22 +146,22 @@ export class UserDataHandler {
 			});
 
 			if(200 === res.status) {
-				log("User is deleted successfully.");
+				log("INFO", "User is deleted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
 
-				log(result);
+				log("INFO", result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
-				console.error(result);
+				log("ERROR", result);
 			}
 		}
 		catch(err) {
-			console.error(err);
+			log("ERROR", err);
 			result = { message: "Client Error" }
 		}
 		finally {
@@ -179,7 +179,7 @@ const dummyData = [
 		},
 		language: "ko",
 		initial: "박",
-		corpId: "1eb2035d-bb9a-4933-a0ec-438baf8cff0a",
+		corpId: "5bf15b3b-573c-4243-baba-513081141304",
 		sessionId: "0d3643fd-4b6e-4244-94f4-1286468036a7",
 	},
 ];

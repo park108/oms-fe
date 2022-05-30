@@ -68,7 +68,7 @@
 		methods: {
 			// TODO: Define functions for this component
 			saveItem: function() {
-				log("Click Update Sample Button");
+				log("INFO", "Click Update Sample Button");
 
 				const input = document.getElementById("input");
 				const select = document.getElementById("select");
@@ -86,7 +86,7 @@
 
 				if(!confirmUpdateItem("Sample")) return;
 
-				log("Update Sample after confirm");
+				log("INFO", "Update Sample after confirm");
 				//TODO: Make update logic
 			}
 		}
