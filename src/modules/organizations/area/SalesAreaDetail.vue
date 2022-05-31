@@ -133,7 +133,7 @@
 
 				if(this.isCreate) {
 					if(!confirmCreateItem("Sales Area")) return;
-					const res = await OrganizationDataHandler.postOrg(this.corpId, "areas", {
+					const res = await OrganizationDataHandler.postSalesArea(this.corpId, {
 						salesOrg: salesOrg.value,
 						distributionChannel: distributionChannel.value,
 						division: division.value,

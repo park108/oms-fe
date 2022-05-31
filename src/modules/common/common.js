@@ -3,23 +3,23 @@ export const getApi = (serviceName) => {
 	// TODO: Change URL
 	const apis = {
 		organization: {
-			development: "http://localhost:8080",
-			production: "https://oms-27717587.ap-northeast-2.elb.amazonaws.com",
-		},
-		customer: {
 			development: "http://localhost:8081",
 			production: "https://oms-27717587.ap-northeast-2.elb.amazonaws.com",
 		},
-		product: {
+		customer: {
 			development: "http://localhost:8082",
 			production: "https://oms-27717587.ap-northeast-2.elb.amazonaws.com",
 		},
-		user: {
+		product: {
 			development: "http://localhost:8083",
 			production: "https://oms-27717587.ap-northeast-2.elb.amazonaws.com",
 		},
-		code: {
+		user: {
 			development: "http://localhost:8084",
+			production: "https://oms-27717587.ap-northeast-2.elb.amazonaws.com",
+		},
+		code: {
+			development: "http://localhost:8089",
 			production: "https://oms-27717587.ap-northeast-2.elb.amazonaws.com",
 		},
 	}
@@ -51,7 +51,7 @@ export const log = (type, str) => {
 			: infoLog;
 		
 		if("object" === typeof(str)) {
-			logger("[DEV] Object");
+			logger("[DEV] Object...");
 			logger(str);
 		}
 		else {

@@ -179,7 +179,7 @@ const dummyData = [
 		},
 		language: "ko",
 		initial: "박",
-		corpId: "5bf15b3b-573c-4243-baba-513081141304",
+		corpId: "851b41f9-e907-40f4-bd6e-fcc93b07c456",
 		sessionId: "0d3643fd-4b6e-4244-94f4-1286468036a7",
 	},
 ];

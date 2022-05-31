@@ -212,6 +212,41 @@ export class OrganizationDataHandler {
 		}
 	}
 
+	static async postSalesArea(corpId, body) {
+		log("INFO", "CALL OrganizationDataHandler.postSalesArea(" + corpId + ", " + body.salesOrg + ", " + body.distributionChannel + ", " + body.division + ")");
+		const url = getApi("organization") + "/corps/" + corpId + "/areas/" + body.salesOrg + "/" + body.distributionChannel + "/" + body.division + "/";
+		let result;
+		try {
+			const res = await fetch(url,{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: {}
+			});
+			if(200 === res.status || 201 === res.status) {
+				log("INFO", "Sales Area is posted successfully.");
+				result = res;
+				result.isSuccess = true;
+				result.message = "Success";
+				log("INFO", result);
+			}
+			else {
+				result = res;
+				result.isSuccess = false;
+				result.message = "Server Error";
+				log("ERROR", result);
+			}
+		}
+		catch(err) {
+			log("ERROR", err);
+			result = { isSuccess: false, message: "Client Error" };
+		}
+		finally {
+			return result;
+		}
+	}
+
 	static async putOrg(corpId, uri, orgCode, body) {
 
 		log("INFO", "CALL OrganizationDataHandler.putOrg(" + corpId + ", " + uri + ", " + orgCode + ")");
