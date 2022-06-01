@@ -1,17 +1,12 @@
 import { getApi, sleep, log } from "@/modules/common/common.js"
 
 export class OrganizationDataHandler {
-
 	static async getOverview(corpId) {
-
 		log("INFO", "CALL OrganizationDataHandler.getOverview(" + corpId + ")");
-
 		const url = getApi("organization") + "/corps/" + corpId + "/overview/";
 		let result;
-
 		try {
 			const res = await fetch(url);
-
 			if(404 === res.status) {
 				log("INFO", "Organization overview is not found");
 				result = null;
@@ -28,7 +23,6 @@ export class OrganizationDataHandler {
 			result = null;
 		}
 		finally {
-
 			// TODO: Delete before deilvery backend
 			if(null == result) {
 				result = dummyData.overview;
@@ -36,26 +30,16 @@ export class OrganizationDataHandler {
 				await sleep(100 + 100 * Math.random());
 				log("INFO", "Set organization overview from dummy data for test");
 			}
-			
 			return result;
 		}
 	}
 
 	static async getList(corpId, uri) {
-
 		log("INFO", "CALL OrganizationDataHandler.getList(" + corpId + ", " + uri + ")");
-		// const savedList = sessionStorage.getItem(uri + "_List");
-		// if(undefined !== savedList && null !== savedList) {
-		// 	log("INFO", "Return from session");
-		// 	return JSON.parse(savedList);
-		// }
-
 		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/";
 		let result;
-
 		try {
 			const res = await fetch(url);
-
 			if(404 === res.status) {
 				log("INFO", uri + " is not found");
 				result = null;
@@ -88,15 +72,11 @@ export class OrganizationDataHandler {
 	}
 
 	static async getOrg(corpId, uri, orgName, orgCode) {
-
 		log("INFO", "CALL OrganizationDataHandler.getOrg(" + corpId + ", " + uri + ", " + orgName + " = " + orgCode + ")");
-
 		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/" + orgCode + "/";
 		let result;
-
 		try {
 			const res = await fetch(url);
-
 			if(404 == res.status) {
 				log("INFO", orgName + " is not found");
 				result = null;
@@ -123,21 +103,16 @@ export class OrganizationDataHandler {
 				await sleep(100 + 100 * Math.random());
 				log("INFO", "Set " + orgName + " from dummy data for test");
 			}
-			
 			return result;
 		}
 	}
 
 	static async getSalesArea(corpId, org, channel, div) {
-
 		log("INFO", "CALL OrganizationDataHandler.getSalesArea(" + corpId + ", " + org + "/" + channel + "/" + div + ")");
-
 		const url = getApi("organization") + "/corps/" + corpId + "/areas/" + org + "/" + channel + "/" + div + "/";
 		let result;
-
 		try {
 			const res = await fetch(url);
-
 			if(404 == res.status) {
 				log("INFO", "Sales Area is not found");
 				result = null;
@@ -154,7 +129,6 @@ export class OrganizationDataHandler {
 			result = null;
 		}
 		finally {
-
 			// TODO: Delete before deilvery backend
 			if(null == result) {
 				result = dummyData.areas.filter(item => {
@@ -166,18 +140,14 @@ export class OrganizationDataHandler {
 				await sleep(100 + 100 * Math.random());
 				log("INFO", "Set Sales Area from dummy data for test");
 			}
-			
 			return result;
 		}
 	}
 
 	static async postOrg(corpId, uri, body) {
-
 		log("INFO", "CALL OrganizationDataHandler.postOrg(" + corpId + ", " + uri + ")");
-
 		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/";
 		let result;
-
 		try {
 			const res = await fetch(url,{
 				method: "POST",
@@ -186,20 +156,17 @@ export class OrganizationDataHandler {
 				},
 				body: JSON.stringify(body)
 			});
-
 			if(200 === res.status || 201 === res.status) {
 				log("INFO", "Org is posted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
-
 				log("INFO", result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
-
 				log("ERROR", result);
 			}
 		}
@@ -248,12 +215,9 @@ export class OrganizationDataHandler {
 	}
 
 	static async putOrg(corpId, uri, orgCode, body) {
-
 		log("INFO", "CALL OrganizationDataHandler.putOrg(" + corpId + ", " + uri + ", " + orgCode + ")");
-
 		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/" + orgCode + "/";
 		let result;
-
 		try {
 			const res = await fetch(url,{
 				method: "PUT",
@@ -262,20 +226,17 @@ export class OrganizationDataHandler {
 				},
 				body: JSON.stringify(body)
 			});
-
 			if(200 === res.status || 201 === res.status) {
 				log("INFO", "Org is putted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
-
 				log("INFO", result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
-
 				log("ERROR", result);
 			}
 		}
@@ -289,12 +250,9 @@ export class OrganizationDataHandler {
 	}
 
 	static async deleteOrg(corpId, uri, orgCode, body) {
-
 		log("INFO", "CALL OrganizationDataHandler.deleteOrg(" + corpId + ", " + uri + ", " + orgCode + ")");
-
 		const url = getApi("organization") + "/corps/" + corpId + "/" + uri + "/" + orgCode + "/";
 		let result;
-
 		try {
 			const res = await fetch(url,{
 				method: "DELETE",
@@ -303,20 +261,17 @@ export class OrganizationDataHandler {
 				},
 				body: JSON.stringify(body)
 			});
-
 			if(200 === res.status) {
 				log("INFO", "Org is deleted successfully.");
 				result = res;
 				result.isSuccess = true;
 				result.message = "Success";
-
 				log("INFO", result);
 			}
 			else {
 				result = res;
 				result.isSuccess = false;
 				result.message = "Server Error";
-
 				log("ERROR", result);
 			}
 		}
